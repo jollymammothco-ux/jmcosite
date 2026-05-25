@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Start a Project — Jolly Mammoth Co</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body class="page-contact">
+    <header class="site-header">
+      <a href="index.html" class="logo" aria-label="Jolly Mammoth home">
+        <svg viewBox="0 0 48 40" aria-hidden="true">
+          <path
+            d="M8 28c0-8 6-14 14-14h4c2 0 4-1 5-3l2-4 3 6c3 2 5 6 5 10v7H8v-2zm6-10c-4 2-6 6-6 10h20c0-4-2-7-5-9l-1-2-2 3c-2 2-4 3-6 3z"
+            fill="currentColor"
+          />
+        </svg>
+      </a>
+      <nav class="nav-desktop" aria-label="Main">
+        <a href="index.html#work">Projects</a>
+        <a href="about.html">About</a>
+        <a href="index.html#creative">Creative</a>
+      </nav>
+      <a class="btn btn-header" href="contact.html">Start Project</a>
+      <button class="nav-toggle" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span>
+      </button>
+    </header>
+
+    <main>
+      <section class="contact-hero">
+        <h1 class="headline headline-lavender">Let's build something that compounds.</h1>
+        <p class="lead centered">
+          Tell us where you are — we'll route you to the right next step: a RapidDashboard
+          demo, Go Mammoth install, or a custom AI project.
+        </p>
+      </section>
+
+      <div class="contact-form-wrap">
+        <form class="contact-form" action="#" method="post" id="contact-form">
+          <label for="name">Name</label>
+          <input id="name" name="name" type="text" required autocomplete="name" />
+
+          <label for="email">Email</label>
+          <input id="email" name="email" type="email" required autocomplete="email" />
+
+          <label for="company">Company</label>
+          <input id="company" name="company" type="text" autocomplete="organization" />
+
+          <label for="interest">What are you interested in?</label>
+          <select id="interest" name="interest" required>
+            <option value="">Select one…</option>
+            <option value="rapiddashboard">RapidDashboard — prompt to live dashboard</option>
+            <option value="go-mammoth">Go Mammoth System — full growth infrastructure</option>
+            <option value="call-agent">AI call agent</option>
+            <option value="smart-crm">Smart CRM</option>
+            <option value="marketing">Marketing & lead gen</option>
+            <option value="branding">Branding & creative</option>
+            <option value="other">Not sure yet — help me decide</option>
+          </select>
+
+          <label for="message">What's going on in your business?</label>
+          <textarea
+            id="message"
+            name="message"
+            placeholder="Leads slipping, reporting takes forever, need AI on the phones…"
+          ></textarea>
+
+          <button type="submit" class="btn btn-primary">Book a Strategy Call</button>
+        </form>
+
+        <p class="funnel-hint">
+          Ready for a product demo now?
+          <a href="https://rapiddashboard.ai/demo" target="_blank" rel="noopener noreferrer"
+            >Schedule RapidDashboard demo →</a
+          >
+        </p>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <p class="footer-tagline">
+        Crafted with care. Made by mammals in Eau Claire, WI.
+      </p>
+      <nav class="footer-nav" aria-label="Footer">
+        <a href="index.html#work">projects</a>
+        <a href="about.html">about</a>
+        <a href="index.html">home</a>
+      </nav>
+    </footer>
+
+    <script src="main.js"></script>
+    <script>
+      document.getElementById("contact-form")?.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const interest = document.getElementById("interest")?.value;
+        if (interest === "rapiddashboard") {
+          window.location.href = "https://rapiddashboard.ai/demo";
+          return;
+        }
+        alert(
+          "Thanks! Wire this form to your CRM or email (Go High Level, Formspree, etc.) — submission captured locally for now."
+        );
+      });
+    </script>
+  </body>
+</html>
