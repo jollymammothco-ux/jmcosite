@@ -530,6 +530,119 @@ a {
   margin: 0 0 0.5rem;
 }
 
+/* Go Mammoth page helpers */
+.page-go-mammoth main {
+  padding-top: var(--header-h);
+}
+
+.microline {
+  margin: 1rem auto 0;
+  max-width: 42rem;
+  text-align: center;
+  font-size: 0.9rem;
+  color: var(--muted);
+  font-weight: 600;
+}
+
+.pain-grid--tight {
+  max-width: 860px;
+}
+
+.problem-bridge {
+  margin-top: 2.5rem;
+  color: var(--white);
+  font-weight: 600;
+}
+
+.pillar {
+  max-width: 1100px;
+  margin: 3rem auto 0;
+}
+
+.two-col {
+  max-width: 960px;
+  margin: 2.5rem auto 0;
+  display: grid;
+  gap: 1.25rem;
+}
+
+.two-col-card {
+  padding: 1.5rem;
+  border-radius: var(--radius);
+  background: rgba(0, 0, 0, 0.18);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.two-col-card h3 {
+  font-family: var(--font-display);
+  font-size: 1.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  margin: 0 0 1rem;
+  color: var(--lavender);
+  text-align: center;
+}
+
+.two-col-card ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  color: var(--muted);
+}
+
+.two-col-card li {
+  padding: 0.45rem 0 0.45rem 1.25rem;
+  position: relative;
+}
+
+.two-col-card li::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  color: var(--mint);
+  font-weight: 800;
+}
+
+.pricing-line {
+  font-size: 1.2rem;
+  color: var(--white);
+  font-weight: 700;
+  margin-bottom: 1.25rem;
+}
+
+.pricing-copy {
+  max-width: 52rem;
+  margin: 0 auto;
+  color: var(--muted);
+}
+
+.pricing-copy p {
+  margin: 0 0 1.25rem;
+}
+
+.pricing-copy p:last-child {
+  margin-bottom: 0;
+}
+
+.faq-grid {
+  max-width: 1100px;
+  margin: 2rem auto 0;
+  display: grid;
+  gap: 1rem;
+}
+
+.faq-grid .case-card {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.faq-grid .case-body p {
+  margin: 0;
+  color: var(--muted);
+}
+
 /* Footer */
 .site-footer {
   padding: 2.5rem 1.25rem 5rem;
@@ -959,6 +1072,11 @@ a {
 
   .case-meta {
     grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .two-col {
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
   }
 }
 
