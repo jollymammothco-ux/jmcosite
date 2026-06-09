@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="Jolly Mammoth — AI-powered growth systems for businesses that want to work, not babysit operations. RapidDashboard, Go Mammoth, and done-for-you implementation."
+      content="Jolly Mammoth — AI consultancy that advises and builds. Go Mammoth for lead & revenue generation. MammothIQ for data & ops intelligence."
     />
     <title>Jolly Mammoth Co — AI Growth Systems</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -15,34 +15,54 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="styles.css" />
+    <link rel="icon" href="assets/brand/logo.png" type="image/png" />
+    <link rel="apple-touch-icon" href="assets/brand/logo.png" />
+
   </head>
   <body>
     <header class="site-header" id="top">
       <a href="#top" class="logo" aria-label="Jolly Mammoth home">
-        <svg viewBox="0 0 48 40" aria-hidden="true">
-          <path
-            d="M8 28c0-8 6-14 14-14h4c2 0 4-1 5-3l2-4 3 6c3 2 5 6 5 10v7H8v-2zm6-10c-4 2-6 6-6 10h20c0-4-2-7-5-9l-1-2-2 3c-2 2-4 3-6 3z"
-            fill="currentColor"
-          />
-        </svg>
+        <img
+          src="assets/brand/logo.png"
+          alt=""
+          width="48"
+          height="40"
+          class="logo-mark"
+          aria-hidden="true"
+        />
+        <span class="logo-wordmark">Jolly Mammoth</span>
       </a>
       <nav class="nav-desktop" aria-label="Main">
-        <a href="go-mammoth.html">Go Mammoth</a>
-        <a href="projects.html">Projects</a>
-        <a href="about.html">About</a>
+        <div class="nav-group">
+          <button
+            class="nav-group-toggle"
+            aria-expanded="false"
+            aria-controls="nav-products-menu"
+          >
+            Products
+          </button>
+          <div class="nav-dropdown" id="nav-products-menu" hidden>
+            <a href="#go-mammoth">Go Mammoth</a>
+            <a href="#mammothiq">MammothIQ</a>
+          </div>
+        </div>
+        <a href="#work">Work</a>
+        <a href="#about">About</a>
         <a href="#creative">Creative</a>
       </nav>
-      <a class="btn btn-header" href="contact.html">Start Project</a>
+      <a class="btn btn-header btn-playful" href="contact.html">Start Project</a>
       <button class="nav-toggle" aria-label="Open menu" aria-expanded="false">
         <span></span><span></span>
       </button>
     </header>
 
     <div class="mobile-nav" hidden>
-      <a href="#flagship">RapidDashboard</a>
-      <a href="go-mammoth.html">Go Mammoth</a>
-      <a href="projects.html">Projects</a>
-      <a href="about.html">About</a>
+      <span class="mobile-nav-label">Products</span>
+      <a href="#go-mammoth">Go Mammoth</a>
+      <a href="#mammothiq">MammothIQ</a>
+      <a href="#work">Work</a>
+      <a href="#about">About</a>
+      <a href="#creative">Creative</a>
       <a href="contact.html">Start Project</a>
     </div>
 
@@ -50,13 +70,9 @@
       <!-- HERO -->
       <section class="hero">
         <div class="hero-media">
-          <img
-            src="https://images.unsplash.com/photo-1449844908441-8829872d2602?w=1200&q=80"
-            alt="Neighborhood at sunrise — your business should run this smoothly"
-            width="1200"
-            height="675"
-            loading="eager"
-          />
+          <video autoplay muted loop playsinline aria-label="Jolly Mammoth — growth systems in motion">
+            <source src="assets/hero/home-hero.mp4" type="video/mp4" />
+          </video>
         </div>
         <h1 class="headline headline-lavender">
           You started your business to do work. Not babysit it.
@@ -65,100 +81,81 @@
           We build the AI and systems that run while you work. (Or sleep.)
         </p>
         <div class="cta-row">
-          <a class="btn btn-primary" href="#flagship">See RapidDashboard</a>
+          <a class="btn btn-primary btn-playful" href="#products">See the suite</a>
           <a class="btn btn-ghost" href="contact.html">Book a Strategy Call</a>
         </div>
       </section>
 
       <!-- PAIN -->
-      <section class="section section-blue" id="problems">
+      <section class="section section-blue reveal" id="problems">
         <h2 class="headline">
           Good businesses lose <span class="accent-yellow">good money</span> to
           solvable problems.
         </h2>
-        <ul class="pain-grid">
-          <li>Leads go cold fast</li>
-          <li>Follow-ups get messy</li>
-          <li>Data lives in five tools</li>
-          <li>Reports take 45 minutes each</li>
-          <li>Nobody trusts the numbers</li>
-        </ul>
+        <div class="pain-buckets">
+          <div class="pain-bucket">
+            <p class="pain-bucket-label">Growth pain → <strong>Go Mammoth</strong></p>
+            <ul class="pain-grid">
+              <li>Leads go cold fast</li>
+              <li>Follow-ups get messy</li>
+              <li>The Sales Process is Clunky</li>
+            </ul>
+          </div>
+          <div class="pain-bucket">
+            <p class="pain-bucket-label">Operations pain → <strong>MammothIQ</strong></p>
+            <ul class="pain-grid">
+              <li>Potential Revenue is leaking</li>
+              <li>Workflow lives in five tools</li>
+              <li>Scattered Data means Slow Decisions</li>
+            </ul>
+          </div>
+        </div>
+        <p class="pain-footer">Growth feels like chaos, not freedom</p>
       </section>
 
-      <!-- FLAGSHIP -->
-      <section class="section section-dark" id="flagship">
-        <p class="eyebrow">Flagship product</p>
+      <!-- PRODUCT SUITE -->
+      <section class="section section-dark reveal" id="products">
+        <div class="brand-accent" aria-hidden="true">
+          <svg viewBox="0 0 48 40">
+            <path
+              d="M8 28c0-8 6-14 14-14h4c2 0 4-1 5-3l2-4 3 6c3 2 5 6 5 10v7H8v-2zm6-10c-4 2-6 6-6 10h20c0-4-2-7-5-9l-1-2-2 3c-2 2-4 3-6 3z"
+              fill="currentColor"
+            />
+          </svg>
+        </div>
+        <p class="eyebrow">Two products. One story.</p>
         <h2 class="headline headline-lavender">
-          Ask in plain English. Get a live dashboard.
+          Go Mammoth brings the leads in.<br />MammothIQ tells you what's working.
         </h2>
-        <p class="lead">
-          <strong>RapidDashboard</strong> connects your real systems once — sales,
-          finance, HR, ops — then every question becomes a shareable dashboard your
-          whole team can open. No copy-paste. No stale exports.
-        </p>
-        <div class="product-card">
-          <div class="product-card-copy">
-            <h3>Prompt → Dashboard</h3>
-            <p>
-              Type what you need. Hit share. Your team gets a live URL with the same
-              numbers you see — reconciled from a single source of truth.
-            </p>
-            <ul class="check-list">
-              <li>Private, encrypted AI in a Box</li>
-              <li>Automated syncs — hourly, nightly, or on change</li>
-              <li>Role-based access for managers and execs</li>
-              <li>Follow-up questions without re-exporting files</li>
+        <div class="suite-grid">
+          <article class="suite-card card-lift">
+            <p class="suite-tag">The brawn</p>
+            <h3 class="suite-name">Go Mammoth</h3>
+            <p class="suite-promise">Lead &amp; revenue generation that never lets a lead go cold.</p>
+            <ul class="suite-benefits">
+              <li>Capture leads from every channel</li>
+              <li>Automated follow-up &amp; booking</li>
+              <li>Unified inbox &amp; smart CRM</li>
             </ul>
-            <div class="cta-row">
-              <a
-                class="btn btn-primary"
-                href="https://rapiddashboard.ai/demo"
-                target="_blank"
-                rel="noopener noreferrer"
-                >Schedule a Demo</a
-              >
-              <a
-                class="btn btn-ghost"
-                href="https://rapiddashboard.ai/about"
-                target="_blank"
-                rel="noopener noreferrer"
-                >How It Works</a
-              >
-            </div>
-          </div>
-          <div class="product-card-visual" aria-hidden="true">
-            <div class="mock-prompt">
-              <span class="mock-label">You</span>
-              <p>What were our top 5 revenue streams last quarter?</p>
-            </div>
-            <div class="mock-arrow">↓</div>
-            <div class="mock-dashboard">
-              <span class="mock-label">Live dashboard</span>
-              <div class="mock-bars">
-                <span style="--h: 85%"></span>
-                <span style="--h: 62%"></span>
-                <span style="--h: 48%"></span>
-                <span style="--h: 35%"></span>
-                <span style="--h: 22%"></span>
-              </div>
-            </div>
-          </div>
+            <a class="btn btn-primary" href="#go-mammoth">See Go Mammoth</a>
+          </article>
+          <article class="suite-card card-lift">
+            <p class="suite-tag">The brains</p>
+            <h3 class="suite-name">MammothIQ</h3>
+            <p class="suite-promise">Data &amp; ops intelligence from your real systems.</p>
+            <ul class="suite-benefits">
+              <li>Ask questions in plain English</li>
+              <li>Live shareable dashboards</li>
+              <li>One source of truth across tools</li>
+            </ul>
+            <a class="btn btn-primary" href="#mammothiq">See MammothIQ</a>
+          </article>
         </div>
       </section>
 
-      <!-- JOLLY -->
-      <section class="section section-charcoal" id="jolly">
-        <h2 class="headline">How do we make businesses more jolly?</h2>
-        <p class="lead centered">
-          We install the stack — flagship intelligence plus the growth infrastructure
-          that captures, follows up, and books. So growth feels intentional and
-          operations feel lighter.
-        </p>
-      </section>
-
       <!-- GO MAMMOTH -->
-      <section class="section section-blue-dark" id="system">
-        <p class="eyebrow">Done-for-you implementation</p>
+      <section class="section section-blue-dark reveal" id="go-mammoth">
+        <p class="eyebrow">Product · Go Mammoth</p>
         <h2 class="headline">
           The <span class="accent-yellow">Go Mammoth</span> System
         </h2>
@@ -167,39 +164,39 @@
           white-label and configure the platform so you don't touch a thing.
         </p>
         <div class="feature-grid">
-          <article class="feature">
+          <article class="feature card-lift">
             <h3>Lead capture pipeline</h3>
             <p>
               Web forms, calls, texts, and ads land in one place. Nothing slips
               through.
             </p>
           </article>
-          <article class="feature">
+          <article class="feature card-lift">
             <h3>Automated follow-ups</h3>
             <p>
               On the jobsite or fishing? Leads still get nurtured automatically.
             </p>
           </article>
-          <article class="feature">
+          <article class="feature card-lift">
             <h3>Booking & scheduling</h3>
             <p>Prospects book straight to your calendar. No phone tag.</p>
           </article>
-          <article class="feature">
+          <article class="feature card-lift">
             <h3>All comms, one inbox</h3>
             <p>Texts, emails, and DMs in a single organized platform.</p>
           </article>
-          <article class="feature">
+          <article class="feature card-lift">
             <h3>Custom workflow & AI ops</h3>
             <p>
               We connect your PM tools or build custom workflows so the team stays
               on track.
             </p>
           </article>
-          <article class="feature">
+          <article class="feature card-lift">
             <h3>Reporting & dashboards</h3>
             <p>
               Pipeline, closed jobs, analytics — on your phone. Pairs with
-              RapidDashboard for exec-level intelligence.
+              MammothIQ for exec-level intelligence.
             </p>
           </article>
         </div>
@@ -208,8 +205,118 @@
         >
       </section>
 
+      <!-- MAMMOTHIQ -->
+      <section class="section section-dark reveal" id="mammothiq">
+        <p class="eyebrow">Product · MammothIQ</p>
+        <h2 class="headline headline-lavender">
+          Know what's working — without the spreadsheet scramble.
+        </h2>
+        <p class="lead">
+          MammothIQ connects your sales, finance, HR, and ops data into one intelligence
+          layer. Ask a question, get an answer your whole team can trust.
+        </p>
+        <div class="feature-grid feature-grid--iq">
+          <article class="feature card-lift">
+            <h3>Unified data layer</h3>
+            <p>
+              Pull from the tools you already use. One reconciled view — no more
+              copy-paste between five tabs.
+            </p>
+          </article>
+          <article class="feature card-lift">
+            <h3>Plain-English queries</h3>
+            <p>
+              Ask what you need to know like you'd ask a colleague. MammothIQ handles
+              the SQL.
+            </p>
+          </article>
+          <article class="feature card-lift">
+            <h3>Role-based access</h3>
+            <p>
+              Managers see their numbers. Execs see the full picture. Everyone stays on
+              the same page.
+            </p>
+          </article>
+          <article class="feature card-lift">
+            <h3>Always current</h3>
+            <p>
+              Automated syncs — hourly, nightly, or on change — so dashboards reflect
+              reality, not last Tuesday.
+            </p>
+          </article>
+        </div>
+
+        <!-- RapidDashboard — signature feature -->
+        <div class="signature-feature" id="rapiddashboard">
+          <p class="eyebrow">Signature feature · RapidDashboard</p>
+          <h3 class="signature-headline">Ask in plain English. Get a live dashboard.</h3>
+          <p class="lead">
+            RapidDashboard is MammothIQ's core mechanic: type what you need, hit share,
+            and your team gets a live URL with the same numbers you see.
+          </p>
+          <div class="product-card card-lift">
+            <div class="product-card-copy">
+              <h3>Prompt → Dashboard</h3>
+              <p>
+                Type what you need. Hit share. Your team gets a live URL with the same
+                numbers you see — reconciled from a single source of truth.
+              </p>
+              <ul class="check-list">
+                <li>Private, encrypted AI in a Box</li>
+                <li>Automated syncs — hourly, nightly, or on change</li>
+                <li>Role-based access for managers and execs</li>
+                <li>Follow-up questions without re-exporting files</li>
+              </ul>
+              <div class="cta-row">
+                <a class="btn btn-primary" href="contact.html">Schedule a Demo</a>
+                <a
+                  class="btn btn-ghost"
+                  href="https://rapiddashboard.ai/about"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  >How It Works</a
+                >
+              </div>
+            </div>
+            <div class="product-card-visual" aria-hidden="true">
+              <div class="mock-prompt">
+                <span class="mock-label">You</span>
+                <p>What were our top 5 revenue streams last quarter?</p>
+              </div>
+              <div class="mock-arrow">↓</div>
+              <div class="mock-dashboard">
+                <span class="mock-label">Live dashboard</span>
+                <div class="mock-bars">
+                  <span style="--h: 85%"></span>
+                  <span style="--h: 62%"></span>
+                  <span style="--h: 48%"></span>
+                  <span style="--h: 35%"></span>
+                  <span style="--h: 22%"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- JOLLY -->
+      <section class="section section-jolly reveal" id="jolly">
+        <h2 class="headline">
+          How do we make businesses more
+          <span class="jolly-word" aria-label="jolly"
+            ><span>J</span><span>O</span><span>L</span><span>L</span><span>Y</span></span
+          >?
+        </h2>
+        <p class="lead centered">
+          We make business owners more jolly by building growth infrastructure that
+          takes the heavy lifting off your plate. Growth feels intentional and operations
+          feel lighter. So running your company feels predictable, clear, and actually fun
+          again.
+        </p>
+      </section>
+
       <!-- ADD-ONS -->
-      <section class="section section-dark" id="addons">
+      <section class="section section-dark reveal" id="addons">
         <p class="eyebrow">Expand when you're ready</p>
         <h2 class="headline headline-lavender">AI add-ons that compound</h2>
         <div class="addon-grid">
@@ -238,25 +345,29 @@
       </section>
 
       <!-- WORK -->
-      <section class="section section-charcoal" id="work">
+      <section class="section section-charcoal reveal" id="work">
         <h2 class="headline">Our work</h2>
         <div class="project-grid">
-          <a class="project" href="projects.html#the-oxbow-hotel">
+          <a class="project card-lift" href="projects.html#the-oxbow-hotel">
+            <img class="project-thumb project-thumb--contain" src="assets/projects/oxbow-hotel.png" alt="The Oxbow Hotel" loading="lazy" />
             <span class="project-year">2025</span>
             <span class="project-type">Hotel Front Desk Agent</span>
             <span class="project-name">The Oxbow Hotel</span>
           </a>
-          <a class="project" href="projects.html#high-cliff-consulting">
+          <a class="project card-lift" href="projects.html#high-cliff-consulting">
+            <img class="project-thumb project-thumb--contain" src="assets/projects/high-cliff-consulting.png" alt="High Cliff Consulting" loading="lazy" />
             <span class="project-year">2026</span>
             <span class="project-type">Custom Smart CRM</span>
             <span class="project-name">High Cliff Consulting</span>
           </a>
-          <a class="project" href="projects.html#mas">
+          <a class="project card-lift" href="projects.html#mas">
+            <img class="project-thumb project-thumb--light" src="assets/projects/mas-exteriors-logo.png" alt="M.A.S Exteriors" loading="lazy" />
             <span class="project-year">2025</span>
             <span class="project-type">Marketing & Lead Gen</span>
             <span class="project-name">M.A.S Exteriors</span>
           </a>
-          <a class="project" href="projects.html#brainthoven">
+          <a class="project card-lift" href="projects.html#brainthoven">
+            <img class="project-thumb" src="assets/projects/brainthoven-books.png" alt="Brainthoven brand books" loading="lazy" />
             <span class="project-year">2025</span>
             <span class="project-type">App Development</span>
             <span class="project-name">Brainthoven</span>
@@ -265,12 +376,12 @@
       </section>
 
       <!-- PROCESS -->
-      <section class="section section-blue" id="process">
+      <section class="section section-blue reveal" id="process">
         <h2 class="headline">3 steps, one result: jumping for joy.</h2>
         <ol class="steps">
           <li>
             <strong>Discover</strong> — We learn your business and map the right
-            stack (RapidDashboard, Go Mammoth, add-ons).
+            stack (Go Mammoth, MammothIQ, add-ons).
           </li>
           <li>
             <strong>Build</strong> — Your system is configured, tested, and fully
@@ -284,11 +395,11 @@
       </section>
 
       <!-- CTA -->
-      <section class="section section-cta" id="contact">
+      <section class="section section-cta reveal" id="contact">
         <p class="cta-prompt">.want to work together?</p>
         <h2 class="headline">Let's build something that compounds.</h2>
         <div class="cta-row">
-          <a class="btn btn-primary btn-lg" href="contact.html">Book a Strategy Call</a>
+          <a class="btn btn-primary btn-lg btn-playful" href="contact.html">Book a Strategy Call</a>
           <a
             class="btn btn-ghost btn-lg"
             href="https://rapiddashboard.ai/demo"
@@ -300,7 +411,7 @@
       </section>
 
       <!-- CREATIVE -->
-      <section class="section section-charcoal" id="creative">
+      <section class="section section-charcoal reveal" id="creative">
         <h2 class="headline">
           Systems are our strength. <span class="accent-yellow">Brand building</span>
           is our sauce.
@@ -309,22 +420,20 @@
           A creative department when your business needs to look as good as your work.
         </p>
         <div class="project-grid project-grid--compact">
-          <a class="project" href="projects.html#queuedup">
+          <a class="project card-lift" href="projects.html#queuedup">
+            <img class="project-thumb" src="assets/projects/queuedup-brand-cover.png" alt="QueuedUp brand standards" loading="lazy" />
             <span class="project-year">2024</span>
             <span class="project-type">Branding & Identity</span>
             <span class="project-name">QueuedUp</span>
           </a>
-          <a class="project" href="projects.html#savagefit">
+          <a class="project card-lift" href="projects.html#savagefit">
+            <img class="project-thumb" src="assets/projects/savage-fit-holiday.png" alt="Savage Fit Boxing brand graphic" loading="lazy" />
             <span class="project-year">2025</span>
             <span class="project-type">Branding & Identity</span>
             <span class="project-name">Savage Fit Boxing</span>
           </a>
-          <a class="project" href="projects.html#grahamjams">
-            <span class="project-year">2024</span>
-            <span class="project-type">Branding & Identity</span>
-            <span class="project-name">Graham Jams</span>
-          </a>
-          <a class="project" href="projects.html#dalila-jane">
+          <a class="project card-lift" href="projects.html#dalila-jane">
+            <img class="project-thumb" src="assets/projects/dalila-jane-portrait.png" alt="Dalila Jane brand photography" loading="lazy" />
             <span class="project-year">2026</span>
             <span class="project-type">Branding & Identity</span>
             <span class="project-name">Dalila Jane</span>
@@ -332,26 +441,74 @@
         </div>
       </section>
 
-      <!-- ABOUT -->
-      <section class="section section-dark" id="about">
-        <h2 class="headline headline-lavender">From copy to AI — with you the whole way</h2>
-        <p class="lead">
-          Jolly Mammoth started as freelance copywriting, evolved with the market into
-          digital marketing, and now builds AI solutions businesses actually use. We
-          don't sell shiny tools — we install systems that run.
-        </p>
+      <!-- FOUNDER -->
+      <section class="section section-dark reveal" id="about">
+        <p class="eyebrow">About · the human behind the mammoth</p>
+        <div class="founder-block">
+          <div class="founder-photo">
+            <img
+              src="assets/about/jack-fentress.png"
+              alt="Jack Fentress, owner of Jolly Mammoth"
+              width="400"
+              height="480"
+              loading="lazy"
+            />
+          </div>
+          <div class="founder-copy">
+            <h2 class="headline headline-lavender founder-headline">
+              I watched AI take the gigs I used to win. So I learned to build with it.
+            </h2>
+            <p class="founder-name">
+              Jack Fentress
+              <span class="founder-credential">Owner &amp; AIBMM Executive Coach</span>
+            </p>
+            <div class="founder-prose">
+              <p>
+                I started out as a freelance marketer and copywriter. Brand guides,
+                landing pages, lead magnets, campaigns, etc. Mostly for sustainability
+                and ESG companies, back in 2021. Then one day I opened ChatGPT for the
+                first time, typed a prompt, and watched it do a version of my job in
+                about four seconds. I'm not going to lie to you: that was a weird
+                afternoon.
+              </p>
+              <p>
+                I could've dug in, fought it, and resisted the AI movement. Instead I
+                got curious. And the deeper I went, the more familiar it felt.
+                Reverse-engineering, workflows, big-picture vision, and efficiency
+                applications. All skills I had already developed. The difference? Better
+                tools. Same thinking.
+              </p>
+              <p>
+                So while everyone was bracing for AI to end the world, I started learning
+                to drive it. And I found the gap: businesses need someone who gets how
+                their operations actually run, then builds the systems that help their
+                growth compound.
+              </p>
+              <p>
+                That's Jolly Mammoth. We advise and build, starting with your business,
+                not the tech. If you're nervous about what AI means for your company, I
+                get it. I was on the wrong end of it years ago. Today, my goal is to help
+                business owners feel confident to take on the shifting business
+                landscape.
+              </p>
+            </div>
+            <a class="btn btn-primary" href="contact.html">Let's talk</a>
+          </div>
+        </div>
       </section>
     </main>
 
     <footer class="site-footer">
       <p class="footer-tagline">
-        Crafted with care. Made by mammals in Eau Claire, WI.
+        Crafted with care. Made by mammals in Eau Claire, WI. No tusks were harmed.
       </p>
       <nav class="footer-nav" aria-label="Footer">
-        <a href="projects.html">projects</a>
-        <a href="about.html">about</a>
+        <a href="#go-mammoth">go mammoth</a>
+        <a href="#mammothiq">mammothiq</a>
+        <a href="#work">work</a>
+        <a href="#about">about</a>
         <a href="#creative">creative</a>
-        <a href="contact.html">Start Project</a>
+        <a href="contact.html">start project</a>
       </nav>
     </footer>
 

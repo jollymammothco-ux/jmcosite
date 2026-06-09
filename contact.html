@@ -11,16 +11,21 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="styles.css" />
+    <link rel="icon" href="assets/brand/logo.png" type="image/png" />
+    <link rel="apple-touch-icon" href="assets/brand/logo.png" />
+
   </head>
   <body class="page-contact">
     <header class="site-header">
       <a href="index.html" class="logo" aria-label="Jolly Mammoth home">
-        <svg viewBox="0 0 48 40" aria-hidden="true">
-          <path
-            d="M8 28c0-8 6-14 14-14h4c2 0 4-1 5-3l2-4 3 6c3 2 5 6 5 10v7H8v-2zm6-10c-4 2-6 6-6 10h20c0-4-2-7-5-9l-1-2-2 3c-2 2-4 3-6 3z"
-            fill="currentColor"
-          />
-        </svg>
+        <img
+          src="assets/brand/logo.png"
+          alt=""
+          width="48"
+          height="40"
+          class="logo-mark"
+          aria-hidden="true"
+        />
       </a>
       <nav class="nav-desktop" aria-label="Main">
         <a href="go-mammoth.html">Go Mammoth</a>
@@ -52,7 +57,18 @@
       </section>
 
       <div class="contact-form-wrap">
-        <form class="contact-form" action="#" method="post" id="contact-form">
+        <form class="contact-form" action="#" method="post" id="contact-form" novalidate>
+          <label class="sr-only" for="website">Website</label>
+          <input
+            class="hp-field"
+            id="website"
+            name="website"
+            type="text"
+            tabindex="-1"
+            autocomplete="off"
+            aria-hidden="true"
+          />
+
           <label for="name">Name</label>
           <input id="name" name="name" type="text" required autocomplete="name" />
 
@@ -82,6 +98,7 @@
           ></textarea>
 
           <button type="submit" class="btn btn-primary">Book a Strategy Call</button>
+          <p class="form-status" id="form-status" role="status" aria-live="polite" hidden></p>
         </form>
 
         <p class="funnel-hint">
@@ -105,18 +122,5 @@
     </footer>
 
     <script src="main.js"></script>
-    <script>
-      document.getElementById("contact-form")?.addEventListener("submit", (e) => {
-        e.preventDefault();
-        const interest = document.getElementById("interest")?.value;
-        if (interest === "rapiddashboard") {
-          window.location.href = "https://rapiddashboard.ai/demo";
-          return;
-        }
-        alert(
-          "Thanks! Wire this form to your CRM or email (Go High Level, Formspree, etc.) — submission captured locally for now."
-        );
-      });
-    </script>
   </body>
 </html>
