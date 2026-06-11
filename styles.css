@@ -341,28 +341,69 @@ a {
   background: var(--blue);
 }
 
-#jolly .jolly-word span {
+/* Jolly word — rainbow letters with gentle float */
+@keyframes jolly-letter-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-3px);
+  }
+}
+
+@keyframes jolly-letter-float-logo {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-2px);
+  }
+}
+
+.jolly-word span {
   display: inline-block;
+  animation: jolly-letter-float 2.4s ease-in-out infinite;
+  animation-play-state: paused;
 }
 
-#jolly .jolly-word span:nth-child(1) {
+.jolly-word.is-active span {
+  animation-play-state: running;
+}
+
+.jolly-word span:nth-child(1) {
   color: var(--jolly-j);
+  animation-delay: 0s;
+  animation-duration: 2.2s;
 }
 
-#jolly .jolly-word span:nth-child(2) {
+.jolly-word span:nth-child(2) {
   color: var(--jolly-o);
+  animation-delay: 0.12s;
+  animation-duration: 2.4s;
 }
 
-#jolly .jolly-word span:nth-child(3) {
+.jolly-word span:nth-child(3) {
   color: var(--jolly-l);
+  animation-delay: 0.24s;
+  animation-duration: 2.6s;
 }
 
-#jolly .jolly-word span:nth-child(4) {
+.jolly-word span:nth-child(4) {
   color: var(--jolly-l2);
+  animation-delay: 0.36s;
+  animation-duration: 2.7s;
 }
 
-#jolly .jolly-word span:nth-child(5) {
+.jolly-word span:nth-child(5) {
   color: var(--jolly-y);
+  animation-delay: 0.48s;
+  animation-duration: 2.8s;
+}
+
+.jolly-word--logo span {
+  animation-name: jolly-letter-float-logo;
 }
 
 .section-dark {
@@ -672,6 +713,10 @@ a {
   }
 
   .btn-playful:hover {
+    animation: none;
+  }
+
+  .jolly-word span {
     animation: none;
   }
 

@@ -62,6 +62,98 @@ if (revealSections.length) {
   revealSections.forEach((section) => revealObserver.observe(section));
 }
 
+// Jolly word — auto-wrap brand "Jolly" and float letters in viewport
+initJollyWords();
+
+function initJollyWords() {
+  const skipTags = new Set(["SCRIPT", "STYLE", "NOSCRIPT"]);
+  const roots = [document.querySelector("main"), document.querySelector(".site-header")].filter(
+    Boolean
+  );
+
+  roots.forEach((root) => autoWrapJollyInRoot(root, skipTags));
+
+  document.querySelectorAll(".jolly-word").forEach((word) => {
+    ensureLetterSpans(word);
+    if (word.closest(".logo-wordmark")) {
+      word.classList.add("jolly-word--logo");
+    }
+  });
+
+  const jollyWords = document.querySelectorAll(".jolly-word");
+  if (!jollyWords.length) return;
+
+  const jollyObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        entry.target.classList.toggle("is-active", entry.isIntersecting);
+      });
+    },
+    { threshold: 0.3 }
+  );
+
+  jollyWords.forEach((word) => jollyObserver.observe(word));
+}
+
+function autoWrapJollyInRoot(root, skipTags) {
+  const elements = [root, ...root.querySelectorAll("*")];
+  const textNodes = [];
+
+  for (const el of elements) {
+    if (skipTags.has(el.tagName)) continue;
+    if (el.classList?.contains("jolly-word")) continue;
+    if (el.closest?.(".jolly-word, [aria-hidden='true']") && el !== root) continue;
+
+    for (const node of el.childNodes) {
+      if (node.nodeType !== Node.TEXT_NODE) continue;
+      if (!/\bJolly\b/.test(node.textContent)) continue;
+      textNodes.push(node);
+    }
+  }
+
+  textNodes.forEach((textNode) => {
+    const text = textNode.textContent;
+    const parts = text.split(/(\bJolly\b)/);
+    if (parts.length === 1) return;
+
+    const fragment = document.createDocumentFragment();
+    parts.forEach((part) => {
+      if (part === "Jolly") {
+        fragment.appendChild(createJollyWordElement(part));
+      } else if (part) {
+        fragment.appendChild(document.createTextNode(part));
+      }
+    });
+
+    textNode.parentNode.replaceChild(fragment, textNode);
+  });
+}
+
+function createJollyWordElement(word) {
+  const wrapper = document.createElement("span");
+  wrapper.className = "jolly-word";
+  wrapper.setAttribute("aria-label", "Jolly");
+  [...word].forEach((letter) => {
+    const span = document.createElement("span");
+    span.textContent = letter;
+    wrapper.appendChild(span);
+  });
+  return wrapper;
+}
+
+function ensureLetterSpans(word) {
+  if (word.querySelector("span")) return;
+
+  const text = word.textContent.trim();
+  word.textContent = "";
+  word.setAttribute("aria-label", "Jolly");
+  [...text].forEach((letter) => {
+    const span = document.createElement("span");
+    span.textContent = letter;
+    word.appendChild(span);
+  });
+}
+
 // Highlight sticky CTA after hero scroll
 const stickyCta = document.querySelector(".sticky-cta");
 if (stickyCta) {
