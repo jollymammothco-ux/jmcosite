@@ -63,7 +63,11 @@ if (revealSections.length) {
 }
 
 // Jolly word — auto-wrap brand "Jolly" and float letters in viewport
-initJollyWords();
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", initJollyWords);
+} else {
+  initJollyWords();
+}
 
 function initJollyWords() {
   const skipTags = new Set(["SCRIPT", "STYLE", "NOSCRIPT"]);
@@ -79,20 +83,6 @@ function initJollyWords() {
       word.classList.add("jolly-word--logo");
     }
   });
-
-  const jollyWords = document.querySelectorAll(".jolly-word");
-  if (!jollyWords.length) return;
-
-  const jollyObserver = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        entry.target.classList.toggle("is-active", entry.isIntersecting);
-      });
-    },
-    { threshold: 0.3 }
-  );
-
-  jollyWords.forEach((word) => jollyObserver.observe(word));
 }
 
 function autoWrapJollyInRoot(root, skipTags) {

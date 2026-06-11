@@ -348,7 +348,7 @@ a {
     transform: translateY(0);
   }
   50% {
-    transform: translateY(-3px);
+    transform: translateY(-5px);
   }
 }
 
@@ -358,52 +358,57 @@ a {
     transform: translateY(0);
   }
   50% {
-    transform: translateY(-2px);
+    transform: translateY(-3px);
   }
 }
 
-.jolly-word span {
+.jolly-word > span {
   display: inline-block;
-  animation: jolly-letter-float 2.4s ease-in-out infinite;
-  animation-play-state: paused;
 }
 
-.jolly-word.is-active span {
-  animation-play-state: running;
-}
-
-.jolly-word span:nth-child(1) {
+.jolly-word > span:nth-child(1) {
   color: var(--jolly-j);
-  animation-delay: 0s;
-  animation-duration: 2.2s;
+  animation: jolly-letter-float 2.2s ease-in-out 0s infinite;
 }
 
-.jolly-word span:nth-child(2) {
+.jolly-word > span:nth-child(2) {
   color: var(--jolly-o);
-  animation-delay: 0.12s;
-  animation-duration: 2.4s;
+  animation: jolly-letter-float 2.4s ease-in-out 0.12s infinite;
 }
 
-.jolly-word span:nth-child(3) {
+.jolly-word > span:nth-child(3) {
   color: var(--jolly-l);
-  animation-delay: 0.24s;
-  animation-duration: 2.6s;
+  animation: jolly-letter-float 2.6s ease-in-out 0.24s infinite;
 }
 
-.jolly-word span:nth-child(4) {
+.jolly-word > span:nth-child(4) {
   color: var(--jolly-l2);
-  animation-delay: 0.36s;
-  animation-duration: 2.7s;
+  animation: jolly-letter-float 2.7s ease-in-out 0.36s infinite;
 }
 
-.jolly-word span:nth-child(5) {
+.jolly-word > span:nth-child(5) {
   color: var(--jolly-y);
-  animation-delay: 0.48s;
-  animation-duration: 2.8s;
+  animation: jolly-letter-float 2.8s ease-in-out 0.48s infinite;
 }
 
-.jolly-word--logo span {
-  animation-name: jolly-letter-float-logo;
+.jolly-word--logo > span:nth-child(1) {
+  animation: jolly-letter-float-logo 2.2s ease-in-out 0s infinite;
+}
+
+.jolly-word--logo > span:nth-child(2) {
+  animation: jolly-letter-float-logo 2.4s ease-in-out 0.12s infinite;
+}
+
+.jolly-word--logo > span:nth-child(3) {
+  animation: jolly-letter-float-logo 2.6s ease-in-out 0.24s infinite;
+}
+
+.jolly-word--logo > span:nth-child(4) {
+  animation: jolly-letter-float-logo 2.7s ease-in-out 0.36s infinite;
+}
+
+.jolly-word--logo > span:nth-child(5) {
+  animation: jolly-letter-float-logo 2.8s ease-in-out 0.48s infinite;
 }
 
 .section-dark {
@@ -716,7 +721,7 @@ a {
     animation: none;
   }
 
-  .jolly-word span {
+  .jolly-word > span {
     animation: none;
   }
 
