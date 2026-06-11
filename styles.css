@@ -342,90 +342,73 @@ a {
 }
 
 /* Jolly word — rainbow letters with gentle float */
+@keyframes jolly-letter-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+@keyframes jolly-letter-float-logo {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-3px);
+  }
+}
+
 .jolly-word > span {
   display: inline-block;
 }
 
 .jolly-word > span:nth-child(1) {
   color: var(--jolly-j);
+  animation: jolly-letter-float 2.2s ease-in-out 0s infinite;
 }
 
 .jolly-word > span:nth-child(2) {
   color: var(--jolly-o);
+  animation: jolly-letter-float 2.4s ease-in-out 0.12s infinite;
 }
 
 .jolly-word > span:nth-child(3) {
   color: var(--jolly-l);
+  animation: jolly-letter-float 2.6s ease-in-out 0.24s infinite;
 }
 
 .jolly-word > span:nth-child(4) {
   color: var(--jolly-l2);
+  animation: jolly-letter-float 2.7s ease-in-out 0.36s infinite;
 }
 
 .jolly-word > span:nth-child(5) {
   color: var(--jolly-y);
+  animation: jolly-letter-float 2.8s ease-in-out 0.48s infinite;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  @keyframes jolly-letter-float {
-    0%,
-    100% {
-      transform: translate3d(0, 0, 0) rotate(0deg);
-    }
-    50% {
-      transform: translate3d(0, -8px, 0) rotate(-2deg);
-    }
-  }
+.jolly-word.jolly-word--logo > span:nth-child(1) {
+  animation: jolly-letter-float-logo 2.2s ease-in-out 0s infinite;
+}
 
-  @keyframes jolly-letter-float-logo {
-    0%,
-    100% {
-      transform: translate3d(0, 0, 0) rotate(0deg);
-    }
-    50% {
-      transform: translate3d(0, -5px, 0) rotate(-1.5deg);
-    }
-  }
+.jolly-word.jolly-word--logo > span:nth-child(2) {
+  animation: jolly-letter-float-logo 2.4s ease-in-out 0.12s infinite;
+}
 
-  .jolly-word > span:nth-child(1) {
-    animation: jolly-letter-float 1.8s ease-in-out 0s infinite;
-  }
+.jolly-word.jolly-word--logo > span:nth-child(3) {
+  animation: jolly-letter-float-logo 2.6s ease-in-out 0.24s infinite;
+}
 
-  .jolly-word > span:nth-child(2) {
-    animation: jolly-letter-float 1.9s ease-in-out 0.1s infinite;
-  }
+.jolly-word.jolly-word--logo > span:nth-child(4) {
+  animation: jolly-letter-float-logo 2.7s ease-in-out 0.36s infinite;
+}
 
-  .jolly-word > span:nth-child(3) {
-    animation: jolly-letter-float 2s ease-in-out 0.2s infinite;
-  }
-
-  .jolly-word > span:nth-child(4) {
-    animation: jolly-letter-float 2.1s ease-in-out 0.3s infinite;
-  }
-
-  .jolly-word > span:nth-child(5) {
-    animation: jolly-letter-float 2.2s ease-in-out 0.4s infinite;
-  }
-
-  .jolly-word.jolly-word--logo > span:nth-child(1) {
-    animation: jolly-letter-float-logo 1.8s ease-in-out 0s infinite;
-  }
-
-  .jolly-word.jolly-word--logo > span:nth-child(2) {
-    animation: jolly-letter-float-logo 1.9s ease-in-out 0.1s infinite;
-  }
-
-  .jolly-word.jolly-word--logo > span:nth-child(3) {
-    animation: jolly-letter-float-logo 2s ease-in-out 0.2s infinite;
-  }
-
-  .jolly-word.jolly-word--logo > span:nth-child(4) {
-    animation: jolly-letter-float-logo 2.1s ease-in-out 0.3s infinite;
-  }
-
-  .jolly-word.jolly-word--logo > span:nth-child(5) {
-    animation: jolly-letter-float-logo 2.2s ease-in-out 0.4s infinite;
-  }
+.jolly-word.jolly-word--logo > span:nth-child(5) {
+  animation: jolly-letter-float-logo 2.8s ease-in-out 0.48s infinite;
 }
 
 .section-dark {
@@ -735,6 +718,10 @@ a {
   }
 
   .btn-playful:hover {
+    animation: none;
+  }
+
+  .jolly-word > span {
     animation: none;
   }
 
