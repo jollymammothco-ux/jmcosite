@@ -113,12 +113,25 @@ function pickExtension(mime) {
 
 function whisperErrorMessage(status, detail) {
   let message = "";
+  let code = "";
 
   try {
     const parsed = JSON.parse(detail);
     message = parsed?.error?.message || "";
+    code = parsed?.error?.code || "";
   } catch {
     message = detail;
+  }
+
+  const lower = `${message} ${code}`.toLowerCase();
+
+  if (
+    code === "insufficient_quota" ||
+    lower.includes("insufficient_quota") ||
+    lower.includes("exceeded your current quota") ||
+    lower.includes("billing")
+  ) {
+    return "Transcription needs OpenAI API credits. Add a payment method and prepaid balance at platform.openai.com (ChatGPT free does not include API access).";
   }
 
   if (status === 401) {
@@ -126,11 +139,7 @@ function whisperErrorMessage(status, detail) {
   }
 
   if (status === 429) {
-    return "Transcription is temporarily busy. Wait a moment and try again.";
-  }
-
-  if (message.includes("insufficient_quota") || message.includes("billing")) {
-    return "Transcription failed: OpenAI billing is not set up. Add a payment method at platform.openai.com.";
+    return "OpenAI rate limit hit. Wait a minute and try again, or add prepaid credits at platform.openai.com.";
   }
 
   if (message.includes("Invalid file format")) {
