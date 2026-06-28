@@ -196,6 +196,28 @@
   }
   .done h2 { font-size: 28px; margin: 0 0 10px; letter-spacing: -0.01em; }
   .done p { color: var(--muted); font-size: 17px; margin: 0 auto; max-width: 44ch; }
+  .done-next {
+    margin: 22px auto 18px;
+    font-size: 16px;
+    color: var(--ink);
+    font-weight: 600;
+  }
+  .done-schedule {
+    appearance: none;
+    border: none;
+    background: var(--jolly);
+    color: #fff;
+    font: inherit;
+    font-weight: 700;
+    font-size: 17px;
+    padding: 15px 26px;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: background .15s ease, transform .05s ease;
+    margin-top: 4px;
+  }
+  .done-schedule:hover { background: var(--jolly-deep); }
+  .done-schedule:active { transform: translateY(1px); }
 
   .voice-panel {
     background: #fcfaf6;
@@ -449,6 +471,15 @@
   <div class="done" id="done">
     <h2>Got it.</h2>
     <p>Thanks for laying it out. We'll go through this before we talk and come ready with something built around how you actually run.</p>
+    <p class="done-next">Next step: pick a time that works for you.</p>
+    <button
+      type="button"
+      class="done-schedule"
+      id="scheduleBtn"
+      data-cal-link="jollymammoth/schedule"
+      data-cal-namespace="schedule"
+      data-cal-config='{"layout":"month_view","useSlotsViewOnSmallScreen":"true","theme":"dark"}'
+    >Schedule your call</button>
   </div>
 
   <p class="signoff">Made by mammals in Eau Claire, WI.</p>
@@ -460,7 +491,75 @@
     var form = document.getElementById("intake");
     var statusEl = document.getElementById("status");
     var doneEl = document.getElementById("done");
+    var scheduleBtn = document.getElementById("scheduleBtn");
     var btn = document.getElementById("submitBtn");
+    var calScheduleLoaded = false;
+
+    function initCalSchedule(prefill) {
+      if (calScheduleLoaded) return;
+      calScheduleLoaded = true;
+
+      if (scheduleBtn && prefill) {
+        var calConfig = {
+          layout: "month_view",
+          useSlotsViewOnSmallScreen: "true",
+          theme: "dark",
+        };
+        if (prefill.name) calConfig.name = prefill.name;
+        if (prefill.email) calConfig.email = prefill.email;
+        scheduleBtn.setAttribute("data-cal-config", JSON.stringify(calConfig));
+      }
+
+      (function (C, A, L) {
+        var p = function (a, ar) { a.q.push(ar); };
+        var d = C.document;
+        C.Cal = C.Cal || function () {
+          var cal = C.Cal;
+          var ar = arguments;
+          if (!cal.loaded) {
+            cal.ns = {};
+            cal.q = cal.q || [];
+            d.head.appendChild(d.createElement("script")).src = A;
+            cal.loaded = true;
+          }
+          if (ar[0] === L) {
+            var api = function () { p(api, arguments); };
+            var namespace = ar[1];
+            api.q = api.q || [];
+            if (typeof namespace === "string") {
+              cal.ns[namespace] = cal.ns[namespace] || api;
+              p(cal.ns[namespace], ar);
+              p(cal, ["initNamespace", namespace]);
+            } else {
+              p(cal, ar);
+            }
+            return;
+          }
+          p(cal, ar);
+        };
+      })(window, "https://app.cal.com/embed/embed.js", "init");
+
+      Cal("init", "schedule", { origin: "https://app.cal.com" });
+      Cal.config = Cal.config || {};
+      Cal.config.forwardQueryParams = true;
+      Cal.ns.schedule("ui", {
+        theme: "dark",
+        cssVarsPerTheme: {
+          light: { "cal-brand": "#080707" },
+          dark: { "cal-brand": "#345933" },
+        },
+        hideEventTypeDetails: false,
+        layout: "month_view",
+      });
+    }
+
+    function showDoneView(prefill) {
+      form.style.display = "none";
+      statusEl.className = "status";
+      doneEl.style.display = "block";
+      initCalSchedule(prefill);
+      doneEl.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
 
     var MAX_RECORD_SECONDS = 180;
     var mediaRecorder = null;
@@ -710,8 +809,7 @@
       }
 
       if (form.company_url_confirm.value.trim() !== "") {
-        form.style.display = "none";
-        doneEl.style.display = "block";
+        showDoneView();
         return;
       }
 
@@ -753,10 +851,10 @@
           throw new Error(result.error || "That didn't go through. Give it another shot, or email jack@jollymammoth.co.");
         }
 
-        form.style.display = "none";
-        statusEl.className = "status";
-        doneEl.style.display = "block";
-        doneEl.scrollIntoView({ behavior: "smooth", block: "center" });
+        showDoneView({
+          name: payload.contact_name,
+          email: payload.contact_email,
+        });
       } catch (err) {
         btn.disabled = false;
         btn.textContent = "Send it over";
