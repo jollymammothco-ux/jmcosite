@@ -4,6 +4,8 @@ const SUPABASE_HEADERS = (serviceKey) => ({
   "Content-Type": "application/json",
 });
 
+const { sendNotificationEmail } = require("./lib/resend-notify");
+
 exports.handler = async (event) => {
   if (event.httpMethod === "OPTIONS") {
     return { statusCode: 204, headers: corsHeaders(), body: "" };
@@ -206,50 +208,30 @@ async function supabasePatch(url, serviceKey, table, id, updates) {
 }
 
 async function sendIntakeEmail(intake, dealId) {
-  const apiKey = process.env.RESEND_API_KEY;
-  const toEmail = process.env.NOTIFY_EMAIL;
-  const fromEmail = process.env.INTAKE_FROM_EMAIL || "Jolly Mammoth <onboarding@resend.dev>";
-
-  if (!apiKey || !toEmail) {
-    console.warn("Email notification not configured — set RESEND_API_KEY and NOTIFY_EMAIL");
-    return;
-  }
-
-  const subject = `New demo intake: ${intake.business_name}`;
-  const text = [
-    `New discovery intake submitted.`,
-    ``,
+  const lines = [
+    "New discovery intake submitted.",
+    "",
     `Business: ${intake.business_name}`,
     `Contact: ${intake.contact_name}`,
     `Email: ${intake.contact_email}`,
     intake.contact_phone ? `Phone: ${intake.contact_phone}` : null,
-    intake.frustration ? `Frustration: ${intake.frustration}` : null,
-    intake.ai_workflow_benefit ? `Where AI could help: ${intake.ai_workflow_benefit}` : null,
-    ``,
+    intake.website ? `Website: ${intake.website}` : null,
+    intake.what_you_do ? `What they do: ${intake.what_you_do}` : null,
+    intake.size ? `Team size: ${intake.size}` : null,
+    "",
+    intake.normal_week ? `Normal week:\n${intake.normal_week}` : null,
+    intake.frustration ? `Biggest frustration:\n${intake.frustration}` : null,
+    intake.ai_workflow_benefit ? `Where AI could help:\n${intake.ai_workflow_benefit}` : null,
+    intake.six_months ? `Six months out:\n${intake.six_months}` : null,
+    "",
     `Deal ID: ${dealId}`,
-    `Open your Revenue Command Center to review the full intake.`,
-  ]
-    .filter(Boolean)
-    .join("\n");
+    "Open your Revenue Command Center to review the full intake.",
+  ].filter(Boolean);
 
-  const response = await fetch("https://api.resend.com/emails", {
-    method: "POST",
-    headers: {
-      Authorization: `Bearer ${apiKey}`,
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      from: fromEmail,
-      to: [toEmail],
-      subject,
-      text,
-    }),
+  await sendNotificationEmail({
+    subject: `New demo intake: ${intake.business_name}`,
+    text: lines.join("\n"),
   });
-
-  if (!response.ok) {
-    const detail = await response.text();
-    console.error("Resend email failed:", response.status, detail);
-  }
 }
 
 function clean(value) {

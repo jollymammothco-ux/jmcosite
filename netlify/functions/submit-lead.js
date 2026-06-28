@@ -1,3 +1,5 @@
+const { sendNotificationEmail } = require("./lib/resend-notify");
+
 const INTEREST_LABELS = {
   rapiddashboard: "RapidDashboard",
   "go-mammoth": "Go Mammoth System",
@@ -73,12 +75,33 @@ exports.handler = async (event) => {
       return json(502, { error: "Could not save your request. Please try again." });
     }
 
+    await sendLeadEmail(lead);
+
     return json(200, { ok: true });
   } catch (error) {
     console.error("CRM webhook error:", error);
     return json(502, { error: "Could not save your request. Please try again." });
   }
 };
+
+async function sendLeadEmail(lead) {
+  const lines = [
+    "New contact form submission.",
+    "",
+    `Name: ${lead.name}`,
+    `Email: ${lead.email}`,
+    lead.company ? `Company: ${lead.company}` : null,
+    `Interest: ${lead.interest_label}`,
+    lead.message ? `Message:\n${lead.message}` : null,
+    lead.page_url ? `Page: ${lead.page_url}` : null,
+    `Submitted: ${lead.submitted_at}`,
+  ].filter(Boolean);
+
+  await sendNotificationEmail({
+    subject: `New website lead: ${lead.name}`,
+    text: lines.join("\n"),
+  });
+}
 
 function clean(value) {
   return typeof value === "string" ? value.trim() : "";
