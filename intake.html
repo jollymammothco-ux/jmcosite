@@ -5,367 +5,104 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="Tell us how your business runs. A few questions so we build something that actually fits.">
 <title>Tell us how it runs — Jolly Mammoth Co</title>
-<style>
-  :root {
-    --ink: #1a1714;
-    --paper: #f7f4ee;
-    --card: #ffffff;
-    --line: #e3ddd2;
-    --muted: #6f675c;
-    --jolly: #c0492e;
-    --jolly-deep: #9c3a23;
-    --focus: #2f6f5e;
-    --radius: 14px;
-  }
-  * { box-sizing: border-box; }
-  html { scroll-behavior: smooth; }
-  body {
-    margin: 0;
-    background: var(--paper);
-    color: var(--ink);
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
-    line-height: 1.55;
-    -webkit-font-smoothing: antialiased;
-  }
-  .wrap { max-width: 680px; margin: 0 auto; padding: 56px 22px 96px; }
-
-  .eyebrow {
-    font-size: 13px;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--jolly);
-    font-weight: 700;
-    margin: 0 0 14px;
-  }
-  h1 {
-    font-size: clamp(30px, 6vw, 44px);
-    line-height: 1.06;
-    letter-spacing: -0.02em;
-    margin: 0 0 16px;
-    font-weight: 800;
-  }
-  .lede {
-    font-size: 18px;
-    color: var(--muted);
-    margin: 0 0 8px;
-    max-width: 56ch;
-  }
-  .lede strong { color: var(--ink); font-weight: 600; }
-  .time {
-    font-size: 14px;
-    color: var(--muted);
-    margin: 18px 0 40px;
-  }
-
-  .group {
-    background: var(--card);
-    border: 1px solid var(--line);
-    border-radius: var(--radius);
-    padding: 26px 24px 8px;
-    margin: 0 0 22px;
-  }
-  .group-label {
-    font-size: 13px;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--jolly-deep);
-    font-weight: 700;
-    margin: 0 0 4px;
-  }
-  .group-note {
-    font-size: 14px;
-    color: var(--muted);
-    margin: 0 0 22px;
-  }
-
-  .field { margin: 0 0 22px; }
-  label {
-    display: block;
-    font-weight: 600;
-    font-size: 16px;
-    margin: 0 0 6px;
-  }
-  .help {
-    display: block;
-    font-size: 14px;
-    color: var(--muted);
-    margin: 0 0 9px;
-    font-weight: 400;
-  }
-  input[type="text"],
-  input[type="email"],
-  input[type="tel"],
-  input[type="url"],
-  textarea,
-  select {
-    width: 100%;
-    font: inherit;
-    color: var(--ink);
-    background: #fcfaf6;
-    border: 1px solid var(--line);
-    border-radius: 10px;
-    padding: 12px 13px;
-    transition: border-color .15s ease, box-shadow .15s ease;
-  }
-  textarea { resize: vertical; min-height: 92px; }
-  input:focus, textarea:focus, select:focus {
-    outline: none;
-    border-color: var(--focus);
-    box-shadow: 0 0 0 3px rgba(47,111,94,0.16);
-  }
-  input::placeholder, textarea::placeholder { color: #a79e90; }
-
-  .seg { display: flex; flex-wrap: wrap; gap: 9px; }
-  .seg input { position: absolute; opacity: 0; pointer-events: none; }
-  .seg label {
-    margin: 0;
-    font-weight: 500;
-    font-size: 15px;
-    padding: 9px 15px;
-    border: 1px solid var(--line);
-    border-radius: 999px;
-    background: #fcfaf6;
-    cursor: pointer;
-    transition: all .12s ease;
-  }
-  .seg input:checked + label {
-    background: var(--jolly);
-    border-color: var(--jolly);
-    color: #fff;
-  }
-  .seg input:focus-visible + label {
-    box-shadow: 0 0 0 3px rgba(47,111,94,0.30);
-  }
-
-  .submit {
-    appearance: none;
-    border: none;
-    background: var(--jolly);
-    color: #fff;
-    font: inherit;
-    font-weight: 700;
-    font-size: 17px;
-    padding: 15px 26px;
-    border-radius: 999px;
-    cursor: pointer;
-    transition: background .15s ease, transform .05s ease;
-    width: 100%;
-  }
-  .submit:hover { background: var(--jolly-deep); }
-  .submit:active { transform: translateY(1px); }
-  .submit:disabled { opacity: .6; cursor: default; }
-
-  .foot-note {
-    font-size: 13px;
-    color: var(--muted);
-    text-align: center;
-    margin: 14px 0 0;
-  }
-  .signoff {
-    font-size: 13px;
-    color: var(--muted);
-    text-align: center;
-    margin: 54px 0 0;
-  }
-
-  .pot {
-    position: absolute;
-    left: -9999px;
-    width: 1px;
-    height: 1px;
-    overflow: hidden;
-  }
-
-  .status {
-    display: none;
-    margin: 0 0 22px;
-    padding: 13px 16px;
-    border-radius: 10px;
-    font-size: 15px;
-  }
-  .status.err {
-    display: block;
-    background: #fbeae6;
-    border: 1px solid #e7b6aa;
-    color: var(--jolly-deep);
-  }
-  .done {
-    display: none;
-    text-align: center;
-    padding: 30px 10px;
-  }
-  .done h2 { font-size: 28px; margin: 0 0 10px; letter-spacing: -0.01em; }
-  .done p { color: var(--muted); font-size: 17px; margin: 0 auto; max-width: 44ch; }
-  .done-next {
-    margin: 22px auto 18px;
-    font-size: 16px;
-    color: var(--ink);
-    font-weight: 600;
-  }
-  .done-schedule {
-    appearance: none;
-    border: none;
-    background: var(--jolly);
-    color: #fff;
-    font: inherit;
-    font-weight: 700;
-    font-size: 17px;
-    padding: 15px 26px;
-    border-radius: 999px;
-    cursor: pointer;
-    transition: background .15s ease, transform .05s ease;
-    margin-top: 4px;
-  }
-  .done-schedule:hover { background: var(--jolly-deep); }
-  .done-schedule:active { transform: translateY(1px); }
-
-  .voice-panel {
-    background: #fcfaf6;
-    border: 1px solid var(--line);
-    border-radius: 12px;
-    padding: 16px;
-  }
-  .voice-controls {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    flex-wrap: wrap;
-  }
-  .voice-btn {
-    appearance: none;
-    border: 1px solid var(--line);
-    background: #fff;
-    color: var(--ink);
-    font: inherit;
-    font-weight: 600;
-    font-size: 15px;
-    padding: 10px 16px;
-    border-radius: 999px;
-    cursor: pointer;
-    transition: background .15s ease, border-color .15s ease;
-  }
-  .voice-btn:hover { border-color: #cfc6b8; }
-  .voice-btn.record {
-    background: var(--jolly);
-    border-color: var(--jolly);
-    color: #fff;
-  }
-  .voice-btn.record:hover { background: var(--jolly-deep); border-color: var(--jolly-deep); }
-  .voice-btn.stop {
-    background: #fff;
-    border-color: var(--jolly);
-    color: var(--jolly-deep);
-  }
-  .voice-btn:disabled { opacity: .55; cursor: default; }
-  .voice-timer {
-    font-size: 14px;
-    color: var(--muted);
-    font-variant-numeric: tabular-nums;
-  }
-  .voice-timer.recording { color: var(--jolly-deep); font-weight: 600; }
-  .voice-status {
-    font-size: 14px;
-    color: var(--muted);
-    margin: 12px 0 0;
-  }
-  .voice-status.err { color: var(--jolly-deep); }
-  .voice-transcript-wrap {
-    display: none;
-    margin-top: 14px;
-  }
-  .voice-transcript-wrap.visible { display: block; }
-  .voice-transcript-wrap textarea {
-    min-height: 110px;
-    margin-bottom: 10px;
-  }
-  .voice-actions {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 14px;
-    align-items: center;
-  }
-  .voice-link {
-    appearance: none;
-    border: none;
-    background: none;
-    padding: 0;
-    font: inherit;
-    font-size: 14px;
-    color: var(--focus);
-    cursor: pointer;
-    text-decoration: underline;
-    text-underline-offset: 2px;
-  }
-  .voice-link:hover { color: var(--jolly-deep); }
-  .voice-fallback {
-    display: none;
-    margin-top: 14px;
-  }
-  .voice-fallback.visible { display: block; }
-
-  @media (prefers-reduced-motion: reduce) {
-    html { scroll-behavior: auto; }
-    * { transition: none !important; }
-  }
-</style>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap"
+  rel="stylesheet"
+/>
+<link rel="stylesheet" href="styles.css?v=7" />
+<link rel="icon" href="assets/brand/logo.png" type="image/png" />
+<link rel="apple-touch-icon" href="assets/brand/logo.png" />
 </head>
-<body>
-<main class="wrap">
+<body class="page-intake">
+  <header class="site-header">
+    <a href="index.html" class="logo" aria-label="Jolly Mammoth home">
+      <img
+        src="assets/brand/logo.png"
+        alt=""
+        width="48"
+        height="40"
+        class="logo-mark"
+        aria-hidden="true"
+      />
+    </a>
+    <nav class="nav-desktop" aria-label="Main">
+      <a href="go-mammoth.html">Go Mammoth</a>
+      <a href="projects.html">Projects</a>
+      <a href="about.html">About</a>
+      <a href="index.html#creative">Creative</a>
+    </nav>
+    <a class="btn btn-header" href="intake.html">Start Project</a>
+    <button class="nav-toggle" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span>
+    </button>
+  </header>
 
-  <p class="eyebrow">Before we talk</p>
-  <h1>Tell us how it runs.</h1>
-  <p class="lede">A few questions about your business in your own words. <strong>The more you tell us, the sharper the demo we build you.</strong></p>
-  <p class="time">Takes about 5 minutes. No logins. No jargon.</p>
+  <div class="mobile-nav" hidden>
+    <a href="go-mammoth.html">Go Mammoth</a>
+    <a href="projects.html">Projects</a>
+    <a href="about.html">About</a>
+    <a href="index.html#creative">Creative</a>
+    <a href="intake.html">Start Project</a>
+  </div>
 
-  <div id="status" class="status"></div>
+  <main>
+    <section class="intake-hero">
+      <p class="eyebrow">Before we talk</p>
+      <h1 class="headline headline-lavender">Tell us how it runs.</h1>
+      <p class="lead centered">A few questions about your business in your own words. <strong>The more you tell us, the sharper the demo we build you.</strong></p>
+      <p class="intake-time centered">Takes about 5 minutes. No logins. No jargon.</p>
+    </section>
 
-  <form id="intake" novalidate>
+    <div class="intake-wrap">
+      <div id="status" class="intake-status"></div>
 
-    <div class="pot" aria-hidden="true">
-      <label for="company_url_confirm">Leave this blank</label>
-      <input type="text" id="company_url_confirm" name="company_url_confirm" tabindex="-1" autocomplete="off">
-    </div>
+      <form id="intake" class="intake-form" novalidate>
 
-    <section class="group">
-      <p class="group-label">The basics</p>
-      <p class="group-note">Who we're talking to.</p>
+        <label class="sr-only" for="company_url_confirm">Leave this blank</label>
+        <input type="text" class="hp-field" id="company_url_confirm" name="company_url_confirm" tabindex="-1" autocomplete="off" aria-hidden="true">
 
-      <div class="field">
+    <section class="intake-group">
+      <p class="intake-group-label">The basics</p>
+      <p class="intake-group-note">Who we're talking to.</p>
+
+      <div class="intake-field">
         <label for="contact_name">Your name</label>
         <input type="text" id="contact_name" name="contact_name" required autocomplete="name">
       </div>
 
-      <div class="field">
+      <div class="intake-field">
         <label for="contact_email">Email</label>
         <input type="email" id="contact_email" name="contact_email" required autocomplete="email">
       </div>
 
-      <div class="field">
+      <div class="intake-field">
         <label for="contact_phone">Phone</label>
-        <span class="help">Optional — only if you'd rather we text or call.</span>
+        <span class="intake-help">Optional — only if you'd rather we text or call.</span>
         <input type="tel" id="contact_phone" name="contact_phone" autocomplete="tel">
       </div>
 
-      <div class="field">
+      <div class="intake-field">
         <label for="business_name">Business name</label>
         <input type="text" id="business_name" name="business_name" required autocomplete="organization">
       </div>
 
-      <div class="field">
+      <div class="intake-field">
         <label for="website">Website</label>
-        <span class="help">If you've got one. We'll take a look before we talk.</span>
+        <span class="intake-help">If you've got one. We'll take a look before we talk.</span>
         <input type="url" id="website" name="website" placeholder="yourbusiness.com" autocomplete="url">
       </div>
 
-      <div class="field">
+      <div class="intake-field">
         <label for="what_you_do">What do you do?</label>
-        <span class="help">In your words. A line or two.</span>
+        <span class="intake-help">In your words. A line or two.</span>
         <textarea id="what_you_do" name="what_you_do" placeholder="e.g., Residential and commercial roofing across the Chippewa Valley."></textarea>
       </div>
 
-      <div class="field">
+      <div class="intake-field">
         <label>How big is the operation?</label>
-        <div class="seg">
+        <div class="intake-seg">
           <input type="radio" id="size_solo" name="size" value="Just me"><label for="size_solo">Just me</label>
           <input type="radio" id="size_crew" name="size" value="Small crew"><label for="size_crew">Small crew</label>
           <input type="radio" id="size_mid" name="size" value="10-25"><label for="size_mid">10–25</label>
@@ -374,33 +111,33 @@
       </div>
     </section>
 
-    <section class="group">
-      <p class="group-label">How you run today</p>
-      <p class="group-note">This part matters most. Don't hold back.</p>
+    <section class="intake-group">
+      <p class="intake-group-label">How you run today</p>
+      <p class="intake-group-note">This part matters most. Don't hold back.</p>
 
-      <div class="field">
+      <div class="intake-field">
         <label for="normal_week">Walk us through a normal week. What eats the most time?</label>
         <textarea id="normal_week" name="normal_week" placeholder="e.g., Chasing down which jobs got invoiced and which didn't, then re-entering it all into QuickBooks."></textarea>
       </div>
 
-      <div class="field">
+      <div class="intake-field">
         <label for="wish_report">What's the one number or report you wish you could pull up instantly, but can't?</label>
         <textarea id="wish_report" name="wish_report" placeholder="e.g., Which crews are actually profitable this month."></textarea>
       </div>
 
-      <div class="field">
+      <div class="intake-field">
         <label for="by_hand">What do you do by hand that should be automatic?</label>
         <textarea id="by_hand" name="by_hand" placeholder="e.g., Copying job info between three different apps."></textarea>
       </div>
 
-      <div class="field">
+      <div class="intake-field">
         <label for="frustration">What's your biggest frustration with how the business runs right now?</label>
         <textarea id="frustration" name="frustration" placeholder="Say it straight."></textarea>
       </div>
 
-      <div class="field" id="aiVoiceField">
+      <div class="intake-field" id="aiVoiceField">
         <label for="ai_workflow_benefit">Where could AI help your business most?</label>
-        <span class="help">In your own words — based on how you already work. Record a quick voice note or type below.</span>
+        <span class="intake-help">In your own words — based on how you already work. Record a quick voice note or type below.</span>
 
         <div class="voice-panel">
           <div class="voice-controls">
@@ -428,70 +165,76 @@
       </div>
     </section>
 
-    <section class="group">
-      <p class="group-label">Where you want to go</p>
-      <p class="group-note">The point of all this.</p>
+    <section class="intake-group">
+      <p class="intake-group-label">Where you want to go</p>
+      <p class="intake-group-note">The point of all this.</p>
 
-      <div class="field">
+      <div class="intake-field">
         <label for="six_months">If this worked perfectly, what would it do for you in six months?</label>
         <textarea id="six_months" name="six_months" placeholder="e.g., Stop me from losing a Saturday to paperwork every week."></textarea>
       </div>
     </section>
 
-    <section class="group">
-      <p class="group-label">Your setup</p>
-      <p class="group-note">Light stuff. Just enough to ground the build.</p>
+    <section class="intake-group">
+      <p class="intake-group-label">Your setup</p>
+      <p class="intake-group-note">Light stuff. Just enough to ground the build.</p>
 
-      <div class="field">
+      <div class="intake-field">
         <label for="tools">What tools and software do you run on?</label>
         <textarea id="tools" name="tools" placeholder="QuickBooks, AccuLynx, a spreadsheet, whatever it is."></textarea>
       </div>
 
-      <div class="field">
+      <div class="intake-field">
         <label>Do you have admin/login access to those?</label>
-        <div class="seg">
+        <div class="intake-seg">
           <input type="radio" id="access_yes" name="access" value="Yes"><label for="access_yes">Yes</label>
           <input type="radio" id="access_no" name="access" value="No"><label for="access_no">No</label>
           <input type="radio" id="access_unsure" name="access" value="Not sure"><label for="access_unsure">Not sure</label>
         </div>
       </div>
 
-      <div class="field">
+      <div class="intake-field">
         <label for="off_limits">Anything that should never be touched or shared?</label>
-        <span class="help">Some data's off-limits. Tell us now.</span>
+        <span class="intake-help">Some data's off-limits. Tell us now.</span>
         <textarea id="off_limits" name="off_limits" placeholder="e.g., Employee SSNs, client financials. Or 'nothing comes to mind.'"></textarea>
       </div>
     </section>
 
-    <button type="submit" class="submit" id="submitBtn">Send it over</button>
-    <p class="foot-note">We'll read it before our call. No spam, ever.</p>
+    <button type="submit" class="btn btn-primary intake-submit" id="submitBtn">Send it over</button>
+    <p class="intake-foot-note">We'll read it before our call. No spam, ever.</p>
 
   </form>
 
-  <div class="done" id="done">
-    <h2>Got it.</h2>
-    <p>Thanks for laying it out. We'll go through this before we talk and come ready with something built around how you actually run.</p>
-    <p class="done-next">Next step: pick a time that works for you.</p>
-    <button
-      type="button"
-      class="done-schedule"
-      id="scheduleBtn"
-      data-cal-link="jollymammoth/schedule"
-      data-cal-namespace="schedule"
-      data-cal-config='{"layout":"month_view","useSlotsViewOnSmallScreen":"true","theme":"dark"}'
-    >Schedule your call</button>
+  <div class="intake-done" id="done">
+    <h2>You're in.</h2>
+    <p class="intake-done-subline">We've got your answers and we're already building the solution. By the time we talk, there'll be something real to show you, made to solve your actual pain points.</p>
+    <p class="intake-calendar-label">Grab a time below.</p>
+    <div class="cal-inline-wrap" id="my-cal-inline-schedule"></div>
   </div>
 
-  <p class="signoff">Made by mammals in Eau Claire, WI.</p>
+    </div>
+  </main>
 
-</main>
+  <footer class="site-footer">
+    <p class="footer-tagline">
+      Crafted with care. Made by mammals in Eau Claire, WI.
+    </p>
+    <nav class="footer-nav" aria-label="Footer">
+      <a href="projects.html">projects</a>
+      <a href="about.html">about</a>
+      <a href="intake.html">start discovery</a>
+      <a href="index.html">home</a>
+    </nav>
+  </footer>
+
+  <script src="main.js?v=7"></script>
 
 <script>
   (function () {
     var form = document.getElementById("intake");
     var statusEl = document.getElementById("status");
     var doneEl = document.getElementById("done");
-    var scheduleBtn = document.getElementById("scheduleBtn");
+    var heroEl = document.querySelector(".intake-hero");
     var btn = document.getElementById("submitBtn");
     var calScheduleLoaded = false;
 
@@ -499,15 +242,14 @@
       if (calScheduleLoaded) return;
       calScheduleLoaded = true;
 
-      if (scheduleBtn && prefill) {
-        var calConfig = {
-          layout: "month_view",
-          useSlotsViewOnSmallScreen: "true",
-          theme: "dark",
-        };
-        if (prefill.name) calConfig.name = prefill.name;
-        if (prefill.email) calConfig.email = prefill.email;
-        scheduleBtn.setAttribute("data-cal-config", JSON.stringify(calConfig));
+      var inlineConfig = {
+        layout: "month_view",
+        useSlotsViewOnSmallScreen: "true",
+        theme: "dark",
+      };
+      if (prefill) {
+        if (prefill.name) inlineConfig.name = prefill.name;
+        if (prefill.email) inlineConfig.email = prefill.email;
       }
 
       (function (C, A, L) {
@@ -542,11 +284,16 @@
       Cal("init", "schedule", { origin: "https://app.cal.com" });
       Cal.config = Cal.config || {};
       Cal.config.forwardQueryParams = true;
+      Cal.ns.schedule("inline", {
+        elementOrSelector: "#my-cal-inline-schedule",
+        config: inlineConfig,
+        calLink: "jollymammoth/schedule",
+      });
       Cal.ns.schedule("ui", {
         theme: "dark",
         cssVarsPerTheme: {
-          light: { "cal-brand": "#080707" },
-          dark: { "cal-brand": "#345933" },
+          light: { "cal-brand": "#5ee0c8" },
+          dark: { "cal-brand": "#5ee0c8" },
         },
         hideEventTypeDetails: false,
         layout: "month_view",
@@ -554,8 +301,9 @@
     }
 
     function showDoneView(prefill) {
+      if (heroEl) heroEl.style.display = "none";
       form.style.display = "none";
-      statusEl.className = "status";
+      statusEl.className = "intake-status";
       doneEl.style.display = "block";
       initCalSchedule(prefill);
       doneEl.scrollIntoView({ behavior: "smooth", block: "center" });
@@ -583,7 +331,7 @@
 
     function showError(msg) {
       statusEl.textContent = msg;
-      statusEl.className = "status err";
+      statusEl.className = "intake-status intake-status--err";
       statusEl.scrollIntoView({ behavior: "smooth", block: "center" });
     }
 
@@ -801,7 +549,7 @@
 
     form.addEventListener("submit", async function (e) {
       e.preventDefault();
-      statusEl.className = "status";
+      statusEl.className = "intake-status";
 
       if (isTranscribing) {
         showError("Hang on — still transcribing your recording.");
