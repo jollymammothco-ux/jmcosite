@@ -26,6 +26,16 @@ const { handler } = require("../../netlify/functions/transcribe-intake");
 
   if (savedKey) process.env.OPENAI_API_KEY = savedKey;
 
+  process.env.OPENAI_API_KEY = "re_test_resend_key";
+  const resendKey = await handler({
+    httpMethod: "POST",
+    body: JSON.stringify({ audio: Buffer.from("test").toString("base64") }),
+  });
+  assert.strictEqual(resendKey.statusCode, 500);
+  assert.ok(JSON.parse(resendKey.body).error.includes("Resend"));
+
+  delete process.env.OPENAI_API_KEY;
+
   const options = await handler({ httpMethod: "OPTIONS" });
   assert.strictEqual(options.statusCode, 204);
 

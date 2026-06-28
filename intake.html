@@ -615,12 +615,16 @@
         mediaRecorder.onstop = async function () {
           var blob = new Blob(audioChunks, { type: mediaRecorder.mimeType || mimeType || "audio/webm" });
           resetRecordingUi();
-          if (blob.size > 0) {
-            await transcribeBlob(blob, blob.type);
+          if (blob.size === 0) {
+            voiceStatus.textContent = "No audio was captured. Try recording again or type your answer.";
+            voiceStatus.className = "voice-status err";
+            voiceFallback.classList.add("visible");
+            return;
           }
+          await transcribeBlob(blob, blob.type);
         };
 
-        mediaRecorder.start();
+        mediaRecorder.start(250);
         voiceRecordBtn.style.display = "none";
         voiceStopBtn.style.display = "";
         voiceTimer.className = "voice-timer recording";
@@ -646,6 +650,9 @@
       clearInterval(recordTimer);
       recordTimer = null;
       if (mediaRecorder && mediaRecorder.state !== "inactive") {
+        if (typeof mediaRecorder.requestData === "function") {
+          mediaRecorder.requestData();
+        }
         mediaRecorder.stop();
       } else {
         resetRecordingUi();
