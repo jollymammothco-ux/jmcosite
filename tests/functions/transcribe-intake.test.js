@@ -1,5 +1,5 @@
 const assert = require("assert");
-const { handler } = require("./transcribe-intake");
+const { handler } = require("../../netlify/functions/transcribe-intake");
 
 (async () => {
   const missingAudio = await handler({

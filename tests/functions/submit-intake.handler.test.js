@@ -37,7 +37,7 @@ process.env.INTAKE_OWNER_USER_ID = "user-789";
 process.env.RESEND_API_KEY = "re_test";
 process.env.NOTIFY_EMAIL = "jack@jollymammoth.co";
 
-const { handler } = require("./submit-intake");
+const { handler } = require("../../netlify/functions/submit-intake");
 
 (async () => {
   const response = await handler({

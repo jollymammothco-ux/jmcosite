@@ -3,7 +3,7 @@ const {
   parseIntakePayload,
   validateIntake,
   mapIntakeToDeal,
-} = require("./submit-intake");
+} = require("../../netlify/functions/submit-intake");
 
 const sample = {
   contact_name: "Jane Doe",
