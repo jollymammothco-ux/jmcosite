@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Tell us how your business runs. A few questions so we build something that actually fits.">
+<title>Tell us how it runs — Jolly Mammoth Co</title>
+<style>
+  :root {
+    --ink: #1a1714;
+    --paper: #f7f4ee;
+    --card: #ffffff;
+    --line: #e3ddd2;
+    --muted: #6f675c;
+    --jolly: #c0492e;
+    --jolly-deep: #9c3a23;
+    --focus: #2f6f5e;
+    --radius: 14px;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 680px; margin: 0 auto; padding: 56px 22px 96px; }
+
+  .eyebrow {
+    font-size: 13px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--jolly);
+    font-weight: 700;
+    margin: 0 0 14px;
+  }
+  h1 {
+    font-size: clamp(30px, 6vw, 44px);
+    line-height: 1.06;
+    letter-spacing: -0.02em;
+    margin: 0 0 16px;
+    font-weight: 800;
+  }
+  .lede {
+    font-size: 18px;
+    color: var(--muted);
+    margin: 0 0 8px;
+    max-width: 56ch;
+  }
+  .lede strong { color: var(--ink); font-weight: 600; }
+  .time {
+    font-size: 14px;
+    color: var(--muted);
+    margin: 18px 0 40px;
+  }
+
+  .group {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 26px 24px 8px;
+    margin: 0 0 22px;
+  }
+  .group-label {
+    font-size: 13px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--jolly-deep);
+    font-weight: 700;
+    margin: 0 0 4px;
+  }
+  .group-note {
+    font-size: 14px;
+    color: var(--muted);
+    margin: 0 0 22px;
+  }
+
+  .field { margin: 0 0 22px; }
+  label {
+    display: block;
+    font-weight: 600;
+    font-size: 16px;
+    margin: 0 0 6px;
+  }
+  .help {
+    display: block;
+    font-size: 14px;
+    color: var(--muted);
+    margin: 0 0 9px;
+    font-weight: 400;
+  }
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  input[type="url"],
+  textarea,
+  select {
+    width: 100%;
+    font: inherit;
+    color: var(--ink);
+    background: #fcfaf6;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 12px 13px;
+    transition: border-color .15s ease, box-shadow .15s ease;
+  }
+  textarea { resize: vertical; min-height: 92px; }
+  input:focus, textarea:focus, select:focus {
+    outline: none;
+    border-color: var(--focus);
+    box-shadow: 0 0 0 3px rgba(47,111,94,0.16);
+  }
+  input::placeholder, textarea::placeholder { color: #a79e90; }
+
+  .seg { display: flex; flex-wrap: wrap; gap: 9px; }
+  .seg input { position: absolute; opacity: 0; pointer-events: none; }
+  .seg label {
+    margin: 0;
+    font-weight: 500;
+    font-size: 15px;
+    padding: 9px 15px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    background: #fcfaf6;
+    cursor: pointer;
+    transition: all .12s ease;
+  }
+  .seg input:checked + label {
+    background: var(--jolly);
+    border-color: var(--jolly);
+    color: #fff;
+  }
+  .seg input:focus-visible + label {
+    box-shadow: 0 0 0 3px rgba(47,111,94,0.30);
+  }
+
+  .submit {
+    appearance: none;
+    border: none;
+    background: var(--jolly);
+    color: #fff;
+    font: inherit;
+    font-weight: 700;
+    font-size: 17px;
+    padding: 15px 26px;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: background .15s ease, transform .05s ease;
+    width: 100%;
+  }
+  .submit:hover { background: var(--jolly-deep); }
+  .submit:active { transform: translateY(1px); }
+  .submit:disabled { opacity: .6; cursor: default; }
+
+  .foot-note {
+    font-size: 13px;
+    color: var(--muted);
+    text-align: center;
+    margin: 14px 0 0;
+  }
+  .signoff {
+    font-size: 13px;
+    color: var(--muted);
+    text-align: center;
+    margin: 54px 0 0;
+  }
+
+  .pot {
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+  }
+
+  .status {
+    display: none;
+    margin: 0 0 22px;
+    padding: 13px 16px;
+    border-radius: 10px;
+    font-size: 15px;
+  }
+  .status.err {
+    display: block;
+    background: #fbeae6;
+    border: 1px solid #e7b6aa;
+    color: var(--jolly-deep);
+  }
+  .done {
+    display: none;
+    text-align: center;
+    padding: 30px 10px;
+  }
+  .done h2 { font-size: 28px; margin: 0 0 10px; letter-spacing: -0.01em; }
+  .done p { color: var(--muted); font-size: 17px; margin: 0 auto; max-width: 44ch; }
+
+  .voice-panel {
+    background: #fcfaf6;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 16px;
+  }
+  .voice-controls {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .voice-btn {
+    appearance: none;
+    border: 1px solid var(--line);
+    background: #fff;
+    color: var(--ink);
+    font: inherit;
+    font-weight: 600;
+    font-size: 15px;
+    padding: 10px 16px;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: background .15s ease, border-color .15s ease;
+  }
+  .voice-btn:hover { border-color: #cfc6b8; }
+  .voice-btn.record {
+    background: var(--jolly);
+    border-color: var(--jolly);
+    color: #fff;
+  }
+  .voice-btn.record:hover { background: var(--jolly-deep); border-color: var(--jolly-deep); }
+  .voice-btn.stop {
+    background: #fff;
+    border-color: var(--jolly);
+    color: var(--jolly-deep);
+  }
+  .voice-btn:disabled { opacity: .55; cursor: default; }
+  .voice-timer {
+    font-size: 14px;
+    color: var(--muted);
+    font-variant-numeric: tabular-nums;
+  }
+  .voice-timer.recording { color: var(--jolly-deep); font-weight: 600; }
+  .voice-status {
+    font-size: 14px;
+    color: var(--muted);
+    margin: 12px 0 0;
+  }
+  .voice-status.err { color: var(--jolly-deep); }
+  .voice-transcript-wrap {
+    display: none;
+    margin-top: 14px;
+  }
+  .voice-transcript-wrap.visible { display: block; }
+  .voice-transcript-wrap textarea {
+    min-height: 110px;
+    margin-bottom: 10px;
+  }
+  .voice-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    align-items: center;
+  }
+  .voice-link {
+    appearance: none;
+    border: none;
+    background: none;
+    padding: 0;
+    font: inherit;
+    font-size: 14px;
+    color: var(--focus);
+    cursor: pointer;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+  .voice-link:hover { color: var(--jolly-deep); }
+  .voice-fallback {
+    display: none;
+    margin-top: 14px;
+  }
+  .voice-fallback.visible { display: block; }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    * { transition: none !important; }
+  }
+</style>
+</head>
+<body>
+<main class="wrap">
+
+  <p class="eyebrow">Before we talk</p>
+  <h1>Tell us how it runs.</h1>
+  <p class="lede">A few questions about your business in your own words. <strong>The more you tell us, the sharper the demo we build you.</strong></p>
+  <p class="time">Takes about 5 minutes. No logins. No jargon.</p>
+
+  <div id="status" class="status"></div>
+
+  <form id="intake" novalidate>
+
+    <div class="pot" aria-hidden="true">
+      <label for="company_url_confirm">Leave this blank</label>
+      <input type="text" id="company_url_confirm" name="company_url_confirm" tabindex="-1" autocomplete="off">
+    </div>
+
+    <section class="group">
+      <p class="group-label">The basics</p>
+      <p class="group-note">Who we're talking to.</p>
+
+      <div class="field">
+        <label for="contact_name">Your name</label>
+        <input type="text" id="contact_name" name="contact_name" required autocomplete="name">
+      </div>
+
+      <div class="field">
+        <label for="contact_email">Email</label>
+        <input type="email" id="contact_email" name="contact_email" required autocomplete="email">
+      </div>
+
+      <div class="field">
+        <label for="contact_phone">Phone</label>
+        <span class="help">Optional — only if you'd rather we text or call.</span>
+        <input type="tel" id="contact_phone" name="contact_phone" autocomplete="tel">
+      </div>
+
+      <div class="field">
+        <label for="business_name">Business name</label>
+        <input type="text" id="business_name" name="business_name" required autocomplete="organization">
+      </div>
+
+      <div class="field">
+        <label for="website">Website</label>
+        <span class="help">If you've got one. We'll take a look before we talk.</span>
+        <input type="url" id="website" name="website" placeholder="yourbusiness.com" autocomplete="url">
+      </div>
+
+      <div class="field">
+        <label for="what_you_do">What do you do?</label>
+        <span class="help">In your words. A line or two.</span>
+        <textarea id="what_you_do" name="what_you_do" placeholder="e.g., Residential and commercial roofing across the Chippewa Valley."></textarea>
+      </div>
+
+      <div class="field">
+        <label>How big is the operation?</label>
+        <div class="seg">
+          <input type="radio" id="size_solo" name="size" value="Just me"><label for="size_solo">Just me</label>
+          <input type="radio" id="size_crew" name="size" value="Small crew"><label for="size_crew">Small crew</label>
+          <input type="radio" id="size_mid" name="size" value="10-25"><label for="size_mid">10–25</label>
+          <input type="radio" id="size_big" name="size" value="Bigger"><label for="size_big">Bigger</label>
+        </div>
+      </div>
+    </section>
+
+    <section class="group">
+      <p class="group-label">How you run today</p>
+      <p class="group-note">This part matters most. Don't hold back.</p>
+
+      <div class="field">
+        <label for="normal_week">Walk us through a normal week. What eats the most time?</label>
+        <textarea id="normal_week" name="normal_week" placeholder="e.g., Chasing down which jobs got invoiced and which didn't, then re-entering it all into QuickBooks."></textarea>
+      </div>
+
+      <div class="field">
+        <label for="wish_report">What's the one number or report you wish you could pull up instantly, but can't?</label>
+        <textarea id="wish_report" name="wish_report" placeholder="e.g., Which crews are actually profitable this month."></textarea>
+      </div>
+
+      <div class="field">
+        <label for="by_hand">What do you do by hand that should be automatic?</label>
+        <textarea id="by_hand" name="by_hand" placeholder="e.g., Copying job info between three different apps."></textarea>
+      </div>
+
+      <div class="field">
+        <label for="frustration">What's your biggest frustration with how the business runs right now?</label>
+        <textarea id="frustration" name="frustration" placeholder="Say it straight."></textarea>
+      </div>
+
+      <div class="field" id="aiVoiceField">
+        <label for="ai_workflow_benefit">Where could AI help your business most?</label>
+        <span class="help">In your own words — based on how you already work. Record a quick voice note or type below.</span>
+
+        <div class="voice-panel">
+          <div class="voice-controls">
+            <button type="button" class="voice-btn record" id="voiceRecordBtn">Tap to record</button>
+            <button type="button" class="voice-btn stop" id="voiceStopBtn" style="display:none">Stop</button>
+            <span class="voice-timer" id="voiceTimer">0:00 / 3:00</span>
+          </div>
+          <p class="voice-status" id="voiceStatus">Your recording is transcribed to text. You can edit it before sending.</p>
+
+          <div class="voice-transcript-wrap" id="voiceTranscriptWrap">
+            <textarea id="ai_workflow_benefit" name="ai_workflow_benefit" placeholder="Your transcribed answer will appear here…"></textarea>
+            <div class="voice-actions">
+              <button type="button" class="voice-link" id="voiceRerecordBtn">Re-record</button>
+              <button type="button" class="voice-link" id="voiceTypeBtn">Prefer to type instead?</button>
+            </div>
+          </div>
+
+          <div class="voice-fallback" id="voiceFallback">
+            <textarea id="ai_workflow_benefit_fallback" placeholder="Type your answer here…"></textarea>
+            <div class="voice-actions" style="margin-top:10px">
+              <button type="button" class="voice-link" id="voiceRecordInsteadBtn">Record a voice answer instead</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="group">
+      <p class="group-label">Where you want to go</p>
+      <p class="group-note">The point of all this.</p>
+
+      <div class="field">
+        <label for="six_months">If this worked perfectly, what would it do for you in six months?</label>
+        <textarea id="six_months" name="six_months" placeholder="e.g., Stop me from losing a Saturday to paperwork every week."></textarea>
+      </div>
+    </section>
+
+    <section class="group">
+      <p class="group-label">Your setup</p>
+      <p class="group-note">Light stuff. Just enough to ground the build.</p>
+
+      <div class="field">
+        <label for="tools">What tools and software do you run on?</label>
+        <textarea id="tools" name="tools" placeholder="QuickBooks, AccuLynx, a spreadsheet, whatever it is."></textarea>
+      </div>
+
+      <div class="field">
+        <label>Do you have admin/login access to those?</label>
+        <div class="seg">
+          <input type="radio" id="access_yes" name="access" value="Yes"><label for="access_yes">Yes</label>
+          <input type="radio" id="access_no" name="access" value="No"><label for="access_no">No</label>
+          <input type="radio" id="access_unsure" name="access" value="Not sure"><label for="access_unsure">Not sure</label>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="off_limits">Anything that should never be touched or shared?</label>
+        <span class="help">Some data's off-limits. Tell us now.</span>
+        <textarea id="off_limits" name="off_limits" placeholder="e.g., Employee SSNs, client financials. Or 'nothing comes to mind.'"></textarea>
+      </div>
+    </section>
+
+    <button type="submit" class="submit" id="submitBtn">Send it over</button>
+    <p class="foot-note">We'll read it before our call. No spam, ever.</p>
+
+  </form>
+
+  <div class="done" id="done">
+    <h2>Got it.</h2>
+    <p>Thanks for laying it out. We'll go through this before we talk and come ready with something built around how you actually run.</p>
+  </div>
+
+  <p class="signoff">Made by mammals in Eau Claire, WI.</p>
+
+</main>
+
+<script>
+  (function () {
+    var form = document.getElementById("intake");
+    var statusEl = document.getElementById("status");
+    var doneEl = document.getElementById("done");
+    var btn = document.getElementById("submitBtn");
+
+    var MAX_RECORD_SECONDS = 180;
+    var mediaRecorder = null;
+    var mediaStream = null;
+    var audioChunks = [];
+    var recordTimer = null;
+    var recordSeconds = 0;
+    var isTranscribing = false;
+
+    var voiceRecordBtn = document.getElementById("voiceRecordBtn");
+    var voiceStopBtn = document.getElementById("voiceStopBtn");
+    var voiceTimer = document.getElementById("voiceTimer");
+    var voiceStatus = document.getElementById("voiceStatus");
+    var voiceTranscriptWrap = document.getElementById("voiceTranscriptWrap");
+    var voiceFallback = document.getElementById("voiceFallback");
+    var aiWorkflowBenefit = document.getElementById("ai_workflow_benefit");
+    var aiWorkflowBenefitFallback = document.getElementById("ai_workflow_benefit_fallback");
+    var voiceRerecordBtn = document.getElementById("voiceRerecordBtn");
+    var voiceTypeBtn = document.getElementById("voiceTypeBtn");
+    var voiceRecordInsteadBtn = document.getElementById("voiceRecordInsteadBtn");
+
+    function showError(msg) {
+      statusEl.textContent = msg;
+      statusEl.className = "status err";
+      statusEl.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+
+    function formatTime(seconds) {
+      var m = Math.floor(seconds / 60);
+      var s = seconds % 60;
+      return m + ":" + (s < 10 ? "0" : "") + s;
+    }
+
+    function resetVoiceStatus() {
+      voiceStatus.textContent = "Your recording is transcribed to text. You can edit it before sending.";
+      voiceStatus.className = "voice-status";
+    }
+
+    function getAiWorkflowBenefitValue() {
+      if (voiceFallback.classList.contains("visible")) {
+        return (aiWorkflowBenefitFallback.value || "").trim();
+      }
+      return (aiWorkflowBenefit.value || "").trim();
+    }
+
+    function stopMediaTracks() {
+      if (mediaStream) {
+        mediaStream.getTracks().forEach(function (track) { track.stop(); });
+        mediaStream = null;
+      }
+    }
+
+    function resetRecordingUi() {
+      clearInterval(recordTimer);
+      recordTimer = null;
+      recordSeconds = 0;
+      voiceTimer.textContent = "0:00 / 3:00";
+      voiceTimer.className = "voice-timer";
+      voiceRecordBtn.style.display = "";
+      voiceRecordBtn.disabled = false;
+      voiceRecordBtn.textContent = "Tap to record";
+      voiceStopBtn.style.display = "none";
+      stopMediaTracks();
+      mediaRecorder = null;
+      audioChunks = [];
+    }
+
+    function blobToBase64(blob) {
+      return new Promise(function (resolve, reject) {
+        var reader = new FileReader();
+        reader.onloadend = function () {
+          var result = reader.result || "";
+          var base64 = String(result).split(",")[1] || "";
+          resolve(base64);
+        };
+        reader.onerror = reject;
+        reader.readAsDataURL(blob);
+      });
+    }
+
+    function getPreferredMimeType() {
+      var types = [
+        "audio/webm;codecs=opus",
+        "audio/webm",
+        "audio/mp4",
+        "audio/ogg;codecs=opus",
+      ];
+      for (var i = 0; i < types.length; i++) {
+        if (window.MediaRecorder && MediaRecorder.isTypeSupported(types[i])) {
+          return types[i];
+        }
+      }
+      return "";
+    }
+
+    async function transcribeBlob(blob, mimeType) {
+      isTranscribing = true;
+      voiceStatus.textContent = "Transcribing your recording…";
+      voiceStatus.className = "voice-status";
+      voiceRecordBtn.disabled = true;
+
+      try {
+        var audio = await blobToBase64(blob);
+        var response = await fetch("/.netlify/functions/transcribe-intake", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ audio: audio, mime: mimeType || blob.type || "audio/webm" }),
+        });
+
+        var result = await response.json().catch(function () { return {}; });
+        if (!response.ok) {
+          throw new Error(result.error || "Could not transcribe your recording.");
+        }
+
+        aiWorkflowBenefit.value = (result.transcript || "").trim();
+        voiceTranscriptWrap.classList.add("visible");
+        voiceFallback.classList.remove("visible");
+        resetVoiceStatus();
+      } catch (err) {
+        voiceStatus.textContent = err.message || "Could not transcribe your recording. Try again or type your answer.";
+        voiceStatus.className = "voice-status err";
+        voiceFallback.classList.add("visible");
+        voiceTranscriptWrap.classList.remove("visible");
+      } finally {
+        isTranscribing = false;
+        voiceRecordBtn.disabled = false;
+      }
+    }
+
+    async function startRecording() {
+      if (!navigator.mediaDevices || !window.MediaRecorder) {
+        voiceStatus.textContent = "Voice recording isn't supported in this browser. Type your answer below.";
+        voiceStatus.className = "voice-status err";
+        voiceFallback.classList.add("visible");
+        return;
+      }
+
+      resetVoiceStatus();
+      audioChunks = [];
+
+      try {
+        mediaStream = await navigator.mediaDevices.getUserMedia({ audio: true });
+        var mimeType = getPreferredMimeType();
+        mediaRecorder = mimeType
+          ? new MediaRecorder(mediaStream, { mimeType: mimeType })
+          : new MediaRecorder(mediaStream);
+
+        mediaRecorder.ondataavailable = function (e) {
+          if (e.data && e.data.size > 0) audioChunks.push(e.data);
+        };
+
+        mediaRecorder.onstop = async function () {
+          var blob = new Blob(audioChunks, { type: mediaRecorder.mimeType || mimeType || "audio/webm" });
+          resetRecordingUi();
+          if (blob.size > 0) {
+            await transcribeBlob(blob, blob.type);
+          }
+        };
+
+        mediaRecorder.start();
+        voiceRecordBtn.style.display = "none";
+        voiceStopBtn.style.display = "";
+        voiceTimer.className = "voice-timer recording";
+        recordSeconds = 0;
+        voiceTimer.textContent = "0:00 / 3:00";
+
+        recordTimer = setInterval(function () {
+          recordSeconds += 1;
+          voiceTimer.textContent = formatTime(recordSeconds) + " / 3:00";
+          if (recordSeconds >= MAX_RECORD_SECONDS) {
+            stopRecording();
+          }
+        }, 1000);
+      } catch (err) {
+        resetRecordingUi();
+        voiceStatus.textContent = "Microphone access was blocked. Type your answer below instead.";
+        voiceStatus.className = "voice-status err";
+        voiceFallback.classList.add("visible");
+      }
+    }
+
+    function stopRecording() {
+      clearInterval(recordTimer);
+      recordTimer = null;
+      if (mediaRecorder && mediaRecorder.state !== "inactive") {
+        mediaRecorder.stop();
+      } else {
+        resetRecordingUi();
+      }
+    }
+
+    voiceRecordBtn.addEventListener("click", startRecording);
+    voiceStopBtn.addEventListener("click", stopRecording);
+
+    voiceRerecordBtn.addEventListener("click", function () {
+      aiWorkflowBenefit.value = "";
+      voiceTranscriptWrap.classList.remove("visible");
+      resetVoiceStatus();
+      startRecording();
+    });
+
+    voiceTypeBtn.addEventListener("click", function () {
+      if (aiWorkflowBenefit.value.trim()) {
+        aiWorkflowBenefitFallback.value = aiWorkflowBenefit.value.trim();
+      }
+      voiceFallback.classList.add("visible");
+      voiceTranscriptWrap.classList.remove("visible");
+      resetVoiceStatus();
+      aiWorkflowBenefitFallback.focus();
+    });
+
+    voiceRecordInsteadBtn.addEventListener("click", function () {
+      if (aiWorkflowBenefitFallback.value.trim()) {
+        aiWorkflowBenefit.value = aiWorkflowBenefitFallback.value.trim();
+      }
+      voiceFallback.classList.remove("visible");
+      if (aiWorkflowBenefit.value.trim()) {
+        voiceTranscriptWrap.classList.add("visible");
+      }
+      resetVoiceStatus();
+    });
+
+    aiWorkflowBenefit.addEventListener("input", function () {
+      if (aiWorkflowBenefit.value.trim()) {
+        voiceTranscriptWrap.classList.add("visible");
+      }
+    });
+
+    aiWorkflowBenefitFallback.addEventListener("input", function () {
+      voiceFallback.classList.add("visible");
+    });
+
+    form.addEventListener("submit", async function (e) {
+      e.preventDefault();
+      statusEl.className = "status";
+
+      if (isTranscribing) {
+        showError("Hang on — still transcribing your recording.");
+        return;
+      }
+
+      if (form.company_url_confirm.value.trim() !== "") {
+        form.style.display = "none";
+        doneEl.style.display = "block";
+        return;
+      }
+
+      var fd = new FormData(form);
+      var payload = {
+        contact_name: (fd.get("contact_name") || "").trim(),
+        contact_email: (fd.get("contact_email") || "").trim(),
+        contact_phone: (fd.get("contact_phone") || "").trim(),
+        business_name: (fd.get("business_name") || "").trim(),
+        website: (fd.get("website") || "").trim(),
+        what_you_do: (fd.get("what_you_do") || "").trim(),
+        size: fd.get("size") || "",
+        normal_week: (fd.get("normal_week") || "").trim(),
+        wish_report: (fd.get("wish_report") || "").trim(),
+        by_hand: (fd.get("by_hand") || "").trim(),
+        frustration: (fd.get("frustration") || "").trim(),
+        ai_workflow_benefit: getAiWorkflowBenefitValue(),
+        six_months: (fd.get("six_months") || "").trim(),
+        tools: (fd.get("tools") || "").trim(),
+        access: fd.get("access") || "",
+        off_limits: (fd.get("off_limits") || "").trim(),
+        company_url_confirm: (fd.get("company_url_confirm") || "").trim(),
+        page_url: window.location.href,
+      };
+
+      btn.disabled = true;
+      btn.textContent = "Sending…";
+
+      try {
+        var response = await fetch("/.netlify/functions/submit-intake", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+        });
+
+        var result = await response.json().catch(function () { return {}; });
+
+        if (!response.ok) {
+          throw new Error(result.error || "That didn't go through. Give it another shot, or email jack@jollymammoth.co.");
+        }
+
+        form.style.display = "none";
+        statusEl.className = "status";
+        doneEl.style.display = "block";
+        doneEl.scrollIntoView({ behavior: "smooth", block: "center" });
+      } catch (err) {
+        btn.disabled = false;
+        btn.textContent = "Send it over";
+        showError(err.message || "That didn't go through. Give it another shot, or email jack@jollymammoth.co.");
+      }
+    });
+  })();
+</script>
+</body>
+</html>
