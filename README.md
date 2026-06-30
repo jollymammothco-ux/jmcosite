@@ -13,6 +13,39 @@ Static marketing site for Jolly Mammoth Co — matches the bold, section-driven 
 2. Pain points → flagship product proof
 3. Go Mammoth + add-ons → case studies → 3-step process
 4. Contact form routes interest (RapidDashboard demo redirects to rapiddashboard.ai)
+5. Discovery intake form (`intake.html`) → Revenue Command Center via Supabase
+
+## Discovery intake (`intake.html`)
+
+Clients fill out the questionnaire at `/intake.html`. Submissions go to `/.netlify/functions/submit-intake`, which:
+
+1. Saves the raw answers to Supabase `jolly_intake`
+2. Creates a `demo_requested` deal in the Revenue Command Center
+3. Sends you an email via Resend (if configured)
+
+### Intake setup (Netlify env vars)
+
+Use the **same Supabase project** as the Revenue Command Center. See `.env.example` for:
+
+- `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY`, `INTAKE_OWNER_USER_ID`
+- `RESEND_API_KEY`, `NOTIFY_EMAIL`
+- Optional: `INTAKE_FROM_EMAIL` (custom from address after domain verification)
+
+Run the SQL migration in the Command Center repo first: `supabase/migrations/002_intake.sql`.
+
+Test the function logic locally:
+
+```bash
+node netlify/functions/submit-intake.test.js
+```
+
+Local testing with Netlify CLI:
+
+```bash
+npm i -g netlify-cli
+cp .env.example .env   # add Supabase + Resend values
+netlify dev
+```
 
 ## Run locally
 

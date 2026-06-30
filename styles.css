@@ -1460,6 +1460,17 @@ a {
   color: var(--lavender);
 }
 
+
+.intake-required {
+  color: var(--mint);
+}
+
+.intake-legend {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin: 0 0 1rem;
+}
+
 .intake-help {
   display: block;
   font-size: 0.85rem;
