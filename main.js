@@ -1,3 +1,75 @@
+(function initThemeToggle() {
+  const STORAGE_KEY = "jm-theme";
+  const root = document.documentElement;
+
+  function getTheme() {
+    return root.dataset.theme === "light" ? "light" : "dark";
+  }
+
+  function setTheme(theme) {
+    root.dataset.theme = theme;
+    try {
+      localStorage.setItem(STORAGE_KEY, theme);
+    } catch (e) {}
+    document.dispatchEvent(new CustomEvent("jm-theme-change", { detail: { theme } }));
+    updateToggleLabels();
+  }
+
+  function updateToggleLabels() {
+    const isLight = getTheme() === "light";
+    document.querySelectorAll(".theme-toggle").forEach((btn) => {
+      btn.setAttribute("aria-pressed", String(isLight));
+      btn.setAttribute(
+        "aria-label",
+        isLight ? "Switch to dark theme" : "Switch to light theme"
+      );
+      btn.title = isLight ? "Dark mode" : "Light mode";
+    });
+  }
+
+  function createToggle() {
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "theme-toggle";
+    btn.innerHTML =
+      '<span class="theme-toggle-icon theme-toggle-icon--sun" aria-hidden="true">☀</span>' +
+      '<span class="theme-toggle-icon theme-toggle-icon--moon" aria-hidden="true">☾</span>';
+    btn.addEventListener("click", () => {
+      setTheme(getTheme() === "light" ? "dark" : "light");
+    });
+    return btn;
+  }
+
+  function mountToggles() {
+    const header = document.querySelector(".site-header");
+    if (header && !header.querySelector(".theme-toggle")) {
+      const navToggle = header.querySelector(".nav-toggle");
+      const themeToggle = createToggle();
+      if (navToggle) header.insertBefore(themeToggle, navToggle);
+      else header.appendChild(themeToggle);
+    }
+
+    const mobileNav = document.querySelector(".mobile-nav");
+    if (mobileNav && !mobileNav.querySelector(".theme-toggle")) {
+      const themeToggle = createToggle();
+      themeToggle.classList.add("theme-toggle--mobile");
+      mobileNav.insertBefore(themeToggle, mobileNav.firstChild);
+    }
+
+    updateToggleLabels();
+  }
+
+  if (!root.dataset.theme) {
+    root.dataset.theme = "dark";
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", mountToggles);
+  } else {
+    mountToggles();
+  }
+})();
+
 const toggle = document.querySelector(".nav-toggle");
 const mobileNav = document.querySelector(".mobile-nav");
 
