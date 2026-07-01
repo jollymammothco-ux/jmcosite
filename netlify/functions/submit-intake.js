@@ -114,16 +114,11 @@ function validateIntake(intake) {
   }
   if (!intake.business_name) return "Business name is required.";
 
-  const hasDiscovery =
-    intake.normal_week ||
-    intake.wish_report ||
-    intake.by_hand ||
-    intake.frustration ||
-    intake.ai_workflow_benefit ||
-    intake.six_months;
-
-  if (!hasDiscovery) {
-    return "Please answer at least one question about how your business runs.";
+  if (!intake.normal_week) {
+    return "Please walk us through a normal week — what eats the most time?";
+  }
+  if (!intake.six_months) {
+    return "Please tell us what success would look like in six months.";
   }
 
   return null;
@@ -166,7 +161,7 @@ function mapIntakeToDeal(intake, userId, intakeId) {
     discovery_workflows: workflowParts.join("\n") || null,
     discovery_goals: goalSections.join("\n\n") || null,
     research_notes: researchParts.join("\n") || null,
-    next_action_notes: intake.off_limits ? `Off limits: ${intake.off_limits}` : null,
+    next_action_notes: intake.off_limits ? `Security & privacy: ${intake.off_limits}` : null,
     last_contact_date: today,
     intake_id: intakeId,
   };

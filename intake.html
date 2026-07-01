@@ -116,11 +116,11 @@
 
     <section class="intake-group">
       <p class="intake-group-label">How you run today</p>
-      <p class="intake-group-note">This part matters most. Don't hold back. Answer at least one question below. <span class="intake-required" aria-hidden="true">*</span></p>
+      <p class="intake-group-note">This part matters most. Don't hold back.</p>
 
       <div class="intake-field">
-        <label for="normal_week">Walk us through a normal week. What eats the most time?</label>
-        <textarea id="normal_week" name="normal_week" placeholder="e.g., Chasing down which jobs got invoiced and which didn't, then re-entering it all into QuickBooks."></textarea>
+        <label for="normal_week">Walk us through a normal week. What eats the most time? <span class="intake-required" aria-hidden="true">*</span><span class="sr-only"> (required)</span></label>
+        <textarea id="normal_week" name="normal_week" required placeholder="e.g., Chasing down which jobs got invoiced and which didn't, then re-entering it all into QuickBooks."></textarea>
       </div>
 
       <div class="intake-field">
@@ -173,8 +173,8 @@
       <p class="intake-group-note">The point of all this.</p>
 
       <div class="intake-field">
-        <label for="six_months">If this worked perfectly, what would it do for you in six months?</label>
-        <textarea id="six_months" name="six_months" placeholder="e.g., Stop me from losing a Saturday to paperwork every week."></textarea>
+        <label for="six_months">If this worked perfectly, what would it do for you in six months? <span class="intake-required" aria-hidden="true">*</span><span class="sr-only"> (required)</span></label>
+        <textarea id="six_months" name="six_months" required placeholder="e.g., Stop me from losing a Saturday to paperwork every week."></textarea>
       </div>
     </section>
 
@@ -197,9 +197,9 @@
       </div>
 
       <div class="intake-field">
-        <label for="off_limits">Anything that should never be touched or shared?</label>
-        <span class="intake-help">Some data's off-limits. Tell us now.</span>
-        <textarea id="off_limits" name="off_limits" placeholder="e.g., Employee SSNs, client financials. Or 'nothing comes to mind.'"></textarea>
+        <label for="off_limits">Any security or privacy concerns we should know about?</label>
+        <span class="intake-help">We're HIPAA compliant. Tell us about sensitive data, compliance requirements, or anything that needs extra care.</span>
+        <textarea id="off_limits" name="off_limits" placeholder="e.g., Patient health records, PCI payment data, or 'nothing specific — just standard care.'"></textarea>
       </div>
     </section>
 
@@ -560,18 +560,16 @@
       }
       if (!payload.business_name) return { message: "Business name is required.", field: "business_name" };
 
-      var hasDiscovery =
-        payload.normal_week ||
-        payload.wish_report ||
-        payload.by_hand ||
-        payload.frustration ||
-        payload.ai_workflow_benefit ||
-        payload.six_months;
-
-      if (!hasDiscovery) {
+      if (!payload.normal_week) {
         return {
-          message: "Please answer at least one question about how your business runs.",
+          message: "Please walk us through a normal week — what eats the most time?",
           field: "normal_week",
+        };
+      }
+      if (!payload.six_months) {
+        return {
+          message: "Please tell us what success would look like in six months.",
+          field: "six_months",
         };
       }
 

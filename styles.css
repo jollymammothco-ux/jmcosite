@@ -90,7 +90,7 @@
   --theme-shadow-lg: rgba(47, 47, 47, 0.12);
   --theme-shadow-md: rgba(47, 47, 47, 0.1);
   --theme-shadow-sm: rgba(47, 47, 47, 0.08);
-  --theme-placeholder: rgba(47, 47, 47, 0.4);
+  --theme-placeholder: rgba(47, 47, 47, 0.58);
   --theme-nav-muted: rgba(47, 47, 47, 0.82);
   --theme-lavender-border: rgba(139, 58, 58, 0.22);
 }
@@ -1510,7 +1510,7 @@ a {
 
 .intake-form input::placeholder,
 .intake-form textarea::placeholder {
-  color: rgba(245, 245, 240, 0.38);
+  color: var(--theme-placeholder);
 }
 
 .intake-seg {

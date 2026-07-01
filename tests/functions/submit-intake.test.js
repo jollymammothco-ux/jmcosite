@@ -38,21 +38,16 @@ assert.ok(deal.discovery_goals.includes("Get Saturdays back"));
 assert.ok(deal.discovery_goals.includes("Where AI could help"));
 assert.ok(deal.research_notes.includes("Commercial roofing"));
 assert.ok(deal.next_action_notes.includes("Employee SSNs"));
+assert.ok(deal.next_action_notes.includes("Security & privacy"));
 
 assert.strictEqual(validateIntake(parseIntakePayload({ ...sample, contact_email: "" })), "Email is required.");
 assert.strictEqual(
-  validateIntake(
-    parseIntakePayload({
-      ...sample,
-      normal_week: "",
-      wish_report: "",
-      by_hand: "",
-      frustration: "",
-      ai_workflow_benefit: "",
-      six_months: "",
-    })
-  ),
-  "Please answer at least one question about how your business runs."
+  validateIntake(parseIntakePayload({ ...sample, normal_week: "" })),
+  "Please walk us through a normal week — what eats the most time?"
+);
+assert.strictEqual(
+  validateIntake(parseIntakePayload({ ...sample, six_months: "" })),
+  "Please tell us what success would look like in six months."
 );
 
 console.log("submit-intake tests passed");
