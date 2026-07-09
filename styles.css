@@ -159,6 +159,10 @@ a {
   color: var(--text);
 }
 
+.hero-line {
+  display: block;
+}
+
 .hero-subhead {
   font-family: var(--font-display);
   font-weight: 400;
@@ -599,7 +603,7 @@ a {
 }
 
 .hero-media {
-  max-width: 720px;
+  max-width: min(720px, 77vw);
   margin: 0 auto 2rem;
   border-radius: var(--radius);
   overflow: hidden;
