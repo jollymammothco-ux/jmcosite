@@ -159,6 +159,23 @@ a {
   color: var(--text);
 }
 
+.hero-subhead {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(1.15rem, 2.6vw, 1.6rem);
+  line-height: 1.35;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  max-width: 44rem;
+  margin: 0 auto 1rem;
+  text-align: center;
+  color: var(--white);
+}
+
+[data-theme="light"] .hero .hero-subhead {
+  color: var(--text);
+}
+
 .accent-yellow {
   color: var(--yellow);
 }
@@ -743,6 +760,22 @@ a {
   align-self: center;
 }
 
+.suite-question {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--yellow);
+  margin: 0 0 1rem;
+}
+
+.suite-footer {
+  max-width: 42rem;
+  margin: 2.5rem auto 0;
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 1.05rem;
+  line-height: 1.5;
+}
+
 /* Signature feature (RapidDashboard under MammothIQ) */
 .signature-feature {
   max-width: 960px;
@@ -989,6 +1022,11 @@ a {
   color: var(--text);
 }
 
+.section-blue .feature h3,
+.section-blue-dark .feature h3 {
+  color: var(--white);
+}
+
 .feature p {
   margin: 0;
   color: var(--text-muted);
@@ -1039,6 +1077,32 @@ a {
 
 .project:hover {
   background: rgba(94, 224, 200, 0.1);
+}
+
+/* Jolly card tint cycle — one brand shade per card, echoing the Jolly lettering */
+.feature:nth-of-type(5n+1),
+.project:nth-of-type(5n+1) {
+  background: color-mix(in srgb, var(--jolly-j) 18%, transparent);
+}
+
+.feature:nth-of-type(5n+2),
+.project:nth-of-type(5n+2) {
+  background: color-mix(in srgb, var(--jolly-o) 18%, transparent);
+}
+
+.feature:nth-of-type(5n+3),
+.project:nth-of-type(5n+3) {
+  background: color-mix(in srgb, var(--jolly-l) 18%, transparent);
+}
+
+.feature:nth-of-type(5n+4),
+.project:nth-of-type(5n+4) {
+  background: color-mix(in srgb, var(--jolly-l2) 18%, transparent);
+}
+
+.feature:nth-of-type(5n),
+.project:nth-of-type(5n) {
+  background: color-mix(in srgb, var(--jolly-y) 18%, transparent);
 }
 
 .project-year {
@@ -1867,7 +1931,7 @@ a {
 }
 
 .about-name-mascot {
-  width: clamp(64px, 12vw, 96px);
+  width: clamp(150px, 28vw, 220px);
   height: auto;
   aspect-ratio: 1;
   object-fit: contain;
