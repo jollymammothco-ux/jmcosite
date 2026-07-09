@@ -1853,6 +1853,34 @@ a {
   color: var(--mint);
 }
 
+.about-name-block {
+  display: grid;
+  gap: 2rem;
+  max-width: 960px;
+  margin: 2rem auto 0;
+  align-items: start;
+}
+
+.about-name-photo {
+  margin: 0 auto;
+  max-width: 280px;
+  text-align: center;
+}
+
+.about-name-photo img {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: contain;
+  border-radius: var(--radius);
+}
+
+.about-name-caption {
+  margin-top: 0.75rem;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  font-style: italic;
+}
+
 .about-cta {
   padding-bottom: 5rem;
 }
@@ -2166,6 +2194,16 @@ a {
 
   .about-stats {
     grid-template-columns: repeat(3, 1fr);
+  }
+
+  .about-name-block {
+    grid-template-columns: minmax(220px, 280px) 1fr;
+    gap: 3rem;
+    align-items: start;
+  }
+
+  .about-name-photo {
+    margin: 0;
   }
 
   .about-services-grid {
