@@ -136,7 +136,7 @@ a {
 .headline {
   font-family: var(--font-display);
   font-weight: 400;
-  font-size: clamp(2rem, 6vw, 3.5rem);
+  font-size: clamp(2rem, 4vw, 4.25rem);
   line-height: 1.05;
   letter-spacing: 0.02em;
   text-transform: uppercase;
@@ -166,7 +166,7 @@ a {
 .hero-subhead {
   font-family: var(--font-display);
   font-weight: 400;
-  font-size: clamp(1.15rem, 2.6vw, 1.6rem);
+  font-size: clamp(1.15rem, 1.8vw, 1.85rem);
   line-height: 1.35;
   letter-spacing: 0.02em;
   text-transform: uppercase;
@@ -603,7 +603,7 @@ a {
 }
 
 .hero-media {
-  max-width: min(720px, 77vw);
+  max-width: min(960px, 77vw);
   margin: 0 auto 2rem;
   border-radius: var(--radius);
   overflow: hidden;
@@ -656,7 +656,7 @@ a {
 
 .pain-grid li {
   font-family: var(--font-display);
-  font-size: clamp(1.25rem, 4vw, 1.75rem);
+  font-size: clamp(1.25rem, 2.1vw, 2rem);
   text-transform: uppercase;
   letter-spacing: 0.04em;
   text-align: center;
@@ -666,7 +666,7 @@ a {
 
 .pain-footer {
   font-family: var(--font-display);
-  font-size: clamp(1.25rem, 4vw, 1.75rem);
+  font-size: clamp(1.25rem, 2.1vw, 2rem);
   text-transform: uppercase;
   letter-spacing: 0.04em;
   text-align: center;
@@ -723,7 +723,7 @@ a {
 
 .suite-name {
   font-family: var(--font-display);
-  font-size: clamp(2rem, 5vw, 2.75rem);
+  font-size: clamp(2rem, 3.2vw, 3rem);
   text-transform: uppercase;
   letter-spacing: 0.03em;
   color: var(--lavender);
@@ -790,7 +790,7 @@ a {
 
 .signature-headline {
   font-family: var(--font-display);
-  font-size: clamp(1.75rem, 4.5vw, 2.5rem);
+  font-size: clamp(1.75rem, 2.9vw, 2.75rem);
   text-transform: uppercase;
   letter-spacing: 0.03em;
   color: var(--text);
@@ -826,7 +826,7 @@ a {
 }
 
 .founder-headline {
-  font-size: clamp(1.75rem, 4.5vw, 2.5rem);
+  font-size: clamp(1.75rem, 2.9vw, 2.75rem);
 }
 
 .founder-name {
@@ -1641,7 +1641,7 @@ a {
 
 .intake-done h2 {
   font-family: var(--font-display);
-  font-size: clamp(2rem, 5vw, 2.75rem);
+  font-size: clamp(2rem, 3.2vw, 3rem);
   line-height: 1.05;
   letter-spacing: 0.02em;
   text-transform: uppercase;
@@ -1813,14 +1813,14 @@ a {
 
 .about-hero .eyebrow {
   font-family: var(--font-display);
-  font-size: clamp(2.5rem, 10vw, 4.5rem);
+  font-size: clamp(2.5rem, 5.2vw, 5.5rem);
   letter-spacing: 0.06em;
   color: var(--lavender);
   margin-bottom: 0.5rem;
 }
 
 .about-mission-headline {
-  font-size: clamp(1.5rem, 4.5vw, 2.25rem);
+  font-size: clamp(1.5rem, 2.8vw, 2.75rem);
   max-width: 52rem;
   margin-left: auto;
   margin-right: auto;
@@ -1851,7 +1851,7 @@ a {
 
 .stat-value {
   font-family: var(--font-display);
-  font-size: clamp(2rem, 6vw, 3rem);
+  font-size: clamp(2rem, 3.5vw, 3.25rem);
   text-transform: uppercase;
   letter-spacing: 0.04em;
   color: var(--text);
@@ -2001,7 +2001,7 @@ a {
 
 .case-title {
   font-family: var(--font-display);
-  font-size: clamp(1.75rem, 4.5vw, 2.5rem);
+  font-size: clamp(1.75rem, 2.9vw, 2.75rem);
   text-transform: uppercase;
   letter-spacing: 0.03em;
   color: var(--text);
