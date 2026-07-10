@@ -687,13 +687,14 @@ a {
   left: 50%;
   transform: translate(-50%, -50%);
   pointer-events: none;
-  opacity: 0.04;
+  opacity: 0.2;
 }
 
-.brand-accent svg {
+.brand-accent img {
+  display: block;
   width: min(520px, 90vw);
   height: auto;
-  color: var(--lavender);
+  mix-blend-mode: screen;
 }
 
 .suite-grid {
