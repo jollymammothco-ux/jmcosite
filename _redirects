@@ -1,5 +1,7 @@
 /about    /about.html    200
 /about/   /about.html    200
+/intake        /questionnaire.html   301
+/intake/       /questionnaire.html   301
 /intake.html   /questionnaire.html   301
 /contact.html  /   301
 /contact       /   301
