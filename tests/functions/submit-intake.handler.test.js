@@ -46,6 +46,8 @@ const { handler } = require("../../netlify/functions/submit-intake");
       contact_name: "Jane Doe",
       contact_email: "jane@example.com",
       business_name: "Acme Roofing",
+      normal_week: "Chasing paperwork and scheduling crews",
+      six_months: "Get Saturdays back",
       frustration: "Paperwork",
       page_url: "https://jollymammoth.co/intake.html",
     }),
@@ -65,7 +67,7 @@ const { handler } = require("../../netlify/functions/submit-intake");
   assert.ok(emailCall);
 
   const dealPayload = JSON.parse(dealInsert.options.body);
-  assert.strictEqual(dealPayload.stage, "demo_requested");
+  assert.strictEqual(dealPayload.stage, "discovery_call");
   assert.strictEqual(dealPayload.user_id, "user-789");
   assert.strictEqual(dealPayload.intake_id, "intake-123");
 

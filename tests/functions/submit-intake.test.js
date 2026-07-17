@@ -30,7 +30,7 @@ assert.strictEqual(validateIntake(intake), null);
 
 const deal = mapIntakeToDeal(intake, "00000000-0000-0000-0000-000000000001", "intake-uuid");
 assert.strictEqual(deal.company_name, "Acme Roofing");
-assert.strictEqual(deal.stage, "demo_requested");
+assert.strictEqual(deal.stage, "discovery_call");
 assert.strictEqual(deal.lead_source, "site_form");
 assert.strictEqual(deal.intake_id, "intake-uuid");
 assert.ok(deal.discovery_pain_point.includes("Too much paperwork"));

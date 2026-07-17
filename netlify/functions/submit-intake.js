@@ -154,7 +154,7 @@ function mapIntakeToDeal(intake, userId, intakeId) {
     contact_name: intake.contact_name,
     contact_email: intake.contact_email,
     contact_phone: intake.contact_phone || null,
-    stage: "demo_requested",
+    stage: "discovery_call",
     lead_source: "site_form",
     mrr_cents: 0,
     discovery_pain_point: painSections.join("\n\n") || null,
