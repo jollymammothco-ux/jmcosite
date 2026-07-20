@@ -20,7 +20,7 @@ Static marketing site for Jolly Mammoth Co — matches the bold, section-driven 
 Clients fill out the questionnaire at `/intake.html`. Submissions go to `/.netlify/functions/submit-intake`, which:
 
 1. Saves the raw answers to Supabase `jolly_intake`
-2. Creates a `demo_requested` deal in the Revenue Command Center
+2. Creates a `discovery_call` deal in the Revenue Command Center
 3. Sends you an email via Resend (if configured)
 
 ### Intake setup (Netlify env vars)
