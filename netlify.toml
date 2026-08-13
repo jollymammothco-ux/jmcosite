@@ -1,5 +1,14 @@
 [build]
   publish = "."
+  # Regenerates /work/*.html and projects.html from content/projects.json.
+  # Runs on every deploy, so anything saved in the CMS ships as static HTML.
+  command = "node scripts/build-projects.js"
 
 [functions]
   directory = "netlify/functions"
+
+# The admin is not content. Keep it out of search results.
+[[headers]]
+  for = "/admin/*"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow"

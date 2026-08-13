@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>Case studies — Jolly Mammoth admin</title>
+    <link rel="icon" href="../assets/brand/logo.png" type="image/png" />
+    <style>
+      body { margin: 0; background: #12151a; color: #ece7de; font-family: system-ui, sans-serif; }
+      .boot { padding: 3rem 1.5rem; max-width: 34rem; margin: 0 auto; line-height: 1.6; }
+      .boot h1 { font-size: 1.15rem; margin: 0 0 0.75rem; }
+      .boot p { color: #a8b0ba; margin: 0 0 0.75rem; font-size: 0.95rem; }
+      .boot code { background: #1a1f26; padding: 0.1em 0.4em; border-radius: 3px; font-size: 0.88em; }
+      .boot a { color: #ff8f5f; }
+    </style>
+  </head>
+  <body>
+    <!-- Shown only if the CMS bundle fails to load (offline, blocked, or
+         running from the local static server rather than Netlify). -->
+    <noscript>
+      <div class="boot"><h1>JavaScript required</h1><p>The admin needs JavaScript to run.</p></div>
+    </noscript>
+    <div class="boot" id="boot">
+      <h1>Loading the case study admin…</h1>
+      <p>
+        If this message stays put, the admin is not connected yet. It needs
+        <strong>Netlify Identity</strong> and <strong>Git Gateway</strong> enabled on the site
+        (Site settings &rarr; Identity), and an invite sent to your own email.
+      </p>
+      <p>
+        Editing happens against <code>content/projects.json</code>. Saving commits to git,
+        Netlify rebuilds, and <code>scripts/build-projects.js</code> regenerates every page
+        under <code>/work/</code> plus the Work index.
+      </p>
+      <p><a href="../index.html">Back to the site</a></p>
+    </div>
+
+    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+    <script src="https://unpkg.com/decap-cms@^3.8.4/dist/decap-cms.js"></script>
+    <script>
+      // Hide the fallback copy once the CMS actually mounts.
+      window.addEventListener("load", function () {
+        setTimeout(function () {
+          if (window.CMS) {
+            var b = document.getElementById("boot");
+            if (b) b.remove();
+          }
+        }, 1200);
+      });
+
+      // After an invite is accepted, drop the user straight into the admin.
+      if (window.netlifyIdentity) {
+        window.netlifyIdentity.on("init", function (user) {
+          if (!user) {
+            window.netlifyIdentity.on("login", function () {
+              document.location.href = "/admin/";
+            });
+          }
+        });
+      }
+    </script>
+  </body>
+</html>

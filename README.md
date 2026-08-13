@@ -1,23 +1,56 @@
-# Jolly Mammoth Website (Revamp)
+# Jolly Mammoth Website
 
-Static marketing site for Jolly Mammoth Co — matches the bold, section-driven style of [jollymammoth.co](https://jollymammoth.co) with updated positioning:
+Static marketing site for Jolly Mammoth Co. Dark-only by design, built around a
+hi-vis orange and deep slate system. Positioning is advisory-first: a consultancy
+that advises and builds, not a software vendor.
 
-- **Flagship:** [RapidDashboard](https://rapiddashboard.ai) (prompt → live dashboard)
-- **Implementation:** Go Mammoth System (done-for-you growth stack)
-- **Add-ons:** AI call agents, Smart CRMs, marketing
-- **Creative:** Branding portfolio section
+- **Go Mammoth** — lead and revenue generation (a lane, not a product page)
+- **MammothIQ / RapidDashboard** — job costing, crew hours, and ops intelligence
+- **Creative** — brand work, folded into the Work section
 
-## Funnel
+## Adding a client case study
 
-1. Hero → **See RapidDashboard** or **Book a Strategy Call**
-2. Pain points → flagship product proof
-3. Go Mammoth + add-ons → case studies → 3-step process
-4. Contact form routes interest (RapidDashboard demo redirects to rapiddashboard.ai)
-5. Discovery intake form (`intake.html`) → Revenue Command Center via Supabase
+**Through the CMS (no code):** go to `/admin`, sign in, open *Case studies*, and
+add an entry. Saving commits to git, Netlify rebuilds, and the new page appears at
+`/work/<slug>.html` along with a card on the Work index and an entry in the sitemap.
 
-## Discovery intake (`intake.html`)
+Setup, one time: in Netlify, enable **Identity** (set registration to *Invite only*)
+and **Git Gateway** under Site settings → Identity, then invite your own email.
 
-Clients fill out the questionnaire at `/intake.html`. Submissions go to `/.netlify/functions/submit-intake`, which:
+**By hand:** edit `content/projects.json` and run:
+
+```bash
+node scripts/build-projects.js
+```
+
+That regenerates every page under `work/`, `projects.html`, and `sitemap.xml`.
+Never edit those files directly — they are build output and will be overwritten.
+
+## Architecture
+
+| Path | What it is |
+|---|---|
+| `content/projects.json` | The single source of truth for case studies |
+| `scripts/build-projects.js` | Generates `work/*.html`, `projects.html`, `sitemap.xml` |
+| `admin/` | Decap CMS. Noindexed and disallowed in robots.txt |
+| `boot.js` | Runs in `<head>`. Flags JS so scroll reveals can never blank the page |
+| `mammoth.js` | The hero particle herd, sampled from the brand mark's alpha channel |
+| `main.js` | Nav, scroll reveals, staggered lists, work-card hover clips |
+| `_source-media/` | Original camera and phone uploads. Gitignored, not deployed |
+
+Every page is dark-only. There is no theme toggle; it was removed deliberately.
+
+## Run locally
+
+```bash
+python3 -m http.server 8080
+```
+
+Open http://localhost:8080
+
+## Discovery intake (`questionnaire.html`)
+
+Clients fill out the questionnaire at `/questionnaire.html`. Submissions go to `/.netlify/functions/submit-intake`, which:
 
 1. Saves the raw answers to Supabase `jolly_intake`
 2. Creates a `discovery_call` deal in the Revenue Command Center

@@ -1,104 +1,90 @@
-/* Jolly Mammoth — brand tokens aligned with jollymammoth.co */
+/* Jolly Mammoth — built, not branded.
+   Hi-vis orange over deep slate. Dark only, by design. */
 :root {
-  --charcoal: #2a2a2a;
-  --charcoal-deep: #1e1e1e;
-  --blue: #4a7eb5;
-  --blue-dark: #3a6494;
-  --lavender: #b8a9d4;
-  --yellow: #e8c547;
-  --mint: #5ee0c8;
+  color-scheme: dark;
+
+  /* Grounds. Neutrals carry a slight blue bias so the orange reads warm. */
+  --ground: #12151a;
+  --ground-deep: #0c0f13;
+  --surface: #1a1f26;
+  --surface-hi: #222831;
+
+  /* The band color. Deep enough to carry white text at 10:1. */
+  --slate: #123249;
+  --slate-deep: #0d2436;
+
+  /* One accent. Safety orange, the color the clients already wear. */
+  --signal: #ff6a2b;
+  --signal-hot: #ff8149;
+  --signal-ink: #ff8f5f; /* orange as text on a dark ground */
+  --brass: #e8b33c; /* warm highlight, replaces the failing yellow */
+  --bone: #d9d0c2; /* warm off-white for secondary headlines */
+  --teal: #5ee0c8; /* demoted to data and UI states */
+
+  --text: #ece7de;
+  --text-muted: #a8b0ba;
+  --text-faint: #808995;
+
+  /* Ink that sits ON the orange. Dark, like real hi-vis signage. */
+  --on-signal: #12151a;
+
+  /* Jolly letters. Kept, and now the only place the rainbow appears. */
   --jolly-j: #9ef5e8;
   --jolly-o: #ddd0f5;
-  --jolly-l: #fff4b8;
+  --jolly-l: #ffd98a;
   --jolly-l2: #b8e4ff;
   --jolly-y: #ffc8e0;
-  --white: #f5f5f0;
-  --muted: rgba(245, 245, 240, 0.72);
-  --text: var(--white);
-  --text-muted: var(--muted);
-  --theme-accent-ink: #1e1e1e;
-  --theme-border-subtle: rgba(255, 255, 255, 0.06);
-  --theme-border: rgba(255, 255, 255, 0.08);
-  --theme-border-strong: rgba(255, 255, 255, 0.1);
-  --theme-border-heavy: rgba(255, 255, 255, 0.12);
-  --theme-border-input: rgba(255, 255, 255, 0.15);
-  --theme-border-ghost: rgba(255, 255, 255, 0.35);
-  --theme-border-input-strong: rgba(255, 255, 255, 0.2);
-  --theme-glass: rgba(255, 255, 255, 0.06);
-  --theme-glass-subtle: rgba(255, 255, 255, 0.04);
-  --theme-glass-faint: rgba(255, 255, 255, 0.03);
-  --theme-overlay: rgba(0, 0, 0, 0.25);
-  --theme-overlay-md: rgba(0, 0, 0, 0.2);
-  --theme-overlay-sm: rgba(0, 0, 0, 0.18);
-  --theme-overlay-xs: rgba(0, 0, 0, 0.15);
-  --theme-accent-soft: rgba(94, 224, 200, 0.08);
-  --theme-accent-mid: rgba(94, 224, 200, 0.1);
-  --theme-accent-fill: rgba(94, 224, 200, 0.12);
-  --theme-accent-strong: rgba(94, 224, 200, 0.18);
-  --theme-accent-border: rgba(94, 224, 200, 0.2);
-  --theme-accent-focus: rgba(94, 224, 200, 0.35);
-  --theme-shadow-lg: rgba(0, 0, 0, 0.4);
-  --theme-shadow-md: rgba(0, 0, 0, 0.35);
-  --theme-shadow-sm: rgba(0, 0, 0, 0.25);
-  --theme-placeholder: rgba(245, 245, 240, 0.38);
-  --theme-nav-muted: rgba(245, 245, 240, 0.85);
-  --theme-lavender-border: rgba(184, 169, 212, 0.25);
+
   --font-display: "Bebas Neue", Impact, sans-serif;
   --font-body: "DM Sans", system-ui, sans-serif;
-  --radius: 12px;
+  --radius: 4px;
   --header-h: 64px;
-}
 
-[data-theme="light"] {
-  color-scheme: light;
-  --charcoal-deep: #f0ebe3;
-  --charcoal: #e5dfd4;
-  --muted: rgba(47, 47, 47, 0.72);
-  --text: #2f2f2f;
-  --text-muted: rgba(47, 47, 47, 0.72);
-  --lavender: #8b3a3a;
-  --mint: #c45c2a;
-  --yellow: #a63d2e;
-  --blue: #6b8fb8;
-  --blue-dark: #5a7da6;
-  --jolly-j: #4f8a80;
-  --jolly-o: #7a568f;
-  --jolly-l: #9a7820;
-  --jolly-l2: #4a7399;
-  --jolly-y: #a63d58;
-  --theme-accent-ink: #fffaf5;
-  --theme-border-subtle: rgba(47, 47, 47, 0.08);
-  --theme-border: rgba(47, 47, 47, 0.12);
-  --theme-border-strong: rgba(47, 47, 47, 0.14);
-  --theme-border-heavy: rgba(47, 47, 47, 0.16);
-  --theme-border-input: rgba(47, 47, 47, 0.18);
-  --theme-border-ghost: rgba(47, 47, 47, 0.28);
-  --theme-border-input-strong: rgba(47, 47, 47, 0.22);
-  --theme-glass: rgba(47, 47, 47, 0.04);
-  --theme-glass-subtle: rgba(47, 47, 47, 0.03);
-  --theme-glass-faint: rgba(47, 47, 47, 0.02);
-  --theme-overlay: rgba(47, 47, 47, 0.06);
-  --theme-overlay-md: rgba(47, 47, 47, 0.05);
-  --theme-overlay-sm: rgba(47, 47, 47, 0.04);
-  --theme-overlay-xs: rgba(47, 47, 47, 0.03);
-  --theme-accent-soft: rgba(196, 92, 42, 0.1);
-  --theme-accent-mid: rgba(196, 92, 42, 0.12);
-  --theme-accent-fill: rgba(196, 92, 42, 0.14);
-  --theme-accent-strong: rgba(196, 92, 42, 0.2);
-  --theme-accent-border: rgba(196, 92, 42, 0.28);
-  --theme-accent-focus: rgba(196, 92, 42, 0.4);
-  --theme-shadow-lg: rgba(47, 47, 47, 0.12);
-  --theme-shadow-md: rgba(47, 47, 47, 0.1);
-  --theme-shadow-sm: rgba(47, 47, 47, 0.08);
-  --theme-placeholder: rgba(47, 47, 47, 0.58);
-  --theme-nav-muted: rgba(47, 47, 47, 0.82);
-  --theme-lavender-border: rgba(139, 58, 58, 0.22);
-}
+  /* Vertical rhythm. Bands pick a step instead of all using one value. */
+  --beat-rest: clamp(2.5rem, 5vw, 3.5rem);
+  --beat-normal: clamp(4rem, 8vw, 6.5rem);
+  --beat-peak: clamp(5.5rem, 11vw, 9rem);
 
-[data-theme="light"] body {
-  background-image:
-    radial-gradient(circle at 15% 12%, rgba(196, 92, 42, 0.05), transparent 42%),
-    radial-gradient(circle at 85% 0%, rgba(139, 58, 58, 0.04), transparent 38%);
+  /* --- Legacy aliases -------------------------------------------------
+     The four inner pages and the questionnaire are built on these names.
+     Repointing them here moves every page onto the new palette at once,
+     instead of rewriting 1,100 lines of page CSS by hand. */
+  --charcoal: var(--surface);
+  --charcoal-deep: var(--ground);
+  --blue: var(--slate);
+  --blue-dark: var(--slate-deep);
+  --white: var(--text);
+  --muted: var(--text-muted);
+  --mint: var(--signal-ink);
+  --yellow: var(--brass);
+  --lavender: var(--bone);
+  --theme-accent-ink: var(--on-signal);
+  --theme-border-subtle: rgba(255, 255, 255, 0.06);
+  --theme-border: rgba(255, 255, 255, 0.09);
+  --theme-border-strong: rgba(255, 255, 255, 0.12);
+  --theme-border-heavy: rgba(255, 255, 255, 0.15);
+  --theme-border-input: rgba(255, 255, 255, 0.18);
+  --theme-border-ghost: rgba(255, 255, 255, 0.4);
+  --theme-border-input-strong: rgba(255, 255, 255, 0.24);
+  --theme-glass: rgba(255, 255, 255, 0.05);
+  --theme-glass-subtle: rgba(255, 255, 255, 0.035);
+  --theme-glass-faint: rgba(255, 255, 255, 0.025);
+  --theme-overlay: rgba(0, 0, 0, 0.28);
+  --theme-overlay-md: rgba(0, 0, 0, 0.22);
+  --theme-overlay-sm: rgba(0, 0, 0, 0.18);
+  --theme-overlay-xs: rgba(0, 0, 0, 0.14);
+  --theme-accent-soft: rgba(255, 106, 43, 0.08);
+  --theme-accent-mid: rgba(255, 106, 43, 0.12);
+  --theme-accent-fill: rgba(255, 106, 43, 0.14);
+  --theme-accent-strong: rgba(255, 106, 43, 0.2);
+  --theme-accent-border: rgba(255, 106, 43, 0.32);
+  --theme-accent-focus: rgba(255, 106, 43, 0.45);
+  --theme-shadow-lg: rgba(0, 0, 0, 0.5);
+  --theme-shadow-md: rgba(0, 0, 0, 0.4);
+  --theme-shadow-sm: rgba(0, 0, 0, 0.3);
+  --theme-placeholder: rgba(236, 231, 222, 0.45);
+  --theme-nav-muted: rgba(236, 231, 222, 0.85);
+  --theme-lavender-border: rgba(217, 208, 194, 0.22);
 }
 
 *,
@@ -109,6 +95,89 @@
 
 html {
   scroll-behavior: smooth;
+}
+
+/* ---------------------------------------------------------------
+   Cross-document view transitions.
+   Chrome, Edge and Safari animate between pages; Firefox ignores the
+   at-rule and navigates normally, which is a fine baseline. The header
+   and footer are named so they stay put while the body crossfades,
+   which is what makes it feel like one app rather than page loads.
+   --------------------------------------------------------------- */
+@view-transition {
+  navigation: auto;
+}
+
+@keyframes vt-fade-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: none; }
+}
+
+@keyframes vt-fade-out {
+  from { opacity: 1; transform: none; }
+  to   { opacity: 0; transform: translateY(-6px); }
+}
+
+::view-transition-old(page-body) {
+  animation: vt-fade-out 0.22s cubic-bezier(0.4, 0, 1, 1) both;
+}
+
+::view-transition-new(page-body) {
+  animation: vt-fade-in 0.32s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Chrome persists these across the navigation instead of crossfading. */
+.site-header {
+  view-transition-name: site-header;
+}
+
+.site-footer {
+  view-transition-name: site-footer;
+}
+
+main {
+  view-transition-name: page-body;
+}
+
+/* Hero load choreography. One sequence on first paint, then it is done.
+   Deliberately short: the particle herd is the moment, this just gets the
+   type out of its way. */
+@keyframes hero-rise {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: none; }
+}
+
+.js .hero-eyebrow,
+.js .hero .headline,
+.js .hero-subhead,
+.js .hero .cta-row,
+.js .hero-proof {
+  animation: hero-rise 0.75s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.js .hero-eyebrow    { animation-delay: 0.05s; }
+.js .hero .headline  { animation-delay: 0.14s; }
+.js .hero-subhead    { animation-delay: 0.26s; }
+.js .hero .cta-row   { animation-delay: 0.36s; }
+.js .hero-proof      { animation-delay: 0.46s; }
+
+@media (prefers-reduced-motion: reduce) {
+  @view-transition {
+    navigation: none;
+  }
+
+  .js .hero-eyebrow,
+  .js .hero .headline,
+  .js .hero-subhead,
+  .js .hero .cta-row,
+  .js .hero-proof {
+    animation: none;
+  }
+
+  ::view-transition-old(page-body),
+  ::view-transition-new(page-body) {
+    animation: none;
+  }
 }
 
 body {
@@ -132,30 +201,27 @@ a {
   text-decoration: none;
 }
 
-/* Typography */
+/* Typography
+   The display face is for real headlines only. Subheads, lists and body
+   copy all belong to the body face. Condensed caps are a shout, and when
+   everything shouts nothing does. */
 .headline {
   font-family: var(--font-display);
   font-weight: 400;
-  font-size: clamp(2rem, 4vw, 4.25rem);
-  line-height: 1.05;
-  letter-spacing: 0.02em;
+  font-size: clamp(2.1rem, 5.2vw, 4.5rem);
+  line-height: 0.95;
+  letter-spacing: 0.015em;
   text-transform: uppercase;
   margin: 0 0 1rem;
   text-align: center;
+  text-wrap: balance;
 }
 
 .headline-lavender {
-  color: var(--lavender);
+  color: var(--bone);
 }
 
 .headline-white {
-  color: var(--white);
-}
-
-[data-theme="light"] .hero .headline-white,
-[data-theme="light"] .section-charcoal .headline-white,
-[data-theme="light"] .section-dark .headline-white,
-[data-theme="light"] .section-cta .headline-white {
   color: var(--text);
 }
 
@@ -163,41 +229,45 @@ a {
   display: block;
 }
 
+/* Subhead is now the body face in sentence case. It has to be readable at
+   a glance by someone deciding whether to keep scrolling. */
 .hero-subhead {
-  font-family: var(--font-display);
-  font-weight: 400;
-  font-size: clamp(1.15rem, 1.8vw, 1.85rem);
-  line-height: 1.35;
-  letter-spacing: 0.02em;
-  text-transform: uppercase;
-  max-width: 44rem;
-  margin: 0 auto 1rem;
-  text-align: center;
-  color: var(--white);
-}
-
-[data-theme="light"] .hero .hero-subhead {
-  color: var(--text);
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: clamp(1.02rem, 1.3vw, 1.2rem);
+  line-height: 1.55;
+  letter-spacing: 0;
+  text-transform: none;
+  max-width: 46ch;
+  margin: 0 0 1.75rem;
+  text-align: left;
+  color: var(--text-muted);
 }
 
 .accent-yellow {
-  color: var(--yellow);
+  color: var(--brass);
+}
+
+.accent-signal {
+  color: var(--signal-ink);
 }
 
 .eyebrow {
   text-align: center;
   text-transform: uppercase;
-  letter-spacing: 0.2em;
-  font-size: 0.75rem;
-  color: var(--mint);
-  margin: 0 0 0.75rem;
+  letter-spacing: 0.18em;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--signal-ink);
+  margin: 0 0 0.9rem;
 }
 
 .lead {
-  max-width: 42rem;
+  max-width: 62ch;
   margin: 0 auto 2rem;
   color: var(--text-muted);
-  font-size: 1.1rem;
+  font-size: 1.08rem;
+  line-height: 1.62;
 }
 
 .lead.centered,
@@ -226,6 +296,7 @@ a {
   color: var(--text);
   display: flex;
   align-items: center;
+  min-height: 44px;
   gap: 0.6rem;
 }
 
@@ -327,14 +398,20 @@ a {
   margin-bottom: -0.25rem;
 }
 
+/* 44x44 minimum touch target. Was 38x26. */
 .nav-toggle {
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
   gap: 6px;
+  width: 44px;
+  height: 44px;
   background: none;
   border: none;
   padding: 8px;
   cursor: pointer;
+  color: var(--text);
 }
 
 .nav-toggle span {
@@ -342,49 +419,6 @@ a {
   width: 22px;
   height: 2px;
   background: currentColor;
-}
-
-.theme-toggle {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 2.35rem;
-  height: 2.35rem;
-  padding: 0;
-  border: 1px solid var(--theme-border);
-  border-radius: 999px;
-  background: var(--theme-glass);
-  color: var(--text);
-  cursor: pointer;
-  flex-shrink: 0;
-  transition: border-color 0.2s, background 0.2s, color 0.2s;
-}
-
-.theme-toggle:hover {
-  border-color: var(--mint);
-  color: var(--mint);
-}
-
-.theme-toggle-icon {
-  font-size: 1rem;
-  line-height: 1;
-}
-
-.theme-toggle-icon--moon {
-  display: none;
-}
-
-[data-theme="light"] .theme-toggle-icon--sun {
-  display: none;
-}
-
-[data-theme="light"] .theme-toggle-icon--moon {
-  display: inline;
-}
-
-.theme-toggle--mobile {
-  align-self: flex-start;
-  margin-bottom: 0.5rem;
 }
 
 .mobile-nav {
@@ -406,32 +440,38 @@ a {
 }
 
 .mobile-nav a {
+  display: flex;
+  align-items: center;
+  min-height: 44px;
   font-family: var(--font-display);
   font-size: 1.5rem;
   text-transform: uppercase;
   letter-spacing: 0.05em;
 }
 
-/* Buttons */
+/* Buttons
+   Primary is a solid orange block with dark ink, the way real hi-vis
+   signage works. Minimum 44px tall for touch. */
 .btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 0.85rem 1.5rem;
+  min-height: 44px;
+  padding: 0.8rem 1.5rem;
   font-family: var(--font-body);
   font-weight: 600;
   font-size: 0.95rem;
-  border-radius: 4px;
-  border: 2px solid var(--mint);
+  border-radius: var(--radius);
+  border: 2px solid var(--signal);
   background: transparent;
   color: var(--text);
   cursor: pointer;
-  transition: background 0.2s, color 0.2s, transform 0.15s;
+  transition: background 0.18s ease, color 0.18s ease, border-color 0.18s ease;
 }
 
 .btn:hover {
-  background: var(--mint);
-  color: var(--theme-accent-ink);
+  background: var(--signal);
+  color: var(--on-signal);
 }
 
 .btn-playful:hover {
@@ -452,26 +492,39 @@ a {
 }
 
 .btn-primary {
-  background: var(--theme-accent-fill);
+  background: var(--signal);
+  border-color: var(--signal);
+  color: var(--on-signal);
+}
+
+.btn-primary:hover {
+  background: var(--signal-hot);
+  border-color: var(--signal-hot);
+  color: var(--on-signal);
 }
 
 .btn-ghost {
   border-color: var(--theme-border-ghost);
+  background: transparent;
 }
 
 .btn-ghost:hover {
-  border-color: var(--mint);
+  border-color: var(--signal);
+  background: transparent;
+  color: var(--text);
 }
 
 .btn-header {
   display: none;
-  padding: 0.55rem 1rem;
+  min-height: 38px;
+  padding: 0.5rem 1rem;
   font-size: 0.85rem;
 }
 
 .btn-lg {
-  padding: 1rem 1.75rem;
-  font-size: 1rem;
+  min-height: 52px;
+  padding: 1rem 1.9rem;
+  font-size: 1.02rem;
 }
 
 .centered-btn {
@@ -480,19 +533,159 @@ a {
   margin: 2rem auto 0;
 }
 
-/* Sections */
+/* Sections
+   Every band picks a rhythm step and an alignment. The old system gave all
+   14 sections identical 72px padding and centered everything, which is why
+   nothing read as more important than anything else. */
 .section {
-  padding: 4.5rem 1.25rem;
+  padding: var(--beat-normal) 1.25rem;
   scroll-margin-top: var(--header-h);
+}
+
+/* Rhythm steps */
+.band-rest {
+  padding-top: var(--beat-rest);
+  padding-bottom: var(--beat-rest);
+}
+
+.band-peak {
+  padding-top: var(--beat-peak);
+  padding-bottom: var(--beat-peak);
+}
+
+/* Left-anchored band. Copy sits against a rule on the left instead of
+   floating centered, which gives the eye a fixed edge to track down. */
+.band-anchor {
+  max-width: 1120px;
+  margin-inline: auto;
+}
+
+.band-anchor > .headline,
+.band-anchor > .eyebrow,
+.band-anchor > .lead {
+  text-align: left;
+  margin-inline: 0;
+}
+
+.band-anchor > .headline {
+  max-width: 18ch;
+}
+
+.band-anchor > .eyebrow {
+  padding-left: 0;
+  border-left: 3px solid var(--signal);
+  padding-inline-start: 0.7rem;
+  width: fit-content;
+}
+
+/* Narrow breather. A short band that exists to give the eye a rest between
+   two dense ones. */
+.band-breather {
+  max-width: 46rem;
+  margin-inline: auto;
+  text-align: center;
+}
+
+/* Left-anchored band for the inner pages, where section content sits
+   directly in the <section> with no wrapper. Constrains each child to the
+   measure and pulls the text to the left edge, while the section keeps its
+   full-bleed background. */
+.section.band-left > * {
+  max-width: 1120px;
+  margin-inline: auto;
+}
+
+.section.band-left > .headline,
+.section.band-left > .eyebrow,
+.section.band-left > .lead,
+.section.band-left > .microline,
+.section.band-left > .pillar,
+.section.band-left > .pricing-copy {
+  text-align: left;
+}
+
+.section.band-left > .headline {
+  max-width: min(1120px, 20ch);
+}
+
+/* Narrow children (headline, lead, labels) sit against the LEFT edge of the
+   1120px column, not centered inside it. Without this the auto margins from
+   the rule above center a 20ch headline over a full-width grid, and the two
+   never line up. max() keeps the offset at 0 on narrower viewports. */
+.section.band-left > .headline,
+.section.band-left > .eyebrow,
+.section.band-left > .lead,
+.section.band-left > .microline,
+.section.band-left > .pillar {
+  margin-inline: max(0px, calc((100% - 1120px) / 2)) auto;
+}
+
+/* The eyebrow's rule is drawn as an inline mark rather than a border on a
+   fit-content box, so the element can stay full width and stay aligned with
+   the column above and below it. */
+.section.band-left > .eyebrow,
+.section.band-left .pillar > .eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  text-align: left;
+}
+
+.section.band-left > .eyebrow::before,
+.section.band-left .pillar > .eyebrow::before {
+  content: "";
+  width: 1.5rem;
+  height: 2px;
+  background: var(--signal);
+  flex-shrink: 0;
+}
+
+/* Grids drop their own 960px centering and take the anchored column instead,
+   so they start on the same left edge as the headline. The max() offset
+   resolves to 0 for grids already inside a column element (.pillar), and to
+   the column inset for grids that sit directly in the section. */
+.section.band-left .feature-grid,
+.section.band-left .two-col,
+.section.band-left .project-grid,
+.section.band-left .addon-grid,
+.section.band-left .case-grid,
+.section.band-left .faq-grid,
+.section.band-left .suite-grid,
+.section.band-left .steps,
+.section.band-left .pain-buckets {
+  max-width: 1120px;
+  margin-inline: max(0px, calc((100% - 1120px) / 2)) auto;
 }
 
 .section-charcoal {
   background: var(--charcoal);
 }
 
+/* The Jolly band is the vision beat, sitting between the problem and the
+   products. It gets its own ground so it reads as a clearing rather than
+   merging with the slate band above it, plus a warm wash behind the
+   rainbow lettering. */
 .section-jolly {
-  background: var(--blue);
-  color: var(--white);
+  position: relative;
+  isolation: isolate;
+  background: var(--ground-deep);
+  color: var(--text);
+  overflow: hidden;
+}
+
+.section-jolly::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    radial-gradient(ellipse 60% 90% at 50% 50%, rgba(255, 106, 43, 0.1), transparent 68%),
+    radial-gradient(ellipse 40% 70% at 22% 30%, rgba(158, 245, 232, 0.06), transparent 70%),
+    radial-gradient(ellipse 40% 70% at 78% 70%, rgba(255, 200, 224, 0.06), transparent 70%);
+}
+
+.section-jolly .headline {
+  font-size: clamp(2.3rem, 5.6vw, 4.6rem);
 }
 
 /* Jolly word — rainbow letters with gentle float */
@@ -595,30 +788,198 @@ a {
   padding-bottom: 6rem;
 }
 
-/* Hero */
+/* Hero
+   Headline first, top left, where a scanning eye actually starts. The video
+   is a supporting panel, not the main event. Previously the video was
+   960x548 in a 720px viewport, which pushed the headline to y=667 and put
+   both CTAs below the fold on a standard laptop. */
 .hero {
-  padding: calc(var(--header-h) + 1.5rem) 1.25rem 4rem;
-  background: var(--charcoal);
-  text-align: center;
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  padding: calc(var(--header-h) + clamp(1.75rem, 4vw, 3rem)) 1.25rem
+    clamp(2.5rem, 5vw, 4rem);
+  background: var(--surface);
+  border-bottom: 1px solid var(--theme-border);
+  text-align: left;
+}
+
+/* A faint warm wash under the herd so the particles sit in an atmosphere
+   rather than floating on flat charcoal. */
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 70% 60% at 72% 45%, rgba(255, 106, 43, 0.09), transparent 70%),
+    radial-gradient(ellipse 50% 50% at 88% 70%, rgba(94, 224, 200, 0.05), transparent 70%);
+}
+
+/* The particle stage. Sits behind the copy, weighted to the right so the
+   trunk sweeps in toward the headline. Masked on its left edge so particles
+   never crowd the text. */
+.hero-stage {
+  position: absolute;
+  inset: 0 0 0 auto;
+  width: min(74%, 980px);
+  pointer-events: auto;
+  z-index: 0;
+  /* Fully transparent across the headline column, so particles never compete
+     with the type. The trunk dissolving into the dark on the left is the
+     intended read: the herd emerging rather than a clipped logo. */
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    transparent 32%,
+    rgba(0, 0, 0, 0.45) 46%,
+    #000 62%
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    transparent 32%,
+    rgba(0, 0, 0, 0.45) 46%,
+    #000 62%
+  );
+}
+
+.hero-stage canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* Shown until the canvas takes over, and if JS or canvas is unavailable. */
+.mammoth-fallback {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 78%;
+  height: auto;
+  opacity: 0.28;
+}
+
+.hero-stage.is-live .mammoth-fallback {
+  display: none;
+}
+
+.hero-inner {
+  position: relative;
+  z-index: 1;
+  max-width: 1180px;
+  margin: 0 auto;
+  display: grid;
+  gap: clamp(1.75rem, 4vw, 3.25rem);
+  align-items: center;
+}
+
+.hero-copy {
+  min-width: 0;
+  max-width: 34rem;
+}
+
+.hero .headline {
+  text-align: left;
+  margin-bottom: 1.1rem;
+  /* Capped so the headline can never grow tall enough to push the CTAs
+     off a short laptop viewport. */
+  font-size: clamp(2.1rem, 4.4vw, 3.9rem);
+}
+
+.hero-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.76rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--signal-ink);
+  margin: 0 0 1.1rem;
+}
+
+.hero-eyebrow::before {
+  content: "";
+  width: 1.75rem;
+  height: 2px;
+  background: var(--signal);
+  flex-shrink: 0;
 }
 
 .hero-media {
-  max-width: min(960px, 77vw);
-  margin: 0 auto 2rem;
+  position: relative;
+  margin: 0;
   border-radius: var(--radius);
   overflow: hidden;
+  border: 1px solid var(--theme-border-strong);
+  background: var(--ground-deep);
 }
 
+.hero-media video,
 .hero-media img {
+  display: block;
   width: 100%;
-  aspect-ratio: 16 / 9;
+  height: 100%;
+  aspect-ratio: 4 / 5;
   object-fit: cover;
+}
+
+/* Proof strip. Sits directly under the fold line so the first scroll lands
+   on something concrete rather than more headline. */
+.hero-proof {
+  position: relative;
+  z-index: 1;
+  /* width:100% is load-bearing. The hero is a flex column, and the auto
+     inline margins below would otherwise shrink this to its content width
+     instead of stretching it to the headline's column. */
+  width: 100%;
+  max-width: 1180px;
+  margin: clamp(2rem, 4vw, 3rem) auto 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1px;
+  background: var(--theme-border);
+  border-top: 1px solid var(--theme-border);
+  border-bottom: 1px solid var(--theme-border);
+}
+
+.hero-proof div {
+  background: color-mix(in srgb, var(--surface) 88%, transparent);
+  padding: 1rem 0.75rem;
+}
+
+.hero-proof b {
+  display: block;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(1.5rem, 2.6vw, 2.1rem);
+  line-height: 1;
+  letter-spacing: 0.02em;
+  color: var(--brass);
+}
+
+.hero-proof span {
+  display: block;
+  margin-top: 0.35rem;
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-muted);
 }
 
 .cta-row {
   display: flex;
   flex-wrap: wrap;
-  gap: 1rem;
+  gap: 0.85rem;
+  justify-content: flex-start;
+  margin-top: 0;
+}
+
+.section .cta-row,
+.section-cta .cta-row {
   justify-content: center;
   margin-top: 2rem;
 }
@@ -681,20 +1042,28 @@ a {
   overflow: hidden;
 }
 
+/* Mammoth watermark. Sits behind the cards, not through them. At 0.2 with
+   a screen blend it was showing through the translucent card backgrounds
+   as a colored smear that read as a rendering fault. */
 .brand-accent {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   pointer-events: none;
-  opacity: 0.2;
+  opacity: 0.05;
+  z-index: 0;
+}
+
+#products > *:not(.brand-accent) {
+  position: relative;
+  z-index: 1;
 }
 
 .brand-accent img {
   display: block;
   width: min(520px, 90vw);
   height: auto;
-  mix-blend-mode: screen;
 }
 
 .suite-grid {
@@ -706,12 +1075,16 @@ a {
 
 .suite-card {
   padding: 2rem 1.75rem;
-  background: rgba(0, 0, 0, 0.25);
+  background: var(--surface);
   border-radius: var(--radius);
-  border: 1px solid rgba(94, 224, 200, 0.2);
+  border: 1px solid var(--theme-border-strong);
   display: flex;
   flex-direction: column;
   text-align: center;
+}
+
+.suite-card:hover {
+  border-color: var(--theme-accent-border);
 }
 
 .suite-tag {
@@ -791,12 +1164,28 @@ a {
 
 .signature-headline {
   font-family: var(--font-display);
+  font-weight: 400;
   font-size: clamp(1.75rem, 2.9vw, 2.75rem);
   text-transform: uppercase;
   letter-spacing: 0.03em;
+  line-height: 1.02;
   color: var(--text);
   text-align: center;
   margin: 0 0 1rem;
+}
+
+/* Inside an anchored band the signature block tracks the same left edge as
+   everything else rather than re-centering its own heading. */
+.band-anchor .signature-headline,
+.band-anchor .signature-feature .eyebrow {
+  text-align: left;
+  margin-inline: 0;
+}
+
+.band-anchor .signature-feature .eyebrow {
+  border-left: 3px solid var(--signal);
+  padding-inline-start: 0.7rem;
+  width: fit-content;
 }
 
 /* Founder section */
@@ -811,7 +1200,7 @@ a {
 .founder-photo {
   border-radius: var(--radius);
   overflow: hidden;
-  border: 1px solid rgba(184, 169, 212, 0.25);
+  border: 1px solid var(--theme-lavender-border);
   max-width: 320px;
   margin: 0 auto;
 }
@@ -873,19 +1262,63 @@ a {
   box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25);
 }
 
+/* Scroll reveal.
+   Default state is VISIBLE. The hidden state is opt-in via the `js` class,
+   which boot.js sets in the head before first paint. That way a blocked or
+   broken script leaves the page readable instead of blanking 13 sections.
+   boot.js also sets `reveal-all` on a timer as a failsafe, so if main.js
+   never runs the content still appears. */
 .reveal {
+  opacity: 1;
+  transform: none;
+}
+
+.js .reveal {
   opacity: 0;
   transform: translateY(24px);
   transition: opacity 0.55s ease, transform 0.55s ease;
 }
 
-.reveal.is-visible {
+.js .reveal.is-visible,
+.js.reveal-all .reveal {
   opacity: 1;
   transform: translateY(0);
 }
 
+/* Staggered children. Same opt-in rule as .reveal: the hidden state only
+   applies once boot.js has flagged that JS is running, so no-JS shows
+   everything. */
+.js [data-stagger] > .stagger-item {
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  transition-delay: calc(var(--stagger-i, 0) * 110ms);
+}
+
+.js [data-stagger].is-staggered > .stagger-item,
+.js.reveal-all [data-stagger] > .stagger-item {
+  opacity: 1;
+  transform: none;
+}
+
+/* The payoff line lands after the list it answers. */
+.js .pain-payoff {
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 0.6s ease 0.62s, transform 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.62s;
+}
+
+.js .pain-payoff.is-visible,
+.js.reveal-all .pain-payoff {
+  opacity: 1;
+  transform: none;
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .reveal {
+  .reveal,
+  .js .reveal,
+  .js [data-stagger] > .stagger-item,
+  .js .pain-payoff {
     opacity: 1;
     transform: none;
     transition: none;
@@ -922,7 +1355,7 @@ a {
   padding: 2rem;
   background: rgba(0, 0, 0, 0.25);
   border-radius: var(--radius);
-  border: 1px solid rgba(94, 224, 200, 0.2);
+  border: 1px solid var(--theme-border-strong);
 }
 
 .product-card h3 {
@@ -1081,33 +1514,23 @@ a {
 }
 
 .project:hover {
-  background: rgba(94, 224, 200, 0.1);
+  background: var(--theme-accent-mid);
 }
 
-/* Jolly card tint cycle — one brand shade per card, echoing the Jolly lettering */
-.feature:nth-of-type(5n+1),
-.project:nth-of-type(5n+1) {
-  background: color-mix(in srgb, var(--jolly-j) 18%, transparent);
+/* The five-way pastel tint cycle is gone. It was pulling the eye in five
+   directions at once and fighting the accent. Cards are now one quiet
+   surface, and the rainbow lives only in the Jolly wordmark, where it
+   actually means something. */
+.feature,
+.project {
+  background: var(--theme-glass);
+  border: 1px solid var(--theme-border);
 }
 
-.feature:nth-of-type(5n+2),
-.project:nth-of-type(5n+2) {
-  background: color-mix(in srgb, var(--jolly-o) 18%, transparent);
-}
-
-.feature:nth-of-type(5n+3),
-.project:nth-of-type(5n+3) {
-  background: color-mix(in srgb, var(--jolly-l) 18%, transparent);
-}
-
-.feature:nth-of-type(5n+4),
-.project:nth-of-type(5n+4) {
-  background: color-mix(in srgb, var(--jolly-l2) 18%, transparent);
-}
-
-.feature:nth-of-type(5n),
-.project:nth-of-type(5n) {
-  background: color-mix(in srgb, var(--jolly-y) 18%, transparent);
+.feature:hover,
+.project:hover {
+  background: var(--theme-glass-subtle);
+  border-color: var(--theme-accent-border);
 }
 
 .project-year {
@@ -1311,15 +1734,24 @@ a {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 1.5rem;
+  gap: 0.25rem 1.25rem;
   font-family: var(--font-display);
   font-size: 1.1rem;
   text-transform: lowercase;
   letter-spacing: 0.08em;
 }
 
+/* Footer links were 27px tall. Padding brings them to a 44px target
+   without changing how the row looks. */
+.footer-nav a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 0.25rem;
+}
+
 .footer-nav a:hover {
-  color: var(--mint);
+  color: var(--signal-ink);
 }
 
 /* Sticky CTA */
@@ -1328,13 +1760,16 @@ a {
   bottom: 1.25rem;
   right: 1.25rem;
   z-index: 90;
-  padding: 0.75rem 1.25rem;
-  background: var(--mint);
-  color: var(--theme-accent-ink);
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0.75rem 1.35rem;
+  background: var(--signal);
+  color: var(--on-signal);
   font-weight: 700;
   font-size: 0.9rem;
   border-radius: 999px;
-  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.35);
+  box-shadow: 0 4px 24px var(--theme-shadow-md);
   transition: transform 0.2s;
 }
 
@@ -1596,6 +2031,9 @@ a {
 
 .intake-seg label {
   margin: 0;
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
   font-weight: 500;
   font-size: 0.9rem;
   padding: 0.55rem 1rem;
@@ -1608,13 +2046,13 @@ a {
 }
 
 .intake-seg input:checked + label {
-  background: rgba(94, 224, 200, 0.18);
+  background: var(--theme-accent-strong);
   border-color: var(--mint);
   color: var(--mint);
 }
 
 .intake-seg input:focus-visible + label {
-  box-shadow: 0 0 0 2px rgba(94, 224, 200, 0.35);
+  box-shadow: 0 0 0 2px var(--theme-accent-focus);
 }
 
 .intake-submit {
@@ -1691,6 +2129,10 @@ a {
 
 .page-intake .voice-btn {
   appearance: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
   border: 2px solid rgba(255, 255, 255, 0.2);
   background: transparent;
   color: var(--text);
@@ -1973,7 +2415,7 @@ a {
 }
 
 .case[open] {
-  border-color: rgba(94, 224, 200, 0.35);
+  border-color: var(--theme-accent-border);
   box-shadow: 0 10px 48px rgba(0, 0, 0, 0.35);
 }
 
@@ -2197,6 +2639,623 @@ a {
   }
 }
 
+/* ===================================================================
+   WORK INDEX — generated by scripts/build-projects.js
+   Cards play a silent clip on hover where the case study has video.
+   =================================================================== */
+.work-grid {
+  display: grid;
+  gap: 1.25rem;
+  margin-top: clamp(2rem, 4vw, 3rem);
+}
+
+.work-card {
+  display: grid;
+  gap: 0.4rem;
+  padding: 0;
+  background: var(--theme-glass);
+  border: 1px solid var(--theme-border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  transition: border-color 0.25s ease, background 0.25s ease, transform 0.25s ease;
+}
+
+.work-card:hover,
+.work-card:focus-visible {
+  background: var(--theme-glass-subtle);
+  border-color: var(--theme-accent-border);
+}
+
+.work-card-media {
+  position: relative;
+  display: block;
+  aspect-ratio: 4 / 3;
+  background: var(--ground-deep);
+  overflow: hidden;
+}
+
+.work-card-thumb,
+.work-card-media video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: opacity 0.35s ease, transform 0.6s ease;
+}
+
+.work-card-thumb--contain {
+  object-fit: contain;
+  padding: 12%;
+}
+
+.work-card:hover .work-card-thumb {
+  transform: scale(1.03);
+}
+
+/* The clip is injected on first hover and fades over the still. */
+.work-card-media video {
+  opacity: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.work-card-media video.is-playing {
+  opacity: 1;
+}
+
+.work-card-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 0.85rem;
+  align-items: baseline;
+  padding: 1.15rem 1.25rem 0;
+  font-size: 0.76rem;
+  text-transform: uppercase;
+  letter-spacing: 0.11em;
+}
+
+.work-card-year {
+  color: var(--signal-ink);
+  font-weight: 600;
+}
+
+.work-card-cat {
+  color: var(--text-muted);
+}
+
+.work-card-title {
+  padding: 0 1.25rem;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(1.5rem, 2.6vw, 2rem);
+  line-height: 1.02;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--text);
+}
+
+.work-card-sub {
+  padding: 0 1.25rem 1.35rem;
+  color: var(--text-muted);
+  font-size: 0.93rem;
+  line-height: 1.55;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* ===================================================================
+   CASE STUDY PAGE — editorial, not an accordion
+   =================================================================== */
+.page-case main,
+.page-case {
+  padding-top: 0;
+}
+
+.case-hero {
+  padding: calc(var(--header-h) + clamp(2.5rem, 6vw, 4.5rem)) 1.25rem
+    clamp(2rem, 4vw, 3rem);
+  background: var(--surface);
+  border-bottom: 1px solid var(--theme-border);
+}
+
+.case-hero-inner {
+  max-width: 1120px;
+  margin: 0 auto;
+}
+
+.case-hero .eyebrow {
+  text-align: left;
+  margin-inline: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.case-hero .eyebrow::before {
+  content: "";
+  width: 1.5rem;
+  height: 2px;
+  background: var(--signal);
+  flex-shrink: 0;
+}
+
+/* The breadcrumb is a real tap target, not just inline text. */
+.case-hero .eyebrow a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding-inline: 0.15rem;
+  margin-inline: -0.15rem;
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.case-hero .eyebrow a:hover {
+  color: var(--brass);
+}
+
+.case-hero .headline {
+  text-align: left;
+  font-size: clamp(2.4rem, 6.5vw, 5rem);
+  margin-bottom: 1rem;
+}
+
+.case-lede {
+  max-width: 62ch;
+  margin: 0 0 2rem;
+  color: var(--text-muted);
+  font-size: clamp(1.05rem, 1.6vw, 1.22rem);
+  line-height: 1.6;
+}
+
+.case-meta {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1px;
+  margin: 0;
+  background: var(--theme-border);
+  border-top: 1px solid var(--theme-border);
+  border-bottom: 1px solid var(--theme-border);
+}
+
+.case-meta > div {
+  background: var(--surface);
+  padding: 0.9rem 0.25rem;
+}
+
+.case-meta dt {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--text-muted);
+  margin-bottom: 0.3rem;
+}
+
+.case-meta dd {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(1.1rem, 2vw, 1.5rem);
+  line-height: 1;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--brass);
+}
+
+/* These carry their own inline padding, so the max-width has to include it or
+   their content lands 20px right of the hero's column and nothing lines up. */
+.case-lead-media,
+.case-gallery,
+.case-section {
+  max-width: calc(1120px + 2.5rem);
+  margin-inline: auto;
+  padding-inline: 1.25rem;
+}
+
+.case-lead-media {
+  margin-top: clamp(2rem, 5vw, 3.5rem);
+}
+
+.case-gallery {
+  display: grid;
+  gap: 1.25rem;
+  margin-top: clamp(2rem, 4vw, 3rem);
+}
+
+.case-media {
+  margin: 0;
+  border-radius: var(--radius);
+  overflow: hidden;
+  border: 1px solid var(--theme-border);
+  background: var(--ground-deep);
+}
+
+.case-media img,
+.case-media video {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.case-media--logo img {
+  object-fit: contain;
+  padding: 8%;
+  background: var(--surface);
+}
+
+.case-media figcaption {
+  padding: 0.75rem 1rem;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  border-top: 1px solid var(--theme-border);
+}
+
+.case-section {
+  padding-top: clamp(2.75rem, 6vw, 4.5rem);
+  padding-bottom: 0;
+}
+
+.case-h {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(1.4rem, 2.4vw, 1.9rem);
+  line-height: 1;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--signal-ink);
+  margin: 0 0 1.25rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--theme-border-heavy);
+}
+
+.case-prose {
+  max-width: 68ch;
+}
+
+.case-prose p {
+  margin: 0 0 1.2rem;
+  color: var(--text);
+  font-size: 1.05rem;
+  line-height: 1.72;
+}
+
+.case-prose p:first-child {
+  font-size: clamp(1.1rem, 1.7vw, 1.28rem);
+  line-height: 1.6;
+  color: var(--text);
+}
+
+.case-prose p:last-child {
+  margin-bottom: 0;
+}
+
+.case-cta {
+  margin-top: clamp(3rem, 7vw, 5rem);
+}
+
+.case-nav {
+  display: grid;
+  gap: 1px;
+  background: var(--theme-border);
+  border-top: 1px solid var(--theme-border);
+}
+
+.case-nav-link {
+  display: grid;
+  gap: 0.35rem;
+  padding: 1.75rem 1.25rem;
+  background: var(--ground);
+  transition: background 0.2s ease;
+}
+
+.case-nav-link:hover {
+  background: var(--surface);
+}
+
+.case-nav-link--next {
+  text-align: right;
+}
+
+.case-nav-dir {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--signal-ink);
+  font-weight: 600;
+}
+
+.case-nav-title {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(1.35rem, 2.4vw, 1.9rem);
+  line-height: 1;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--text);
+}
+
+/* Pain lines — the sharper, more specific jabs carried over from the retired
+   Go Mammoth page. Set as a rhythm of short rules rather than a bulleted list
+   so they read like a drumbeat. */
+.pain-lines {
+  list-style: none;
+  padding: 0;
+  margin: clamp(2rem, 4vw, 3rem) 0 0;
+  display: grid;
+  gap: 0;
+  max-width: 62ch;
+}
+
+.pain-lines li {
+  padding: 0.9rem 0 0.9rem 1.6rem;
+  border-top: 1px solid var(--theme-border-heavy);
+  position: relative;
+  color: var(--text);
+  font-size: 1.02rem;
+  line-height: 1.5;
+}
+
+.pain-lines li:last-child {
+  border-bottom: 1px solid var(--theme-border-heavy);
+}
+
+.pain-lines li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 1.45rem;
+  width: 0.7rem;
+  height: 2px;
+  background: var(--brass);
+}
+
+/* Social proof — real client messages. The lead quote gets the weight
+   because it carries an actual outcome, not a compliment. */
+.proof-grid {
+  display: grid;
+  gap: 1rem;
+  margin-top: 2.25rem;
+}
+
+.proof-quote {
+  margin: 0;
+  padding: 1.5rem 1.6rem;
+  background: var(--theme-glass);
+  border: 1px solid var(--theme-border);
+  border-left: 3px solid var(--signal);
+  border-radius: 0 var(--radius) var(--radius) 0;
+}
+
+.proof-quote p {
+  margin: 0 0 1rem;
+  color: var(--text);
+  font-size: 1.02rem;
+  line-height: 1.6;
+}
+
+.proof-quote strong {
+  color: var(--brass);
+  font-weight: 600;
+}
+
+.proof-quote footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.5rem 0.75rem;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.proof-who {
+  color: var(--signal-ink);
+  font-weight: 600;
+}
+
+.proof-where {
+  color: var(--text-muted);
+}
+
+.proof-quote--lead {
+  border-left-color: var(--brass);
+  background: var(--theme-overlay-md);
+}
+
+.proof-quote--lead p {
+  font-size: clamp(1.1rem, 1.9vw, 1.4rem);
+  line-height: 1.5;
+}
+
+/* FAQ — plain disclosure rows, no card chrome. Sits before the CTA. */
+.faq-grid {
+  display: grid;
+  gap: 0;
+  margin-top: 2rem;
+  max-width: 68ch;
+  border-top: 1px solid var(--theme-border-heavy);
+}
+
+.faq-item {
+  border-bottom: 1px solid var(--theme-border-heavy);
+}
+
+.faq-item summary {
+  cursor: pointer;
+  list-style: none;
+  padding: 1.1rem 2.5rem 1.1rem 0;
+  position: relative;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 1.04rem;
+  color: var(--text);
+}
+
+.faq-item summary::-webkit-details-marker {
+  display: none;
+}
+
+.faq-item summary::after {
+  content: "";
+  position: absolute;
+  right: 0.4rem;
+  top: 50%;
+  width: 0.7rem;
+  height: 0.7rem;
+  margin-top: -0.5rem;
+  border-right: 2px solid var(--brass);
+  border-bottom: 2px solid var(--brass);
+  transform: rotate(45deg);
+  transition: transform 0.2s ease;
+}
+
+.faq-item[open] summary::after {
+  transform: rotate(-135deg);
+  margin-top: -0.2rem;
+}
+
+.faq-item summary:hover {
+  color: var(--brass);
+}
+
+.faq-item summary:focus-visible {
+  outline: 2px solid var(--signal);
+  outline-offset: 2px;
+}
+
+.faq-body {
+  padding: 0 2.5rem 1.25rem 0;
+}
+
+.faq-body p {
+  margin: 0;
+  color: var(--text);
+  line-height: 1.62;
+}
+
+/* Local note now carries job-site footage. Proof beats assertion. */
+.local-media {
+  border-radius: var(--radius);
+  overflow: hidden;
+  border: 1px solid var(--theme-border-strong);
+  background: var(--ground-deep);
+  flex-shrink: 0;
+}
+
+.local-media video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 9 / 16;
+  object-fit: cover;
+}
+
+/* Work band — systems and brand work share one section instead of two
+   near-identical grid bands 2,000px apart. */
+.work-creative {
+  margin-top: clamp(3rem, 6vw, 4.5rem);
+  padding-top: clamp(2rem, 4vw, 3rem);
+  border-top: 1px solid var(--theme-border);
+}
+
+.work-sub {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(1.5rem, 3vw, 2.4rem);
+  line-height: 1.05;
+  letter-spacing: 0.015em;
+  text-transform: uppercase;
+  margin: 0 0 0.75rem;
+  max-width: 22ch;
+}
+
+.work-creative .lead {
+  margin-inline: 0;
+  text-align: left;
+}
+
+/* Process + Local share a band. Both were short, and side by side they
+   read as one thought instead of two thin stripes. */
+.process-local {
+  display: grid;
+  gap: clamp(2rem, 5vw, 3.5rem);
+  align-items: start;
+}
+
+.process-col .headline,
+.process-col .eyebrow {
+  text-align: left;
+  margin-inline: 0;
+}
+
+.process-col .steps {
+  margin-inline: 0;
+  max-width: none;
+}
+
+.local-note {
+  display: grid;
+  gap: 1.25rem;
+  padding: 1.5rem 1.6rem;
+  background: var(--theme-overlay-md);
+  border-left: 3px solid var(--brass);
+  border-radius: 0 var(--radius) var(--radius) 0;
+}
+
+.local-note h3 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(1.3rem, 2.2vw, 1.75rem);
+  line-height: 1.05;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  margin: 0 0 0.6rem;
+  color: var(--text);
+}
+
+.local-note p {
+  margin: 0;
+  color: var(--text);
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+/* Grids inside an anchored band sit against the left edge rather than
+   re-centering themselves. */
+.band-anchor .pain-buckets,
+.band-anchor .feature-grid,
+.band-anchor .project-grid,
+.band-anchor .signature-feature,
+.band-anchor .product-card {
+  margin-inline: 0;
+  max-width: none;
+}
+
+.band-anchor .lead {
+  margin-inline: 0;
+}
+
+.band-anchor .pain-footer {
+  margin-inline: 0;
+  text-align: left;
+  max-width: none;
+}
+
+/* Everything inside an anchored band tracks the same left edge. Centered
+   sub-content inside a left-anchored headline reads as an accident. */
+.band-anchor .pain-bucket-label,
+.band-anchor .pain-grid li {
+  text-align: left;
+}
+
+.band-anchor .centered-btn {
+  margin-inline: 0 auto;
+}
+
 /* Responsive */
 @media (max-width: 520px) {
   .logo-wordmark {
@@ -2283,15 +3342,209 @@ a {
     grid-template-columns: 1fr 1fr;
     gap: 1.5rem;
   }
+
+  .hero-proof {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .process-local {
+    grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+  }
+
+  .project-grid--compact {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  /* Lead testimonial spans both columns; the rest sit two-up. */
+  .proof-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 1.1rem;
+  }
+
+  .proof-quote--lead {
+    grid-column: 1 / -1;
+  }
+
+  .local-media {
+    max-width: 190px;
+  }
+
+  .work-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+
+  .case-meta {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .case-nav {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .case-gallery--pair {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (min-width: 1100px) {
+  .work-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  /* Give the herd room to actually read as a mammoth. */
+  .hero {
+    min-height: min(88vh, 780px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .hero-inner {
+    width: 100%;
+  }
 }
 
 @media (min-width: 1024px) {
   .section {
-    padding: 5.5rem 2rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
   }
 
   .hero {
     padding-left: 2rem;
     padding-right: 2rem;
+  }
+}
+
+/* Short laptop viewports. The original bug was a 960x548 video taking 76% of
+   a 720px fold; the guard stays so the headline, subhead and both CTAs are
+   always above the line. */
+@media (min-width: 1024px) and (max-height: 800px) {
+  .hero {
+    min-height: 0;
+    padding-top: calc(var(--header-h) + 1.25rem);
+    padding-bottom: 1.75rem;
+  }
+
+  .hero .headline {
+    font-size: clamp(2rem, 3.4vw, 3rem);
+  }
+
+  .hero-proof {
+    margin-top: 1.5rem;
+  }
+
+  .hero-proof div {
+    padding: 0.7rem 0.75rem;
+  }
+}
+
+/* Narrow desktops. The copy column takes a larger share of the width here, so
+   the mask has to clear further right or particles end up behind the tail of
+   the headline. */
+@media (min-width: 1024px) and (max-width: 1200px) {
+  .hero-stage {
+    -webkit-mask-image: linear-gradient(
+      to right,
+      transparent 0%,
+      transparent 50%,
+      rgba(0, 0, 0, 0.45) 64%,
+      #000 78%
+    );
+    mask-image: linear-gradient(
+      to right,
+      transparent 0%,
+      transparent 50%,
+      rgba(0, 0, 0, 0.45) 64%,
+      #000 78%
+    );
+  }
+}
+
+/* Mobile: there is no room to put the herd beside the copy, and behind the
+   copy it made the subhead unreadable. So it stops being a backdrop and
+   becomes a band in normal flow, ordered between the copy and the proof
+   strip. Absolute positioning could not do this without colliding with the
+   buttons, whose position depends on how the headline wraps. */
+@media (max-width: 1023px) {
+  .hero {
+    display: flex;
+    flex-direction: column;
+    padding-bottom: clamp(2.5rem, 8vw, 4rem);
+  }
+
+  .hero-inner {
+    order: 1;
+  }
+
+  .hero-stage {
+    order: 2;
+    position: relative;
+    inset: auto;
+    width: 100%;
+    height: clamp(170px, 46vw, 240px);
+    margin-top: clamp(1.5rem, 5vw, 2.5rem);
+    opacity: 0.95;
+    /* Soft edges so the band does not read as a boxed-off panel. */
+    -webkit-mask-image: linear-gradient(
+      to right,
+      transparent 0%,
+      #000 12%,
+      #000 88%,
+      transparent 100%
+    );
+    mask-image: linear-gradient(
+      to right,
+      transparent 0%,
+      #000 12%,
+      #000 88%,
+      transparent 100%
+    );
+  }
+
+  .hero-proof {
+    order: 3;
+  }
+
+  /* Buttons go full width so the stack reads as a deliberate pair rather
+     than two differently sized blocks. The explicit 1fr matters: an implicit
+     grid track is content-sized and will not stretch to the container. */
+  .hero .cta-row {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.7rem;
+    max-width: 26rem;
+  }
+
+  .hero .cta-row .btn {
+    width: 100%;
+  }
+
+  .hero-proof {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  /* "Small, but mighty" wraps to two lines while its neighbours do not.
+     Pinning the label to the bottom keeps the row of labels on one line. */
+  .hero-proof div {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 0.4rem;
+    padding: 0.85rem 0.6rem;
+  }
+
+  .hero-proof b {
+    font-size: clamp(0.9rem, 3.5vw, 1.2rem);
+    line-height: 1.05;
+  }
+
+  .hero-proof span {
+    margin-top: 0;
+    font-size: 0.62rem;
+    letter-spacing: 0.09em;
   }
 }

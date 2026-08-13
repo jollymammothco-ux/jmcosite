@@ -1,75 +1,3 @@
-(function initThemeToggle() {
-  const STORAGE_KEY = "jm-theme";
-  const root = document.documentElement;
-
-  function getTheme() {
-    return root.dataset.theme === "light" ? "light" : "dark";
-  }
-
-  function setTheme(theme) {
-    root.dataset.theme = theme;
-    try {
-      localStorage.setItem(STORAGE_KEY, theme);
-    } catch (e) {}
-    document.dispatchEvent(new CustomEvent("jm-theme-change", { detail: { theme } }));
-    updateToggleLabels();
-  }
-
-  function updateToggleLabels() {
-    const isLight = getTheme() === "light";
-    document.querySelectorAll(".theme-toggle").forEach((btn) => {
-      btn.setAttribute("aria-pressed", String(isLight));
-      btn.setAttribute(
-        "aria-label",
-        isLight ? "Switch to dark theme" : "Switch to light theme"
-      );
-      btn.title = isLight ? "Dark mode" : "Light mode";
-    });
-  }
-
-  function createToggle() {
-    const btn = document.createElement("button");
-    btn.type = "button";
-    btn.className = "theme-toggle";
-    btn.innerHTML =
-      '<span class="theme-toggle-icon theme-toggle-icon--sun" aria-hidden="true">☀</span>' +
-      '<span class="theme-toggle-icon theme-toggle-icon--moon" aria-hidden="true">☾</span>';
-    btn.addEventListener("click", () => {
-      setTheme(getTheme() === "light" ? "dark" : "light");
-    });
-    return btn;
-  }
-
-  function mountToggles() {
-    const header = document.querySelector(".site-header");
-    if (header && !header.querySelector(".theme-toggle")) {
-      const navToggle = header.querySelector(".nav-toggle");
-      const themeToggle = createToggle();
-      if (navToggle) header.insertBefore(themeToggle, navToggle);
-      else header.appendChild(themeToggle);
-    }
-
-    const mobileNav = document.querySelector(".mobile-nav");
-    if (mobileNav && !mobileNav.querySelector(".theme-toggle")) {
-      const themeToggle = createToggle();
-      themeToggle.classList.add("theme-toggle--mobile");
-      mobileNav.insertBefore(themeToggle, mobileNav.firstChild);
-    }
-
-    updateToggleLabels();
-  }
-
-  if (!root.dataset.theme) {
-    root.dataset.theme = "dark";
-  }
-
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", mountToggles);
-  } else {
-    mountToggles();
-  }
-})();
-
 const toggle = document.querySelector(".nav-toggle");
 const mobileNav = document.querySelector(".mobile-nav");
 
@@ -88,34 +16,108 @@ if (toggle && mobileNav) {
   });
 }
 
-// Products dropdown (desktop)
-const navGroupToggle = document.querySelector(".nav-group-toggle");
-const navDropdown = document.querySelector(".nav-dropdown");
+// Hero video: don't spend a contractor's data plan on decoration.
+// On a metered connection or with reduced motion requested, stop the clip
+// and leave the poster frame showing. The poster is 10KB and carries the
+// same image, so nothing is lost visually.
+const heroVideo = document.querySelector(".hero video");
+if (heroVideo) {
+  const conn = navigator.connection || {};
+  const saveData = conn.saveData === true;
+  const slowLink = /(^|-)2g$/.test(conn.effectiveType || "");
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-if (navGroupToggle && navDropdown) {
-  navGroupToggle.addEventListener("click", () => {
-    const open = navGroupToggle.getAttribute("aria-expanded") === "true";
-    navGroupToggle.setAttribute("aria-expanded", String(!open));
-    navDropdown.hidden = open;
-  });
+  if (saveData || slowLink || reducedMotion) {
+    heroVideo.autoplay = false;
+    heroVideo.removeAttribute("autoplay");
+    heroVideo.preload = "none";
+    heroVideo.pause();
+  }
+}
 
-  document.addEventListener("click", (e) => {
-    if (
-      !navGroupToggle.contains(e.target) &&
-      !navDropdown.contains(e.target)
-    ) {
-      navGroupToggle.setAttribute("aria-expanded", "false");
-      navDropdown.hidden = true;
+// Work cards: play a silent clip on hover.
+// The <video> is created on first hover rather than shipped in the markup, so
+// a grid of twelve cards costs nothing until someone actually points at one.
+// Skipped entirely on touch, metered connections, and reduced motion.
+(function initWorkCardClips() {
+  const cards = document.querySelectorAll(".work-card.has-clip");
+  if (!cards.length) return;
+
+  const conn = navigator.connection || {};
+  const cheap =
+    conn.saveData === true || /(^|-)2g$/.test(conn.effectiveType || "");
+  const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const hoverable = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+  if (cheap || reduced || !hoverable) return;
+
+  cards.forEach((card) => {
+    const src = card.getAttribute("data-clip");
+    const holder = card.querySelector(".work-card-media");
+    if (!src || !holder) return;
+
+    let video = null;
+
+    function enter() {
+      if (!video) {
+        video = document.createElement("video");
+        video.muted = true;
+        video.loop = true;
+        video.playsInline = true;
+        video.preload = "auto";
+        video.setAttribute("aria-hidden", "true");
+        video.src = src;
+        holder.appendChild(video);
+      }
+      const p = video.play();
+      if (p && p.catch) p.catch(() => {});
+      video.classList.add("is-playing");
     }
-  });
 
-  navDropdown.querySelectorAll("a").forEach((link) => {
-    link.addEventListener("click", () => {
-      navGroupToggle.setAttribute("aria-expanded", "false");
-      navDropdown.hidden = true;
+    function leave() {
+      if (!video) return;
+      video.classList.remove("is-playing");
+      video.pause();
+      video.currentTime = 0;
+    }
+
+    card.addEventListener("pointerenter", enter);
+    card.addEventListener("pointerleave", leave);
+    card.addEventListener("focus", enter);
+    card.addEventListener("blur", leave);
+  });
+})();
+
+// Staggered reveal: children of [data-stagger] come in one after another
+// rather than all at once. Used on the leak list so the problem section reads
+// as an accumulating case rather than a block of text appearing.
+(function initStagger() {
+  const groups = document.querySelectorAll("[data-stagger]");
+  if (!groups.length) return;
+
+  groups.forEach((group) => {
+    Array.from(group.children).forEach((child, i) => {
+      child.style.setProperty("--stagger-i", i);
+      child.classList.add("stagger-item");
     });
   });
-}
+
+  if (!("IntersectionObserver" in window)) {
+    groups.forEach((g) => g.classList.add("is-staggered"));
+    return;
+  }
+
+  const io = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add("is-staggered");
+        io.unobserve(entry.target);
+      });
+    },
+    { threshold: 0.25, rootMargin: "0px 0px -10% 0px" }
+  );
+  groups.forEach((g) => io.observe(g));
+})();
 
 // Section reveal on scroll
 const revealSections = document.querySelectorAll(".reveal");
@@ -230,77 +232,3 @@ if (stickyCta) {
   if (hero) observer.observe(hero);
 }
 
-// Contact form → CRM (Go High Level via Netlify function)
-const contactForm = document.getElementById("contact-form");
-if (contactForm) {
-  const submitButton = contactForm.querySelector('button[type="submit"]');
-  const statusEl = document.getElementById("form-status");
-  const defaultButtonLabel = submitButton?.textContent?.trim() || "Submit";
-
-  contactForm.addEventListener("submit", async (event) => {
-    event.preventDefault();
-
-    const interest = contactForm.interest?.value;
-    if (interest === "rapiddashboard") {
-      window.location.href = "https://rapiddashboard.ai/demo";
-      return;
-    }
-
-    const formData = new FormData(contactForm);
-    const payload = {
-      name: formData.get("name"),
-      email: formData.get("email"),
-      company: formData.get("company"),
-      interest: formData.get("interest"),
-      message: formData.get("message"),
-      website: formData.get("website"),
-      page_url: window.location.href,
-    };
-
-    setFormStatus(statusEl, "");
-    setSubmitting(submitButton, defaultButtonLabel, true);
-
-    try {
-      const response = await fetch("/.netlify/functions/submit-lead", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
-      });
-
-      const result = await response.json().catch(() => ({}));
-
-      if (!response.ok) {
-        throw new Error(result.error || "Something went wrong. Please try again.");
-      }
-
-      contactForm.reset();
-      setFormStatus(
-        statusEl,
-        "Thanks — we got your message. We'll follow up shortly to book your strategy call.",
-        "success"
-      );
-    } catch (error) {
-      setFormStatus(
-        statusEl,
-        error.message || "Could not send your message. Please try again.",
-        "error"
-      );
-    } finally {
-      setSubmitting(submitButton, defaultButtonLabel, false);
-    }
-  });
-}
-
-function setFormStatus(element, message, type) {
-  if (!element) return;
-  element.textContent = message;
-  element.hidden = !message;
-  element.classList.remove("form-status--success", "form-status--error");
-  if (type) element.classList.add(`form-status--${type}`);
-}
-
-function setSubmitting(button, label, isSubmitting) {
-  if (!button) return;
-  button.disabled = isSubmitting;
-  button.textContent = isSubmitting ? "Sending…" : label;
-}

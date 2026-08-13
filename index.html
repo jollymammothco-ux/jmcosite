@@ -16,7 +16,10 @@
       property="og:description"
       content="Jolly Mammoth: AI consultancy that advises and builds. Go Mammoth for lead & revenue generation. MammothIQ for data & ops intelligence."
     />
-    <meta property="og:image" content="https://jollymammoth.co/assets/brand/logo.png" />
+    <meta property="og:image" content="https://jollymammoth.co/assets/brand/og-share.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Jolly Mammoth: AI systems for Wisconsin contractors." />
     <meta property="og:url" content="https://jollymammoth.co/" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Jolly Mammoth Co: AI Growth Systems" />
@@ -24,7 +27,7 @@
       name="twitter:description"
       content="Jolly Mammoth: AI consultancy that advises and builds. Go Mammoth for lead & revenue generation. MammothIQ for data & ops intelligence."
     />
-    <meta name="twitter:image" content="https://jollymammoth.co/assets/brand/logo.png" />
+    <meta name="twitter:image" content="https://jollymammoth.co/assets/brand/og-share.jpg" />
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -48,8 +51,8 @@
       href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap"
       rel="stylesheet"
     />
-    <script src="theme-init.js?v=1"></script>
-    <link rel="stylesheet" href="styles.css?v=10" />
+    <script src="boot.js?v=2"></script>
+    <link rel="stylesheet" href="styles.css?v=26" />
     <link rel="icon" href="assets/brand/logo.png" type="image/png" />
     <link rel="apple-touch-icon" href="assets/brand/logo.png" />
 
@@ -73,100 +76,141 @@
         >
       </a>
       <nav class="nav-desktop" aria-label="Main">
-        <a href="#products">What We Do</a>
-        <a href="#work">Work</a>
+        <a href="#go-mammoth">Go Mammoth</a>
+        <a href="#mammothiq">MammothIQ</a>
+        <a href="projects.html">Work</a>
         <a href="about.html">About</a>
-        <a href="#creative">Creative</a>
       </nav>
-      <a class="btn btn-header btn-playful" href="questionnaire.html">Book a Strategy Call</a>
+      <a class="btn btn-primary btn-header" href="questionnaire.html">Book a Strategy Call</a>
       <button class="nav-toggle" aria-label="Open menu" aria-expanded="false">
         <span></span><span></span>
       </button>
     </header>
 
     <div class="mobile-nav" hidden>
-      <a href="#products">What We Do</a>
-      <a href="#work">Work</a>
+      <a href="#go-mammoth">Go Mammoth</a>
+      <a href="#mammothiq">MammothIQ</a>
+      <a href="projects.html">Work</a>
       <a href="about.html">About</a>
-      <a href="#creative">Creative</a>
       <a href="questionnaire.html">Book a Strategy Call</a>
     </div>
 
     <main>
-      <!-- HERO -->
+      <!-- HERO — the mammoth assembles itself out of a rainbow particle herd.
+           Canvas sits behind the copy; falls back to the static mark. -->
       <section class="hero">
-        <div class="hero-media">
-          <video autoplay muted loop playsinline aria-label="Jolly Mammoth — growth systems in motion">
-            <source src="assets/hero/home-hero.mp4" type="video/mp4" />
-          </video>
+        <div
+          class="hero-stage"
+          data-mammoth="assets/brand/logo.png"
+          aria-hidden="true"
+        >
+          <canvas></canvas>
+          <img
+            class="mammoth-fallback"
+            src="assets/brand/logo.png"
+            alt=""
+            width="1008"
+            height="850"
+          />
         </div>
-        <h1 class="headline headline-lavender">
-          <span class="hero-line">You started your business to build things you're proud of.</span>
-          <span class="hero-line">Not patch revenue leaks.</span>
-        </h1>
-        <p class="hero-subhead">
-          AI can expand what your business handles without adding headcount. We look at how you actually run, find where it's leaking, and build the fix around you.
-        </p>
-        <div class="cta-row">
-          <a class="btn btn-primary btn-playful" href="#products">See where it fits</a>
-          <a class="btn btn-ghost" href="questionnaire.html">Book a Strategy Call</a>
+        <div class="hero-inner">
+          <div class="hero-copy">
+            <p class="hero-eyebrow">Eau Claire, Wisconsin</p>
+            <h1 class="headline headline-lavender">
+              <span class="hero-line">You started your business to build things.</span>
+              <span class="hero-line">Not to patch <span class="accent-yellow">revenue leaks</span>.</span>
+            </h1>
+            <p class="hero-subhead">
+              AI can expand what your business handles without adding headcount. We look at how you
+              actually run, find where it is leaking, and build the fix around you.
+            </p>
+            <div class="cta-row">
+              <a class="btn btn-primary btn-lg" href="questionnaire.html">Book a Strategy Call</a>
+              <a class="btn btn-ghost btn-lg" href="#products">See where it fits</a>
+            </div>
+          </div>
+        </div>
+        <div class="hero-proof">
+          <div><b>2024</b><span>Established</span></div>
+          <div><b>Eau Claire</b><span>Headquarters</span></div>
+          <div><b>Small, but mighty</b><span>The team</span></div>
         </div>
       </section>
 
-      <!-- PAIN -->
+      <!-- PAIN — left-anchored against the slate band -->
       <section class="section section-blue reveal" id="problems">
-        <h2 class="headline">
-          Good businesses lose <span class="accent-yellow">good money</span> to
-          solvable problems.
-        </h2>
-        <div class="pain-buckets">
-          <div class="pain-bucket">
-            <p class="pain-bucket-label">Where growth leaks</p>
-            <ul class="pain-grid">
-              <li>Leads go cold fast</li>
-              <li>Follow-ups get messy</li>
-              <li>The sales process is clunky</li>
-            </ul>
+        <div class="band-anchor">
+          <p class="eyebrow">The problem</p>
+          <h2 class="headline">
+            Good businesses lose <span class="accent-yellow">good money</span> to
+            solvable problems.
+          </h2>
+          <div class="pain-buckets">
+            <div class="pain-bucket">
+              <p class="pain-bucket-label">Where growth leaks</p>
+              <ul class="pain-grid">
+                <li>Leads go cold fast</li>
+                <li>Follow-ups get messy</li>
+                <li>The sales process is clunky</li>
+              </ul>
+            </div>
+            <div class="pain-bucket">
+              <p class="pain-bucket-label">Where operations leak</p>
+              <ul class="pain-grid">
+                <li>Jobs cost more than they bid</li>
+                <li>Workflow lives in five tools</li>
+                <li>Scattered data means slow decisions</li>
+              </ul>
+            </div>
           </div>
-          <div class="pain-bucket">
-            <p class="pain-bucket-label">Where operations leak</p>
-            <ul class="pain-grid">
-              <li>Potential revenue is leaking</li>
-              <li>Workflow lives in five tools</li>
-              <li>Scattered data means slow decisions</li>
-            </ul>
-          </div>
+
+          <ul class="pain-lines" data-stagger>
+            <li>Leads come in. Some get a call back, some don't. You've stopped tracking which.</li>
+            <li>You pay for ads or referrals. Half never get a callback, because you were on a job.</li>
+            <li>Your CRM is your inbox, your phone, and a notebook in the truck.</li>
+            <li>You've hired marketers before. You got pretty pictures and no pipeline.</li>
+          </ul>
+
+          <p class="pain-footer pain-payoff reveal">
+            None of this is a failure of effort. It's a failure of infrastructure.
+            <span class="accent-yellow">That's what we install.</span>
+          </p>
         </div>
-        <p class="pain-footer">Growth feels like chaos, not freedom</p>
       </section>
 
-      <!-- HOW WE WORK -->
-      <section class="section section-dark reveal">
-        <p class="eyebrow">How we work</p>
-        <h2 class="headline headline-lavender">
-          We are not here to sell you SaaS.
-        </h2>
-        <p class="lead centered">
-          We look at the whole business. Not just marketing. Not just your
-          logistics or your project management. All of it, as one system, so we
-          can see what is lacking, what can improve, and what just needs a little
-          grease on the wheels.
-        </p>
-        <p class="lead centered">
-          Then we build that fix custom to you, and we stick around to keep it
-          earning its keep.
-        </p>
+      <!-- JOLLY — the vision beat. Sits right after the problem so the page
+           answers "what does better feel like?" before it sells anything. -->
+      <section class="section section-jolly band-rest reveal" id="jolly">
+        <div class="band-breather">
+          <h2 class="headline">
+            How do we make businesses more
+            <span class="jolly-word-group">
+              <span class="jolly-word" aria-label="Jolly"
+                ><span>J</span><span>O</span><span>L</span><span>L</span><span>Y</span></span
+              >?
+            </span>
+          </h2>
+          <p class="lead centered">
+            We take the heavy lifting off your plate. Growth feels intentional. Operations feel
+            lighter. Running your company feels predictable, clear, and actually fun again.
+          </p>
+        </div>
       </section>
 
-      <!-- PRODUCT SUITE -->
-      <section class="section section-dark reveal" id="products">
+      <!-- TWO LANES — the peak of the page -->
+      <section class="section section-dark band-peak reveal" id="products">
         <div class="brand-accent" aria-hidden="true">
           <img src="assets/brand/logo.png" alt="" width="1008" height="850" />
         </div>
-        <p class="eyebrow">Most builds run in one of two lanes</p>
+        <p class="eyebrow">How we work</p>
         <h2 class="headline headline-lavender">
-          Which lane is yours depends on where it hurts.
+          We are not here to sell you software.
         </h2>
+        <p class="lead centered">
+          We look at the whole business. Not just marketing. Not just your logistics or your
+          scheduling. All of it, as one system. Then we build the fix custom to you, and we stick
+          around to keep it earning its keep. Most builds run in one of two lanes.
+        </p>
         <div class="suite-grid">
           <article class="suite-card card-lift">
             <p class="suite-question">Losing leads and stalling on growth?</p>
@@ -181,10 +225,10 @@
             <a class="btn btn-primary" href="#go-mammoth">See Go Mammoth</a>
           </article>
           <article class="suite-card card-lift">
-            <p class="suite-question">Flying blind on your own numbers?</p>
+            <p class="suite-question">Flying blind on job costs and crew hours?</p>
             <p class="suite-tag">The brains</p>
             <h3 class="suite-name">MammothIQ</h3>
-            <p class="suite-promise">Data &amp; ops intelligence from your real systems.</p>
+            <p class="suite-promise">Know what every job actually made you, while it is still running.</p>
             <ul class="suite-benefits">
               <li>Ask questions in plain English</li>
               <li>Live shareable dashboards</li>
@@ -194,150 +238,151 @@
           </article>
         </div>
         <p class="suite-footer">
-          Same hardware. Same relationship. We start where it hurts most and grow
-          from there.
+          Same relationship either way. We start where it hurts most and grow from there.
         </p>
       </section>
 
       <!-- GO MAMMOTH -->
       <section class="section section-blue-dark reveal" id="go-mammoth">
-        <p class="eyebrow">Product · Go Mammoth</p>
-        <h2 class="headline">
-          The <span class="accent-yellow">Go Mammoth</span> System
-        </h2>
-        <p class="lead">
-          Growth infrastructure built for your business, installed and running. We
-          white-label and configure the platform so you don't touch a thing.
-        </p>
-        <div class="feature-grid">
-          <article class="feature card-lift">
-            <h3>Lead capture pipeline</h3>
-            <p>
-              Web forms, calls, texts, and ads land in one place. Nothing slips
-              through.
-            </p>
-          </article>
-          <article class="feature card-lift">
-            <h3>Automated follow-ups</h3>
-            <p>
-              On the jobsite or fishing? Leads still get nurtured automatically.
-            </p>
-          </article>
-          <article class="feature card-lift">
-            <h3>Booking & scheduling</h3>
-            <p>Prospects book straight to your calendar. No phone tag.</p>
-          </article>
-          <article class="feature card-lift">
-            <h3>All comms, one inbox</h3>
-            <p>Texts, emails, and DMs in a single organized platform.</p>
-          </article>
-          <article class="feature card-lift">
-            <h3>Custom workflow & AI ops</h3>
-            <p>
-              We connect your PM tools or build custom workflows so the team stays
-              on track.
-            </p>
-          </article>
-          <article class="feature card-lift">
-            <h3>Reporting & dashboards</h3>
-            <p>
-              Pipeline, closed jobs, and analytics on your phone. Pairs with
-              MammothIQ for exec-level intelligence.
-            </p>
-          </article>
+        <div class="band-anchor">
+          <p class="eyebrow">Product · Go Mammoth</p>
+          <h2 class="headline">
+            The <span class="accent-yellow">Go Mammoth</span> System
+          </h2>
+          <p class="lead">
+            Growth infrastructure built for your business, installed and running. We white-label and
+            configure the platform so you don't touch a thing.
+          </p>
+          <div class="feature-grid">
+            <article class="feature card-lift">
+              <h3>Lead capture pipeline</h3>
+              <p>
+                Web forms, calls, texts, and ads land in one place. Nothing slips through.
+              </p>
+            </article>
+            <article class="feature card-lift">
+              <h3>Automated follow-ups</h3>
+              <p>
+                On the jobsite or fishing? Leads still get nurtured automatically.
+              </p>
+            </article>
+            <article class="feature card-lift">
+              <h3>Booking &amp; scheduling</h3>
+              <p>Prospects book straight to your calendar. No phone tag.</p>
+            </article>
+            <article class="feature card-lift">
+              <h3>All comms, one inbox</h3>
+              <p>Texts, emails, and DMs in a single organized platform.</p>
+            </article>
+            <article class="feature card-lift">
+              <h3>Custom workflow &amp; AI ops</h3>
+              <p>
+                We connect your scheduling and job tools or build custom workflows so the crew stays
+                on track.
+              </p>
+            </article>
+            <article class="feature card-lift">
+              <h3>Reporting &amp; dashboards</h3>
+              <p>
+                Pipeline, closed jobs, and analytics on your phone. Pairs with MammothIQ for the full
+                picture.
+              </p>
+            </article>
+          </div>
+          <a class="btn btn-primary centered-btn" href="questionnaire.html"
+            >Get the Go Mammoth System</a
+          >
         </div>
-        <a class="btn btn-primary centered-btn" href="questionnaire.html"
-          >Get the Go Mammoth System</a
-        >
       </section>
 
       <!-- MAMMOTHIQ -->
       <section class="section section-dark reveal" id="mammothiq">
-        <p class="eyebrow">Product · MammothIQ</p>
-        <h2 class="headline headline-lavender">
-          Know what's working. No spreadsheet scramble.
-        </h2>
-        <p class="lead">
-          MammothIQ connects your sales, finance, HR, and ops data into one intelligence
-          layer. Ask a question, get an answer your whole team can trust.
-        </p>
-        <div class="feature-grid feature-grid--iq">
-          <article class="feature card-lift">
-            <h3>Unified data layer</h3>
-            <p>
-              Pull from the tools you already use. One reconciled view. No more
-              copy-paste between five tabs.
-            </p>
-          </article>
-          <article class="feature card-lift">
-            <h3>Plain-English queries</h3>
-            <p>
-              Ask what you need to know like you'd ask a colleague. MammothIQ handles
-              the SQL.
-            </p>
-          </article>
-          <article class="feature card-lift">
-            <h3>Role-based access</h3>
-            <p>
-              Managers see their numbers. Execs see the full picture. Everyone stays on
-              the same page.
-            </p>
-          </article>
-          <article class="feature card-lift">
-            <h3>Always current</h3>
-            <p>
-              Automated syncs run hourly, nightly, or on change. Dashboards reflect
-              reality, not last Tuesday.
-            </p>
-          </article>
-        </div>
-
-        <!-- RapidDashboard — signature feature -->
-        <div class="signature-feature" id="rapiddashboard">
-          <p class="eyebrow">Signature feature · RapidDashboard</p>
-          <h3 class="signature-headline">Ask in plain English. Get a live dashboard.</h3>
+        <div class="band-anchor">
+          <p class="eyebrow">Product · MammothIQ</p>
+          <h2 class="headline headline-lavender">
+            Know what the job made you. Before the invoice clears.
+          </h2>
           <p class="lead">
-            RapidDashboard is MammothIQ's core mechanic: type what you need, hit share,
-            and your team gets a live URL with the same numbers you see.
+            MammothIQ connects your job costing, crew hours, material spend, and pipeline into one
+            place. Ask a question, get an answer your whole team can trust.
           </p>
-          <div class="product-card card-lift">
-            <div class="product-card-copy">
-              <h3>Prompt → Dashboard</h3>
+          <div class="feature-grid feature-grid--iq">
+            <article class="feature card-lift">
+              <h3>Every job, one view</h3>
               <p>
-                Type what you need. Hit share. Your team gets a live URL with the same
-                numbers you see. Reconciled from a single source of truth.
+                Bids, change orders, labor hours, and material costs reconciled. No more copy-paste
+                between five tabs.
               </p>
-              <ul class="check-list">
-                <li>Private, encrypted AI in a Box</li>
-                <li>Automated syncs: hourly, nightly, or on change</li>
-                <li>Role-based access for managers and execs</li>
-                <li>Follow-up questions without re-exporting files</li>
-              </ul>
-              <div class="cta-row">
-                <a class="btn btn-primary" href="questionnaire.html">Schedule a Demo</a>
-                <a
-                  class="btn btn-ghost"
-                  href="https://rapiddashboard.ai/about"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  >How It Works</a
-                >
+            </article>
+            <article class="feature card-lift">
+              <h3>Plain-English questions</h3>
+              <p>
+                "Which crews ran over on hours last month?" Ask it like you'd ask a foreman.
+                MammothIQ handles the query.
+              </p>
+            </article>
+            <article class="feature card-lift">
+              <h3>Role-based access</h3>
+              <p>
+                Foremen see their jobs. You see the full picture. Everyone stays on the same page.
+              </p>
+            </article>
+            <article class="feature card-lift">
+              <h3>Always current</h3>
+              <p>
+                Automated syncs run hourly, nightly, or on change. Numbers reflect this morning, not
+                last Tuesday.
+              </p>
+            </article>
+          </div>
+
+          <!-- RapidDashboard — signature feature -->
+          <div class="signature-feature" id="rapiddashboard">
+            <p class="eyebrow">Signature feature · RapidDashboard</p>
+            <h3 class="signature-headline">Ask in plain English. Get a live dashboard.</h3>
+            <p class="lead">
+              RapidDashboard is MammothIQ's core mechanic: type what you need, hit share, and your
+              team gets a live URL with the same numbers you see.
+            </p>
+            <div class="product-card card-lift">
+              <div class="product-card-copy">
+                <h3>Prompt → Dashboard</h3>
+                <p>
+                  Type what you need. Hit share. Your crew leads get a live URL with the same numbers
+                  you see. Reconciled from a single source of truth.
+                </p>
+                <ul class="check-list">
+                  <li>Private, encrypted AI in a Box</li>
+                  <li>Automated syncs: hourly, nightly, or on change</li>
+                  <li>Role-based access for foremen and owners</li>
+                  <li>Follow-up questions without re-exporting files</li>
+                </ul>
+                <div class="cta-row">
+                  <a class="btn btn-primary" href="questionnaire.html">Schedule a Demo</a>
+                  <a
+                    class="btn btn-ghost"
+                    href="https://rapiddashboard.ai/about"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    >How It Works</a
+                  >
+                </div>
               </div>
-            </div>
-            <div class="product-card-visual" aria-hidden="true">
-              <div class="mock-prompt">
-                <span class="mock-label">You</span>
-                <p>What were our top 5 revenue streams last quarter?</p>
-              </div>
-              <div class="mock-arrow">↓</div>
-              <div class="mock-dashboard">
-                <span class="mock-label">Live dashboard</span>
-                <div class="mock-bars">
-                  <span style="--h: 85%"></span>
-                  <span style="--h: 62%"></span>
-                  <span style="--h: 48%"></span>
-                  <span style="--h: 35%"></span>
-                  <span style="--h: 22%"></span>
+              <div class="product-card-visual" aria-hidden="true">
+                <div class="mock-prompt">
+                  <span class="mock-label">You</span>
+                  <p>Which jobs ran over budget last quarter?</p>
+                </div>
+                <div class="mock-arrow">↓</div>
+                <div class="mock-dashboard">
+                  <span class="mock-label">Live dashboard</span>
+                  <div class="mock-bars">
+                    <span style="--h: 85%"></span>
+                    <span style="--h: 62%"></span>
+                    <span style="--h: 48%"></span>
+                    <span style="--h: 35%"></span>
+                    <span style="--h: 22%"></span>
+                  </div>
                 </div>
               </div>
             </div>
@@ -345,158 +390,195 @@
         </div>
       </section>
 
-      <!-- JOLLY -->
-      <section class="section section-jolly reveal" id="jolly">
-        <h2 class="headline">
-          How do we make businesses more
-          <span class="jolly-word-group">
-            <span class="jolly-word" aria-label="Jolly"
-              ><span>J</span><span>O</span><span>L</span><span>L</span><span>Y</span></span
-            >?
-          </span>
-        </h2>
-        <p class="lead centered">
-          We make business owners more jolly by building growth infrastructure that
-          takes the heavy lifting off your plate. Growth feels intentional and operations
-          feel lighter. So running your company feels predictable, clear, and actually fun
-          again.
-        </p>
-      </section>
+      <!-- SOCIAL PROOF — real client messages, in their own words.
+           ATTRIBUTIONS ARE PLACEHOLDERS: confirm permission and the correct
+           name/company with each client before this goes live. -->
+      <section class="section section-charcoal reveal" id="proof">
+        <div class="band-anchor">
+          <p class="eyebrow">What clients say</p>
+          <h2 class="headline">Not a case study. Just the text they sent.</h2>
 
-      <!-- ADD-ONS -->
-      <section class="section section-dark reveal" id="addons">
-        <p class="eyebrow">Expand when you're ready</p>
-        <h2 class="headline headline-lavender">AI add-ons that compound</h2>
-        <div class="addon-grid">
-          <article class="addon">
-            <h3>AI call agents</h3>
-            <p>
-              Front desk, after-hours, and lead qualification: trained on your
-              business and integrated with your pipeline.
-            </p>
-          </article>
-          <article class="addon">
-            <h3>Smart CRMs</h3>
-            <p>
-              Custom relationship systems when off-the-shelf CRMs don't fit how you
-              actually sell and serve.
-            </p>
-          </article>
-          <article class="addon">
-            <h3>Marketing & lead gen</h3>
-            <p>
-              Campaigns, funnels, and creative from the team that started in
-              copywriting and grew with the market.
-            </p>
-          </article>
+          <div class="proof-grid">
+            <blockquote class="proof-quote proof-quote--lead">
+              <p>
+                Man, it's been good. Especially picked up this month, phone calls galore. I've had to
+                put some jobs off until winter because we really can't take on the extra work.
+                <strong>When we started, probably 2 jobs a week. Now at least one a day.</strong>
+                Big time.
+              </p>
+              <footer><span class="proof-who">Exteriors contractor</span><span class="proof-where">Chippewa Valley</span></footer>
+            </blockquote>
+
+            <blockquote class="proof-quote">
+              <p>
+                Presentation went very well. They really like what I do and are planning on bringing
+                me back in. Thanks for making this go so smoothly. Could not have been a success
+                without y'all.
+              </p>
+              <footer><span class="proof-who">Consulting client</span><span class="proof-where">Presentation build</span></footer>
+            </blockquote>
+
+            <blockquote class="proof-quote">
+              <p>
+                I'm speechless, man. This came out so well. You really blew my expectations.
+              </p>
+              <footer><span class="proof-who">Brand client</span><span class="proof-where">Video &amp; editing</span></footer>
+            </blockquote>
+
+            <blockquote class="proof-quote">
+              <p>
+                I just really want to say that I appreciate you. I appreciate you as a person, and I
+                value your work.
+              </p>
+              <footer><span class="proof-who">Long-term client</span><span class="proof-where">Voice message</span></footer>
+            </blockquote>
+          </div>
         </div>
       </section>
 
-      <!-- LOCAL -->
-      <section class="section section-blue reveal" id="local">
-        <h2 class="headline">
-          Eau Claire, the Chippewa Valley, Wisconsin, and beyond.
-        </h2>
-        <p class="lead">
-          We're local. We show up in person, build in front of you, and pick up the
-          phone when you call. That's not how most AI companies work. It's how we do.
-        </p>
-      </section>
-
-      <!-- WORK -->
+      <!-- WORK — systems and brand work in one band -->
       <section class="section section-charcoal reveal" id="work">
-        <h2 class="headline">Our work</h2>
-        <div class="project-grid">
-          <a class="project card-lift" href="projects.html#the-oxbow-hotel">
-            <img class="project-thumb" src="assets/projects/oxbow-hotel.png" alt="The Oxbow Hotel" loading="lazy" />
-            <span class="project-year">2025</span>
-            <span class="project-type">Hotel Front Desk Agent</span>
-            <span class="project-name">The Oxbow Hotel</span>
-          </a>
-          <a class="project card-lift" href="projects.html#high-cliff-consulting">
-            <img class="project-thumb project-thumb--contain" src="assets/projects/high-cliff-consulting.png" alt="High Cliff Consulting" loading="lazy" />
-            <span class="project-year">2026</span>
-            <span class="project-type">Custom Smart CRM</span>
-            <span class="project-name">High Cliff Consulting</span>
-          </a>
-          <a class="project card-lift" href="projects.html#mas">
-            <img class="project-thumb" src="assets/projects/mas-exteriors-drone.png" alt="M.A.S Exteriors" loading="lazy" />
-            <span class="project-year">2025</span>
-            <span class="project-type">Marketing & Lead Gen</span>
-            <span class="project-name">M.A.S Exteriors</span>
-          </a>
-          <a class="project card-lift" href="projects.html#brainthoven">
-            <img class="project-thumb" src="assets/projects/brainthoven-books.png" alt="Brainthoven brand books" loading="lazy" />
-            <span class="project-year">2025</span>
-            <span class="project-type">App Development</span>
-            <span class="project-name">Brainthoven</span>
-          </a>
+        <div class="band-anchor">
+          <p class="eyebrow">Selected work</p>
+          <h2 class="headline">What we've built.</h2>
+          <div class="work-grid">
+            <a class="work-card card-lift" href="work/the-oxbow-hotel.html">
+              <span class="work-card-media">
+                <img class="work-card-thumb" src="assets/projects/oxbow-hotel.png" alt="The Oxbow Hotel" width="800" height="600" loading="lazy" />
+              </span>
+              <span class="work-card-meta">
+                <span class="work-card-year">2025</span>
+                <span class="work-card-cat">Hotel Front Desk Agent</span>
+              </span>
+              <span class="work-card-title">The Oxbow Hotel</span>
+              <span class="work-card-sub">The Oxbow is a locally loved boutique hotel with genuine heart.</span>
+            </a>
+            <a class="work-card card-lift" href="work/high-cliff-consulting.html">
+              <span class="work-card-media">
+                <img class="work-card-thumb work-card-thumb--contain" src="assets/projects/high-cliff-consulting.png" alt="High Cliff Consulting" width="800" height="600" loading="lazy" />
+              </span>
+              <span class="work-card-meta">
+                <span class="work-card-year">2026</span>
+                <span class="work-card-cat">Custom Smart CRM</span>
+              </span>
+              <span class="work-card-title">High Cliff Consulting</span>
+              <span class="work-card-sub">High Cliff Consulting is a soil testing and sewage design firm serving contractors and property owners across the region.</span>
+            </a>
+            <a class="work-card card-lift" href="work/mas.html">
+              <span class="work-card-media">
+                <img class="work-card-thumb" src="assets/projects/mas-exteriors-drone.png" alt="M.A.S Exteriors" width="800" height="600" loading="lazy" />
+              </span>
+              <span class="work-card-meta">
+                <span class="work-card-year">2025</span>
+                <span class="work-card-cat">Marketing &amp; Lead Gen</span>
+              </span>
+              <span class="work-card-title">M.A.S Exteriors</span>
+              <span class="work-card-sub">A Western Wisconsin–based contractor delivering residential and commercial exterior solutions.</span>
+            </a>
+            <a class="work-card card-lift" href="work/brainthoven.html">
+              <span class="work-card-media">
+                <img class="work-card-thumb" src="assets/projects/brainthoven-books.png" alt="Brainthoven brand books" width="800" height="600" loading="lazy" />
+              </span>
+              <span class="work-card-meta">
+                <span class="work-card-year">2025</span>
+                <span class="work-card-cat">App Development</span>
+              </span>
+              <span class="work-card-title">Brainthoven</span>
+              <span class="work-card-sub">Repositioning a legacy early-childhood, brain-based, music education program into a scalable, digital-first platform and brand.</span>
+            </a>
+          </div>
+
+          <div class="work-creative" id="creative">
+            <h3 class="work-sub">
+              Systems are our strength. <span class="accent-yellow">Brand building</span> is our sauce.
+            </h3>
+            <p class="lead">
+              A creative department for when your business needs to look as good as your work.
+            </p>
+            <div class="work-grid work-grid--compact">
+              <a class="work-card card-lift" href="work/queuedup.html">
+              <span class="work-card-media">
+                <img class="work-card-thumb" src="assets/projects/queuedup-brand-cover.png" alt="QueuedUp brand standards" width="800" height="600" loading="lazy" />
+              </span>
+              <span class="work-card-meta">
+                <span class="work-card-year">2024</span>
+                <span class="work-card-cat">Branding &amp; Identity</span>
+              </span>
+              <span class="work-card-title">QueuedUp</span>
+              <span class="work-card-sub">Shifting a music platform’s narrative from product-first to audience-first.</span>
+            </a>
+              <a class="work-card card-lift has-clip" href="work/savagefit.html" data-clip="assets/projects/savage-fit-web-home.mp4">
+              <span class="work-card-media">
+                <img class="work-card-thumb" src="assets/projects/savage-fit-holiday.png" alt="Savage Fit Boxing brand graphic" width="800" height="600" loading="lazy" />
+              </span>
+              <span class="work-card-meta">
+                <span class="work-card-year">2025</span>
+                <span class="work-card-cat">Branding &amp; Identity</span>
+              </span>
+              <span class="work-card-title">Savage Fit Boxing</span>
+              <span class="work-card-sub">Positioning a community-driven fitness studio to better reflect its culture, value, and momentum.</span>
+            </a>
+              <a class="work-card card-lift has-clip" href="work/dalila-jane.html" data-clip="assets/projects/dalila-jane-site-demo.mp4">
+              <span class="work-card-media">
+                <img class="work-card-thumb" src="assets/projects/dalila-jane-portrait.png" alt="Dalila Jane brand photography" width="800" height="600" loading="lazy" />
+              </span>
+              <span class="work-card-meta">
+                <span class="work-card-year">2026</span>
+                <span class="work-card-cat">Branding &amp; Identity</span>
+              </span>
+              <span class="work-card-title">Dalila Jane</span>
+              <span class="work-card-sub">Dalila Jane is a rising independent artist with a sound worth paying attention to.</span>
+            </a>
+            </div>
+          </div>
         </div>
       </section>
 
-      <!-- PROCESS -->
+      <!-- PROCESS + LOCAL, merged into one band -->
       <section class="section section-blue reveal" id="process">
-        <h2 class="headline">3 steps to a system that runs itself.</h2>
-        <ol class="steps">
-          <li>
-            <strong>Discover:</strong> We learn your business and map the right
-            stack (Go Mammoth, MammothIQ, add-ons).
-          </li>
-          <li>
-            <strong>Build:</strong> Your system is configured, tested, and fully
-            set up. You don't touch a thing.
-          </li>
-          <li>
-            <strong>Launch:</strong> We hand you the keys and stick around. The
-            system compounds. You get back to building.
-          </li>
-        </ol>
-      </section>
-
-      <!-- CTA -->
-      <section class="section section-cta reveal" id="contact">
-        <p class="cta-prompt">want to work together?</p>
-        <h2 class="headline">Let's build something that compounds.</h2>
-        <div class="cta-row">
-          <a class="btn btn-primary btn-lg btn-playful" href="questionnaire.html">Book a Strategy Call</a>
-          <a
-            class="btn btn-ghost btn-lg"
-            href="https://rapiddashboard.ai/demo"
-            target="_blank"
-            rel="noopener noreferrer"
-            >Demo RapidDashboard</a
-          >
-        </div>
-      </section>
-
-      <!-- CREATIVE -->
-      <section class="section section-charcoal reveal" id="creative">
-        <h2 class="headline">
-          Systems are our strength. <span class="accent-yellow">Brand building</span>
-          is our sauce.
-        </h2>
-        <p class="lead centered">
-          A creative department when your business needs to look as good as your work.
-        </p>
-        <div class="project-grid project-grid--compact">
-          <a class="project card-lift" href="projects.html#queuedup">
-            <img class="project-thumb" src="assets/projects/queuedup-brand-cover.png" alt="QueuedUp brand standards" loading="lazy" />
-            <span class="project-year">2024</span>
-            <span class="project-type">Branding & Identity</span>
-            <span class="project-name">QueuedUp</span>
-          </a>
-          <a class="project card-lift" href="projects.html#savagefit">
-            <img class="project-thumb" src="assets/projects/savage-fit-holiday.png" alt="Savage Fit Boxing brand graphic" loading="lazy" />
-            <span class="project-year">2025</span>
-            <span class="project-type">Branding & Identity</span>
-            <span class="project-name">Savage Fit Boxing</span>
-          </a>
-          <a class="project card-lift" href="projects.html#dalila-jane">
-            <img class="project-thumb" src="assets/projects/dalila-jane-portrait.png" alt="Dalila Jane brand photography" loading="lazy" />
-            <span class="project-year">2026</span>
-            <span class="project-type">Branding & Identity</span>
-            <span class="project-name">Dalila Jane</span>
-          </a>
+        <div class="band-anchor process-local">
+          <div class="process-col">
+            <p class="eyebrow">How it goes</p>
+            <h2 class="headline">3 steps to a system that runs itself.</h2>
+            <ol class="steps">
+              <li>
+                <strong>Discover:</strong> We learn your business and map the right
+                stack (Go Mammoth, MammothIQ, add-ons).
+              </li>
+              <li>
+                <strong>Build:</strong> Your system is configured, tested, and fully
+                set up. You don't touch a thing.
+              </li>
+              <li>
+                <strong>Launch:</strong> We hand you the keys and stick around. The
+                system compounds. You get back to building.
+              </li>
+            </ol>
+          </div>
+          <aside class="local-note">
+            <div class="local-media">
+              <video
+                autoplay
+                muted
+                loop
+                playsinline
+                preload="metadata"
+                poster="assets/founder/jack-roof-poster.jpg"
+                width="720"
+                height="1280"
+                aria-label="Jack on site with a roofing crew in Eau Claire"
+              >
+                <source src="assets/founder/jack-roof.mp4" type="video/mp4" />
+              </video>
+            </div>
+            <div class="local-copy">
+              <h3>Eau Claire, the Chippewa Valley, and beyond.</h3>
+              <p>
+                We're local. We show up in person, build in front of you, and pick up the phone when
+                you call. That's not how most AI companies work. It's how we do.
+              </p>
+            </div>
+          </aside>
         </div>
       </section>
 
@@ -506,10 +588,10 @@
         <div class="founder-block">
           <div class="founder-photo">
             <img
-              src="assets/about/jack-fentress.png"
-              alt="Jack Fentress, founder of Jolly Mammoth"
-              width="400"
-              height="480"
+              src="assets/founder/jack-ipad.jpg"
+              alt="Jack Fentress, founder of Jolly Mammoth, working from a chair with an iPad"
+              width="1800"
+              height="1200"
               loading="lazy"
             />
           </div>
@@ -556,6 +638,89 @@
           </div>
         </div>
       </section>
+
+      <!-- FAQ — moved off the retired Go Mammoth page. Sits immediately before
+           the CTA so it answers the last objections at the decision point. -->
+      <section class="section section-blue reveal" id="faq">
+        <div class="band-anchor">
+          <p class="eyebrow">Before you ask</p>
+          <h2 class="headline">Questions we get every week.</h2>
+          <div class="faq-grid">
+            <details class="faq-item">
+              <summary>How long until I see results?</summary>
+              <div class="faq-body">
+                <p>
+                  Most businesses see the first wins quickly. Faster follow-up, cleaner handoffs,
+                  fewer dropped leads, and clearer visibility in the first few weeks. The compounding
+                  part shows up over the next 60 to 90 days as the system starts running without you.
+                </p>
+              </div>
+            </details>
+            <details class="faq-item">
+              <summary>Do I have to learn the system?</summary>
+              <div class="faq-body">
+                <p>
+                  No. We build and install it, then show you the few views that matter. Your job is to
+                  run the business. The system handles the busywork.
+                </p>
+              </div>
+            </details>
+            <details class="faq-item">
+              <summary>Is there a contract?</summary>
+              <div class="faq-body">
+                <p>
+                  No long term commitment. You stay month to month because the system is working, not
+                  because you're locked in. If you ever step away, you keep the infrastructure we built.
+                </p>
+              </div>
+            </details>
+            <details class="faq-item">
+              <summary>What if I already use some marketing tools?</summary>
+              <div class="faq-body">
+                <p>
+                  That is normal. We do not rip everything out on day one. We connect what is worth
+                  keeping and replace the parts causing dropped leads, slow response, or messy operations.
+                </p>
+              </div>
+            </details>
+            <details class="faq-item">
+              <summary>Do you work with my industry?</summary>
+              <div class="faq-body">
+                <p>
+                  We work best with contractors and service businesses. If you sell work that requires
+                  calls, estimates, scheduling, and follow-through, the system fits.
+                </p>
+              </div>
+            </details>
+            <details class="faq-item">
+              <summary>What if it doesn't work for me?</summary>
+              <div class="faq-body">
+                <p>
+                  That is why we start with a short strategy call. We back every install with a
+                  satisfaction guarantee and our Jolly in 90 promise. If you are not seeing the system
+                  working in the first 90 days, we make it right.
+                </p>
+              </div>
+            </details>
+          </div>
+        </div>
+      </section>
+
+      <!-- CTA -->
+      <section class="section section-cta band-peak reveal" id="contact">
+        <p class="cta-prompt">want to work together?</p>
+        <h2 class="headline">Let's build something that compounds.</h2>
+        <div class="cta-row">
+          <a class="btn btn-primary btn-lg" href="questionnaire.html">Book a Strategy Call</a>
+          <a
+            class="btn btn-ghost btn-lg"
+            href="https://rapiddashboard.ai/demo"
+            target="_blank"
+            rel="noopener noreferrer"
+            >Demo RapidDashboard</a
+          >
+        </div>
+      </section>
     </main>
 
     <footer class="site-footer">
@@ -571,7 +736,7 @@
       <nav class="footer-nav" aria-label="Footer">
         <a href="#go-mammoth">go mammoth</a>
         <a href="#mammothiq">mammothiq</a>
-        <a href="#work">work</a>
+        <a href="projects.html">work</a>
         <a href="about.html">about</a>
         <a href="#creative">creative</a>
         <a href="questionnaire.html">book a strategy call</a>
@@ -580,6 +745,7 @@
 
     <a class="sticky-cta" href="questionnaire.html">Book a Call</a>
 
-    <script src="main.js?v=7"></script>
+    <script src="main.js?v=11"></script>
+    <script src="mammoth.js?v=2" defer></script>
   </body>
 </html>

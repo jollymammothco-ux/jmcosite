@@ -4,3 +4,7 @@ node_modules/
 .venv-media/
 .netlify/
 .claude/
+
+# Original camera/phone uploads. Kept locally, not deployed.
+_source-media/
+.DS_Store

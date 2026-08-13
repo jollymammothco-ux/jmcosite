@@ -1,0 +1,131 @@
+# Decap CMS — the admin behind /admin
+#
+# Backend is git-gateway, which means edits become real git commits and
+# Netlify rebuilds the site. Turn on Netlify Identity + Git Gateway in the
+# Netlify dashboard (Site settings > Identity), then invite yourself.
+#
+# Set registration to "Invite only" so the admin is not open to the public.
+
+backend:
+  name: git-gateway
+  branch: master
+
+# Uploads land next to the rest of the project media.
+media_folder: "assets/projects"
+public_folder: "assets/projects"
+
+publish_mode: simple
+
+collections:
+  - name: "projects"
+    label: "Case studies"
+    label_singular: "Case study"
+    description: >
+      Each entry becomes its own page at /work/<slug>.html and a card on the
+      Work index. Order on the site is by year, newest first.
+    files:
+      - name: "projects"
+        label: "All case studies"
+        file: "content/projects.json"
+        description: "Add, edit, and reorder client work."
+        fields:
+          - name: "projects"
+            label: "Case studies"
+            label_singular: "Case study"
+            widget: "list"
+            summary: "{{fields.year}} · {{fields.title}}"
+            fields:
+              - name: "title"
+                label: "Client name"
+                widget: "string"
+                hint: "Shown as the page headline. e.g. The Oxbow Hotel"
+
+              - name: "slug"
+                label: "URL slug"
+                widget: "string"
+                pattern: ["^[a-z0-9-]+$", "Lowercase letters, numbers and dashes only"]
+                hint: "Becomes /work/<slug>.html. Do not change it once the page is live."
+
+              - name: "year"
+                label: "Year"
+                widget: "string"
+                pattern: ["^[0-9]{4}$", "Four digits, e.g. 2026"]
+
+              - name: "category"
+                label: "Category"
+                widget: "select"
+                options:
+                  - "Branding and Identity"
+                  - "Custom Smart CRM"
+                  - "Hotel Front Desk Agent"
+                  - "Marketing and Lead Gen"
+                  - "App Development"
+                  - "Website Development"
+                  - "AI Call Agent"
+
+              - name: "subtitle"
+                label: "Summary"
+                widget: "text"
+                hint: "One or two sentences. Used on the card and as the page description."
+
+              - name: "media"
+                label: "Media"
+                widget: "list"
+                required: false
+                summary: "{{fields.type}} · {{fields.src}}"
+                hint: "First item becomes the lead image or video on the page."
+                fields:
+                  - name: "type"
+                    label: "Type"
+                    widget: "select"
+                    options: ["image", "video"]
+                    default: "image"
+                  - name: "src"
+                    label: "File"
+                    widget: "file"
+                  - name: "poster"
+                    label: "Video poster image"
+                    widget: "image"
+                    required: false
+                    hint: "Videos only. The still shown before it plays."
+                  - name: "alt"
+                    label: "Alt text"
+                    widget: "string"
+                    required: false
+                    hint: "Images only. Describe it for screen readers."
+                  - name: "caption"
+                    label: "Caption"
+                    widget: "string"
+                    required: false
+                  - name: "variant"
+                    label: "Display style"
+                    widget: "select"
+                    required: false
+                    options: ["logo", "video"]
+                    hint: "Pick 'logo' for marks that need padding instead of a full bleed crop."
+
+              - name: "problem"
+                label: "The problem"
+                widget: "list"
+                field:
+                  name: "paragraph"
+                  label: "Paragraph"
+                  widget: "text"
+
+              - name: "solution"
+                label: "What we built"
+                widget: "list"
+                field:
+                  name: "paragraph"
+                  label: "Paragraph"
+                  widget: "text"
+
+              - name: "meta"
+                label: "Details"
+                widget: "object"
+                collapsed: false
+                fields:
+                  - { name: "year", label: "Year", widget: "string", required: false }
+                  - { name: "timeframe", label: "Timeframe", widget: "string", required: false, hint: "e.g. 16 days" }
+                  - { name: "tools", label: "Tools", widget: "string", required: false, hint: "e.g. Framer, Go High Level" }
+                  - { name: "category", label: "Category", widget: "string", required: false }
