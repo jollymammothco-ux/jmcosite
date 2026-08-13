@@ -22,6 +22,12 @@ design overhaul (see CHANGELOG).
 - **Back up `_source-media/`.** It holds the 97MB of originals and is gitignored,
   so it exists only on this machine.
 
+- **Check the Icons8 licence.** The neon construction icons on the Go Mammoth
+  feature cards came from Icons8, which requires either a visible link back
+  or a paid plan for commercial use. A business site is commercial use. Either
+  take the paid licence or add the attribution link they specify. Originals
+  are in `_source-media/icons/`; the eleven in use are `assets/icons/`.
+
 ## P1 — needs your input
 
 - **Get one client testimonial with a name and company attached.** There is

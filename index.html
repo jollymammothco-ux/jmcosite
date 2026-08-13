@@ -52,7 +52,7 @@
       rel="stylesheet"
     />
     <script src="boot.js?v=2"></script>
-    <link rel="stylesheet" href="styles.css?v=35" />
+    <link rel="stylesheet" href="styles.css?v=40" />
     <link rel="icon" href="assets/brand/logo.png" type="image/png" />
     <link rel="apple-touch-icon" href="assets/brand/logo.png" />
 
@@ -138,6 +138,27 @@
           <div><b>Small, but mighty</b><span>The team</span></div>
         </div>
       </section>
+
+      <!-- Reactive caution tape. Scroll blows it, pointer brushes it.
+           Purely decorative, so it is hidden from assistive tech. -->
+      <div class="tape" data-tape data-nodes="46" data-width="34" data-sag="10" aria-hidden="true">
+        <svg class="tape__svg" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+          <defs>
+            <pattern
+              id="tape-stripes"
+              width="34"
+              height="34"
+              patternUnits="userSpaceOnUse"
+              patternTransform="rotate(-58)"
+            >
+              <rect width="34" height="34" fill="var(--tape-face)" />
+              <rect width="15" height="34" fill="var(--tape-stripe)" />
+            </pattern>
+          </defs>
+          <path class="tape__front" d="" />
+          <path class="tape__back" d="" />
+        </svg>
+      </div>
 
       <!-- PAIN — left-anchored over a real job-site frame -->
       <section class="section band-photo reveal" id="problems">
@@ -262,26 +283,31 @@
           </p>
           <div class="feature-grid">
             <article class="feature card-lift">
+              <img class="feature-icon" src="assets/icons/lead-capture.png" alt="" width="96" height="96" loading="lazy" aria-hidden="true" />
               <h3>Lead capture pipeline</h3>
               <p>
                 Web forms, calls, texts, and ads land in one place. Nothing slips through.
               </p>
             </article>
             <article class="feature card-lift">
+              <img class="feature-icon" src="assets/icons/follow-up.png" alt="" width="96" height="96" loading="lazy" aria-hidden="true" />
               <h3>Automated follow-ups</h3>
               <p>
                 On the jobsite or fishing? Leads still get nurtured automatically.
               </p>
             </article>
             <article class="feature card-lift">
+              <img class="feature-icon" src="assets/icons/booking.png" alt="" width="96" height="96" loading="lazy" aria-hidden="true" />
               <h3>Booking &amp; scheduling</h3>
               <p>Prospects book straight to your calendar. No phone tag.</p>
             </article>
             <article class="feature card-lift">
+              <img class="feature-icon" src="assets/icons/inbox.png" alt="" width="96" height="96" loading="lazy" aria-hidden="true" />
               <h3>All comms, one inbox</h3>
               <p>Texts, emails, and DMs in a single organized platform.</p>
             </article>
             <article class="feature card-lift">
+              <img class="feature-icon" src="assets/icons/workflow.png" alt="" width="96" height="96" loading="lazy" aria-hidden="true" />
               <h3>Custom workflow &amp; AI ops</h3>
               <p>
                 We connect your scheduling and job tools or build custom workflows so the crew stays
@@ -289,6 +315,7 @@
               </p>
             </article>
             <article class="feature card-lift">
+              <img class="feature-icon" src="assets/icons/reporting.png" alt="" width="96" height="96" loading="lazy" aria-hidden="true" />
               <h3>Reporting &amp; dashboards</h3>
               <p>
                 Pipeline, closed jobs, and analytics on your phone. Pairs with MammothIQ for the full
@@ -397,53 +424,6 @@
         </div>
       </section>
 
-      <!-- SOCIAL PROOF — real client messages, in their own words.
-           ATTRIBUTIONS ARE PLACEHOLDERS: confirm permission and the correct
-           name/company with each client before this goes live. -->
-      <section class="section section-proof reveal" id="proof">
-        <div class="band-anchor">
-          <p class="eyebrow">What clients actually say</p>
-          <h2 class="headline">Not a case study. <span class="accent-yellow">The texts they sent.</span></h2>
-
-          <!-- The outcome quote gets typeset large because it carries a number.
-               Everything under it is the unedited screenshot, which is the part
-               that cannot be faked. -->
-          <blockquote class="proof-lead">
-            <p>
-              Man, it's been good. Especially picked up this month, phone calls galore. I've had to
-              put some jobs off until winter because we really can't take on the extra work.
-              <strong>When we started, probably 2 jobs a week. Now at least one a day.</strong>
-            </p>
-            <footer>
-              <span class="proof-who">Exteriors contractor</span>
-              <span class="proof-where">Chippewa Valley</span>
-            </footer>
-          </blockquote>
-
-          <div class="shot-wall">
-            <figure class="shot shot--tall">
-              <img src="assets/testimonials/jobs-per-day.png" alt="Client text message: phone calls galore, went from about two jobs a week to at least one a day" width="760" height="464" loading="lazy" />
-              <figcaption>Exteriors contractor <span>lead gen</span></figcaption>
-            </figure>
-            <figure class="shot">
-              <img src="assets/testimonials/presentation.png" alt="Client text message: presentation went very well, could not have been a success without y'all" width="760" height="625" loading="lazy" />
-              <figcaption>Consulting client <span>presentation build</span></figcaption>
-            </figure>
-            <figure class="shot">
-              <img src="assets/testimonials/speechless.png" alt="Client text message: speechless, this came out so well, you really blew my expectations" width="760" height="414" loading="lazy" />
-              <figcaption>Brand client <span>video &amp; editing</span></figcaption>
-            </figure>
-            <figure class="shot">
-              <img src="assets/testimonials/eight-pages.png" alt="Client text message: my sister absolutely loved the eight pages" width="760" height="299" loading="lazy" />
-              <figcaption>Copy client <span>long-form</span></figcaption>
-            </figure>
-            <figure class="shot">
-              <img src="assets/testimonials/appreciate-you.png" alt="Client voice message transcript: I really appreciate you and I value your work" width="760" height="297" loading="lazy" />
-              <figcaption>Long-term client <span>voice note</span></figcaption>
-            </figure>
-          </div>
-        </div>
-      </section>
 
       <!-- WORK — systems and brand work in one band -->
       <section class="section section-charcoal reveal" id="work">
@@ -624,6 +604,46 @@
         </div>
       </section>
 
+      <!-- SOCIAL PROOF — sits next to the ask, where proof does its work.
+           The headline summarises the outcome; the screenshots evidence it.
+           Deliberately not restating the quote in type, which just duplicated
+           the first screenshot. -->
+      <section class="section section-proof reveal" id="proof">
+        <div class="band-anchor">
+          <p class="eyebrow">What clients actually say</p>
+          <h2 class="headline">
+            One went from two jobs a week to <span class="accent-yellow">one a day</span>.
+          </h2>
+          <p class="proof-note">
+            No pull quotes, no stock headshots. These are the actual messages, uncropped
+            past the edge of the bubble.
+          </p>
+
+          <div class="shot-rail" role="group" aria-label="Client messages">
+            <figure class="shot">
+              <img src="assets/testimonials/jobs-per-day.png" alt="Client text message: phone calls galore, went from about two jobs a week to at least one a day" width="760" height="464" loading="lazy" />
+              <figcaption>Exteriors contractor <span>lead gen</span></figcaption>
+            </figure>
+            <figure class="shot">
+              <img src="assets/testimonials/presentation.png" alt="Client text message: presentation went very well, could not have been a success without y'all" width="760" height="625" loading="lazy" />
+              <figcaption>Consulting client <span>presentation build</span></figcaption>
+            </figure>
+            <figure class="shot">
+              <img src="assets/testimonials/speechless.png" alt="Client text message: speechless, this came out so well, you really blew my expectations" width="760" height="414" loading="lazy" />
+              <figcaption>Brand client <span>video &amp; editing</span></figcaption>
+            </figure>
+            <figure class="shot">
+              <img src="assets/testimonials/eight-pages.png" alt="Client text message: my sister absolutely loved the eight pages" width="760" height="299" loading="lazy" />
+              <figcaption>Copy client <span>long-form</span></figcaption>
+            </figure>
+            <figure class="shot">
+              <img src="assets/testimonials/appreciate-you.png" alt="Client voice message transcript: I really appreciate you and I value your work" width="760" height="297" loading="lazy" />
+              <figcaption>Long-term client <span>voice note</span></figcaption>
+            </figure>
+          </div>
+        </div>
+      </section>
+
       <!-- FAQ — moved off the retired Go Mammoth page. Sits immediately before
            the CTA so it answers the last objections at the decision point. -->
       <section class="section section-blue reveal" id="faq">
@@ -737,5 +757,6 @@
 
     <script src="main.js?v=11"></script>
     <script src="mammoth.js?v=2" defer></script>
+    <script src="tape.js?v=2" defer></script>
   </body>
 </html>

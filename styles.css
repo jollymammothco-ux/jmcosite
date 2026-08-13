@@ -572,6 +572,70 @@ a {
   padding-bottom: var(--beat-peak);
 }
 
+/* ===================================================================
+   REACTIVE CAUTION TAPE
+   A strung ribbon that sags, twists and settles. Scroll blows it, the
+   pointer brushes it. Used as a section divider.
+   =================================================================== */
+.tape {
+  position: relative;
+  height: 78px;
+  margin: 0;
+  overflow: visible;
+  background: transparent;
+  /* Sits above neighbouring bands so the ribbon can hang past its own box. */
+  z-index: 4;
+  touch-action: pan-y;
+}
+
+.tape__svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+/* Until the script measures and draws, show nothing rather than a flash of
+   an unpositioned ribbon. */
+.tape:not(.is-live) .tape__svg {
+  visibility: hidden;
+}
+
+.tape__front {
+  fill: url(#tape-stripes);
+}
+
+.tape__back {
+  fill: var(--tape-back);
+}
+
+.tape__edge {
+  fill: none;
+  stroke: rgba(0, 0, 0, 0.45);
+  stroke-width: 1;
+}
+
+:root {
+  --tape-face: #ff6a2b;
+  --tape-stripe: #14161a;
+  --tape-back: #b8451a;
+}
+
+/* The Creative Department gets its own tape colours, same as everything else
+   on that side of the house. */
+.page-creative .tape,
+.tape--creative {
+  --tape-face: #ffc8e0;
+  --tape-stripe: #14161a;
+  --tape-back: #c98aa6;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tape {
+    height: 56px;
+  }
+}
+
 /* Photo band. A real job-site frame behind the copy, scrimmed hard enough
    that text holds contrast. This is what makes the page read as built for
    the trades rather than for a SaaS buyer. */
@@ -1552,6 +1616,30 @@ a {
   padding: 1.25rem;
   background: rgba(0, 0, 0, 0.15);
   border-radius: var(--radius);
+}
+
+/* Neon line-art icons. They already run on cyan/yellow/orange/green, which
+   happens to sit right next to the Jolly palette, so they read as part of the
+   brand rather than as stock clip art. Kept small and dimmed until hover so
+   six of them in a grid do not out-shout the copy. */
+.feature-icon {
+  width: 40px;
+  height: 40px;
+  margin-bottom: 0.85rem;
+  opacity: 0.82;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  filter: drop-shadow(0 0 10px rgba(255, 106, 43, 0.28));
+}
+
+.feature:hover .feature-icon {
+  opacity: 1;
+  transform: translateY(-2px) scale(1.06);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .feature:hover .feature-icon {
+    transform: none;
+  }
 }
 
 .feature h3 {
@@ -3345,17 +3433,58 @@ a {
   color: var(--text-muted);
 }
 
-/* The screenshot wall. Columns rather than a grid so the cards pack by
-   height instead of leaving ragged gaps under the short ones. */
-.shot-wall {
-  margin-top: clamp(2.5rem, 5vw, 4rem);
-  column-gap: 1.1rem;
-  columns: 1;
+.proof-note {
+  max-width: 52ch;
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 1.02rem;
+  line-height: 1.6;
+}
+
+/* A horizontal rail rather than a tall wall. Five screenshots stacked in
+   columns ate roughly 1,200px of the page for evidence that is scanned, not
+   read. Fixed height with variable width keeps every message legible while
+   the whole section costs one screen. */
+.shot-rail {
+  display: flex;
+  gap: 1rem;
+  margin-top: clamp(2rem, 4vw, 3rem);
+  padding-bottom: 1rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  overscroll-behavior-x: contain;
+  scrollbar-width: thin;
+  scrollbar-color: var(--theme-border-heavy) transparent;
+}
+
+.shot-rail::-webkit-scrollbar {
+  height: 8px;
+}
+
+.shot-rail::-webkit-scrollbar-thumb {
+  background: var(--theme-border-heavy);
+  border-radius: 99px;
+}
+
+/* The image sets the card width, not the caption. Fixing the image height and
+   letting width follow keeps every bubble at the same reading size while the
+   cards stay shrink-wrapped to their content. */
+/* Wide enough for the landscape screenshots, which run about 660px at this
+   height. The rail scrolls, so a wide card costs nothing. */
+.shot-rail .shot {
+  flex: 0 0 auto;
+  max-width: min(88vw, 700px);
+  scroll-snap-align: start;
+}
+
+.shot-rail .shot img {
+  height: clamp(190px, 28vw, 260px);
+  width: auto;
+  max-width: none;
 }
 
 .shot {
-  break-inside: avoid;
-  margin: 0 0 1.1rem;
+  margin: 0;
   background: var(--surface);
   border: 1px solid var(--theme-border);
   border-radius: 10px;
@@ -3678,9 +3807,6 @@ a {
     grid-template-columns: repeat(3, 1fr);
   }
 
-  .shot-wall {
-    columns: 2;
-  }
 
   .local-media {
     max-width: 190px;
@@ -3709,9 +3835,6 @@ a {
     grid-template-columns: repeat(3, 1fr);
   }
 
-  .shot-wall {
-    columns: 3;
-  }
 }
 
 @media (min-width: 1024px) {
