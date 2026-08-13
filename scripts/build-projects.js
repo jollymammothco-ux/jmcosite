@@ -23,7 +23,7 @@ const ROOT = path.join(__dirname, "..");
 const DATA = path.join(ROOT, "content", "projects.json");
 const WORK_DIR = path.join(ROOT, "work");
 
-const CSS_V = "26";
+const CSS_V = "35";
 const JS_V = "11";
 
 /* ------------------------------------------------------------------ utils */
@@ -81,6 +81,7 @@ function header(depth, current) {
     [`${u}index.html#go-mammoth`, "Go Mammoth", "go-mammoth"],
     [`${u}index.html#mammothiq`, "MammothIQ", "mammothiq"],
     [`${u}projects.html`, "Work", "work"],
+    [`${u}creative.html`, "Creative", "creative"],
     [`${u}about.html`, "About", "about"],
   ];
   const nav = links
@@ -140,6 +141,7 @@ function footer(depth) {
         <a href="${u}index.html#go-mammoth">go mammoth</a>
         <a href="${u}index.html#mammothiq">mammothiq</a>
         <a href="${u}projects.html">work</a>
+        <a href="${u}creative.html">creative</a>
         <a href="${u}about.html">about</a>
         <a href="${u}questionnaire.html">book a strategy call</a>
       </nav>
@@ -392,6 +394,104 @@ ${cards}
 ${footer(depth)}`;
 }
 
+/* ------------------------------------------- Jolly Creative Department page */
+
+/**
+ * The creative arm gets its own page and its own look. The main brand is
+ * orange over slate because it sells systems to the trades; the Creative
+ * Department runs on the Jolly rainbow because it sells brand and video.
+ * Same company, different room.
+ */
+function creativePage(cases) {
+  const depth = 0;
+  const creative = cases.filter((c) => c.department === "creative");
+
+  const cards = creative
+    .map((c) => {
+      const t = thumbFor(c);
+      const clip = hoverClipFor(c);
+      return `            <a class="work-card card-lift${clip ? " has-clip" : ""}" href="work/${esc(
+        c.slug
+      )}.html"${clip ? ` data-clip="${esc(clip)}"` : ""}>
+              <span class="work-card-media">
+                <img
+                  class="work-card-thumb${t.contain ? " work-card-thumb--contain" : ""}"
+                  src="${esc(t.src)}"
+                  alt="${esc(t.alt)}"
+                  width="800"
+                  height="600"
+                  loading="lazy"
+                />
+              </span>
+              <span class="work-card-meta">
+                <span class="work-card-year">${esc(c.year)}</span>
+                <span class="work-card-cat">${esc(c.category)}</span>
+              </span>
+              <span class="work-card-title">${esc(c.title)}</span>
+              <span class="work-card-sub">${esc(c.subtitle)}</span>
+            </a>`;
+    })
+    .join("\n");
+
+  return `${head(
+    {
+      title: "Jolly Creative Department — brand, video & content",
+      description:
+        "The creative arm of Jolly Mammoth. Brand identity, video production, and content for businesses that need to look as good as their work.",
+      canonical: "https://jollymammoth.co/creative.html",
+      ogImage: "https://jollymammoth.co/assets/brand/og-share.jpg",
+    },
+    depth
+  )}
+${header(depth, "creative")}
+    <main class="page-creative">
+      <section class="creative-hero">
+        <div class="creative-hero-inner">
+          <p class="creative-kicker">A department of Jolly Mammoth</p>
+          <h1 class="creative-wordmark">
+            <span class="jolly-word" aria-label="Jolly"
+              ><span>J</span><span>o</span><span>l</span><span>l</span><span>y</span></span
+            >
+            <span class="creative-wordmark-rest">Creative<br />Department</span>
+          </h1>
+          <p class="creative-lede">
+            Brand, video, and content for businesses that need to look as good as the
+            work they do. Same shop as the systems side. Different room, different tools.
+          </p>
+          <div class="creative-services">
+            <span>Brand identity</span>
+            <span>Video production</span>
+            <span>Photography</span>
+            <span>Social content</span>
+            <span>Websites</span>
+            <span>Campaigns</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="section band-peak reveal">
+        <div class="band-anchor">
+          <p class="eyebrow">Selected creative work</p>
+          <h2 class="headline">Things we made.</h2>
+          <div class="work-grid">
+${cards}
+          </div>
+        </div>
+      </section>
+
+      <section class="section section-cta band-peak reveal">
+        <p class="cta-prompt">need something made?</p>
+        <h2 class="headline">Let's build the brand around the work.</h2>
+        <div class="cta-row">
+          <a class="btn btn-primary btn-lg" href="questionnaire.html">Book a Strategy Call</a>
+          <a class="btn btn-ghost btn-lg" href="projects.html">See the systems side</a>
+        </div>
+      </section>
+    </main>
+
+${footer(depth)}`;
+}
+
 /* ------------------------------------------------------------------- build */
 
 function build() {
@@ -431,6 +531,9 @@ function build() {
   fs.writeFileSync(path.join(ROOT, "projects.html"), indexPage(cases), "utf8");
   console.log("  projects.html");
 
+  fs.writeFileSync(path.join(ROOT, "creative.html"), creativePage(cases), "utf8");
+  console.log("  creative.html");
+
   writeSitemap(cases);
   console.log("  sitemap.xml");
 
@@ -447,6 +550,7 @@ function writeSitemap(cases) {
     "https://jollymammoth.co/",
     "https://jollymammoth.co/about.html",
     "https://jollymammoth.co/projects.html",
+    "https://jollymammoth.co/creative.html",
     ...cases.map((c) => `https://jollymammoth.co/work/${c.slug}.html`),
   ];
   const xml = `<?xml version="1.0" encoding="UTF-8"?>

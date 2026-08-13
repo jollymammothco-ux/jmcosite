@@ -36,7 +36,8 @@
       "timeframe": "16 days",
       "tools": "Framer",
       "category": "Branding and Identity"
-    }
+    },
+    "department": "creative"
   },
   {
     "slug": "high-cliff-consulting",
@@ -71,7 +72,8 @@
       "timeframe": "2 months",
       "tools": "CRM Automation",
       "category": "Custom Smart CRM"
-    }
+    },
+    "department": "systems"
   },
   {
     "slug": "the-oxbow-hotel",
@@ -106,7 +108,8 @@
       "timeframe": "6-8 weeks",
       "tools": "Custom Development",
       "category": "Hotel Front Desk Agent"
-    }
+    },
+    "department": "systems"
   },
   {
     "slug": "mas",
@@ -137,7 +140,8 @@
       "year": "2025",
       "timeframe": "6 months",
       "category": "Marketing and Lead Gen"
-    }
+    },
+    "department": "systems"
   },
   {
     "slug": "brainthoven",
@@ -167,7 +171,8 @@
       "year": "2025",
       "timeframe": "60 days",
       "category": "App Development"
-    }
+    },
+    "department": "systems"
   },
   {
     "slug": "queuedup",
@@ -197,7 +202,8 @@
       "year": "2024",
       "timeframe": "60 days",
       "category": "Branding and Identity"
-    }
+    },
+    "department": "creative"
   },
   {
     "slug": "savagefit",
@@ -235,6 +241,7 @@
       "year": "2025",
       "timeframe": "90 days",
       "category": "Branding and Identity"
-    }
+    },
+    "department": "creative"
   }
 ]

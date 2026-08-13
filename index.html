@@ -52,7 +52,7 @@
       rel="stylesheet"
     />
     <script src="boot.js?v=2"></script>
-    <link rel="stylesheet" href="styles.css?v=26" />
+    <link rel="stylesheet" href="styles.css?v=35" />
     <link rel="icon" href="assets/brand/logo.png" type="image/png" />
     <link rel="apple-touch-icon" href="assets/brand/logo.png" />
 
@@ -79,6 +79,7 @@
         <a href="#go-mammoth">Go Mammoth</a>
         <a href="#mammothiq">MammothIQ</a>
         <a href="projects.html">Work</a>
+        <a href="creative.html">Creative</a>
         <a href="about.html">About</a>
       </nav>
       <a class="btn btn-primary btn-header" href="questionnaire.html">Book a Strategy Call</a>
@@ -91,6 +92,7 @@
       <a href="#go-mammoth">Go Mammoth</a>
       <a href="#mammothiq">MammothIQ</a>
       <a href="projects.html">Work</a>
+      <a href="creative.html">Creative</a>
       <a href="about.html">About</a>
       <a href="questionnaire.html">Book a Strategy Call</a>
     </div>
@@ -137,8 +139,13 @@
         </div>
       </section>
 
-      <!-- PAIN — left-anchored against the slate band -->
-      <section class="section section-blue reveal" id="problems">
+      <!-- PAIN — left-anchored over a real job-site frame -->
+      <section class="section band-photo reveal" id="problems">
+        <div
+          class="band-photo-bg"
+          style="background-image: url('assets/trades/roof-house.jpg')"
+          aria-hidden="true"
+        ></div>
         <div class="band-anchor">
           <p class="eyebrow">The problem</p>
           <h2 class="headline">
@@ -393,45 +400,47 @@
       <!-- SOCIAL PROOF — real client messages, in their own words.
            ATTRIBUTIONS ARE PLACEHOLDERS: confirm permission and the correct
            name/company with each client before this goes live. -->
-      <section class="section section-charcoal reveal" id="proof">
+      <section class="section section-proof reveal" id="proof">
         <div class="band-anchor">
-          <p class="eyebrow">What clients say</p>
-          <h2 class="headline">Not a case study. Just the text they sent.</h2>
+          <p class="eyebrow">What clients actually say</p>
+          <h2 class="headline">Not a case study. <span class="accent-yellow">The texts they sent.</span></h2>
 
-          <div class="proof-grid">
-            <blockquote class="proof-quote proof-quote--lead">
-              <p>
-                Man, it's been good. Especially picked up this month, phone calls galore. I've had to
-                put some jobs off until winter because we really can't take on the extra work.
-                <strong>When we started, probably 2 jobs a week. Now at least one a day.</strong>
-                Big time.
-              </p>
-              <footer><span class="proof-who">Exteriors contractor</span><span class="proof-where">Chippewa Valley</span></footer>
-            </blockquote>
+          <!-- The outcome quote gets typeset large because it carries a number.
+               Everything under it is the unedited screenshot, which is the part
+               that cannot be faked. -->
+          <blockquote class="proof-lead">
+            <p>
+              Man, it's been good. Especially picked up this month, phone calls galore. I've had to
+              put some jobs off until winter because we really can't take on the extra work.
+              <strong>When we started, probably 2 jobs a week. Now at least one a day.</strong>
+            </p>
+            <footer>
+              <span class="proof-who">Exteriors contractor</span>
+              <span class="proof-where">Chippewa Valley</span>
+            </footer>
+          </blockquote>
 
-            <blockquote class="proof-quote">
-              <p>
-                Presentation went very well. They really like what I do and are planning on bringing
-                me back in. Thanks for making this go so smoothly. Could not have been a success
-                without y'all.
-              </p>
-              <footer><span class="proof-who">Consulting client</span><span class="proof-where">Presentation build</span></footer>
-            </blockquote>
-
-            <blockquote class="proof-quote">
-              <p>
-                I'm speechless, man. This came out so well. You really blew my expectations.
-              </p>
-              <footer><span class="proof-who">Brand client</span><span class="proof-where">Video &amp; editing</span></footer>
-            </blockquote>
-
-            <blockquote class="proof-quote">
-              <p>
-                I just really want to say that I appreciate you. I appreciate you as a person, and I
-                value your work.
-              </p>
-              <footer><span class="proof-who">Long-term client</span><span class="proof-where">Voice message</span></footer>
-            </blockquote>
+          <div class="shot-wall">
+            <figure class="shot shot--tall">
+              <img src="assets/testimonials/jobs-per-day.png" alt="Client text message: phone calls galore, went from about two jobs a week to at least one a day" width="760" height="464" loading="lazy" />
+              <figcaption>Exteriors contractor <span>lead gen</span></figcaption>
+            </figure>
+            <figure class="shot">
+              <img src="assets/testimonials/presentation.png" alt="Client text message: presentation went very well, could not have been a success without y'all" width="760" height="625" loading="lazy" />
+              <figcaption>Consulting client <span>presentation build</span></figcaption>
+            </figure>
+            <figure class="shot">
+              <img src="assets/testimonials/speechless.png" alt="Client text message: speechless, this came out so well, you really blew my expectations" width="760" height="414" loading="lazy" />
+              <figcaption>Brand client <span>video &amp; editing</span></figcaption>
+            </figure>
+            <figure class="shot">
+              <img src="assets/testimonials/eight-pages.png" alt="Client text message: my sister absolutely loved the eight pages" width="760" height="299" loading="lazy" />
+              <figcaption>Copy client <span>long-form</span></figcaption>
+            </figure>
+            <figure class="shot">
+              <img src="assets/testimonials/appreciate-you.png" alt="Client voice message transcript: I really appreciate you and I value your work" width="760" height="297" loading="lazy" />
+              <figcaption>Long-term client <span>voice note</span></figcaption>
+            </figure>
           </div>
         </div>
       </section>
@@ -488,47 +497,23 @@
             </a>
           </div>
 
-          <div class="work-creative" id="creative">
-            <h3 class="work-sub">
-              Systems are our strength. <span class="accent-yellow">Brand building</span> is our sauce.
-            </h3>
-            <p class="lead">
-              A creative department for when your business needs to look as good as your work.
-            </p>
-            <div class="work-grid work-grid--compact">
-              <a class="work-card card-lift" href="work/queuedup.html">
-              <span class="work-card-media">
-                <img class="work-card-thumb" src="assets/projects/queuedup-brand-cover.png" alt="QueuedUp brand standards" width="800" height="600" loading="lazy" />
-              </span>
-              <span class="work-card-meta">
-                <span class="work-card-year">2024</span>
-                <span class="work-card-cat">Branding &amp; Identity</span>
-              </span>
-              <span class="work-card-title">QueuedUp</span>
-              <span class="work-card-sub">Shifting a music platform’s narrative from product-first to audience-first.</span>
-            </a>
-              <a class="work-card card-lift has-clip" href="work/savagefit.html" data-clip="assets/projects/savage-fit-web-home.mp4">
-              <span class="work-card-media">
-                <img class="work-card-thumb" src="assets/projects/savage-fit-holiday.png" alt="Savage Fit Boxing brand graphic" width="800" height="600" loading="lazy" />
-              </span>
-              <span class="work-card-meta">
-                <span class="work-card-year">2025</span>
-                <span class="work-card-cat">Branding &amp; Identity</span>
-              </span>
-              <span class="work-card-title">Savage Fit Boxing</span>
-              <span class="work-card-sub">Positioning a community-driven fitness studio to better reflect its culture, value, and momentum.</span>
-            </a>
-              <a class="work-card card-lift has-clip" href="work/dalila-jane.html" data-clip="assets/projects/dalila-jane-site-demo.mp4">
-              <span class="work-card-media">
-                <img class="work-card-thumb" src="assets/projects/dalila-jane-portrait.png" alt="Dalila Jane brand photography" width="800" height="600" loading="lazy" />
-              </span>
-              <span class="work-card-meta">
-                <span class="work-card-year">2026</span>
-                <span class="work-card-cat">Branding &amp; Identity</span>
-              </span>
-              <span class="work-card-title">Dalila Jane</span>
-              <span class="work-card-sub">Dalila Jane is a rising independent artist with a sound worth paying attention to.</span>
-            </a>
+          <div class="creative-teaser" id="creative">
+            <div>
+              <p class="creative-kicker">A department of Jolly Mammoth</p>
+              <h3 class="creative-teaser-name">
+                <span class="jolly-word" aria-label="Jolly"
+                  ><span>J</span><span>o</span><span>l</span><span>l</span><span>y</span></span
+                >
+                Creative Department
+              </h3>
+              <div class="creative-teaser-tags">
+                <span>Brand identity</span><span>Video</span><span>Photography</span><span>Social</span><span>Websites</span>
+              </div>
+              <p>
+                Systems are our strength. Brand building is our sauce. The creative side runs
+                its own room, for when the business needs to look as good as the work.
+              </p>
+              <a class="btn btn-ghost" href="creative.html">See the Creative Department</a>
             </div>
           </div>
         </div>
@@ -707,7 +692,12 @@
       </section>
 
       <!-- CTA -->
-      <section class="section section-cta band-peak reveal" id="contact">
+      <section class="section band-photo band-photo--center band-peak reveal" id="contact">
+        <div
+          class="band-photo-bg"
+          style="background-image: url('assets/trades/shingle-carry.jpg')"
+          aria-hidden="true"
+        ></div>
         <p class="cta-prompt">want to work together?</p>
         <h2 class="headline">Let's build something that compounds.</h2>
         <div class="cta-row">
@@ -738,7 +728,7 @@
         <a href="#mammothiq">mammothiq</a>
         <a href="projects.html">work</a>
         <a href="about.html">about</a>
-        <a href="#creative">creative</a>
+        <a href="creative.html">creative</a>
         <a href="questionnaire.html">book a strategy call</a>
       </nav>
     </footer>

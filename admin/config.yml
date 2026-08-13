@@ -51,16 +51,28 @@ collections:
                 widget: "string"
                 pattern: ["^[0-9]{4}$", "Four digits, e.g. 2026"]
 
+              - name: "department"
+                label: "Which side of the house?"
+                widget: "select"
+                default: "systems"
+                options:
+                  - { label: "Jolly Mammoth — systems & growth", value: "systems" }
+                  - { label: "Jolly Creative Department — brand & video", value: "creative" }
+                hint: >
+                  Creative work also gets listed on the Creative Department page.
+
               - name: "category"
                 label: "Category"
                 widget: "select"
                 options:
                   - "Branding and Identity"
+                  - "Video Production"
+                  - "Content & Social"
+                  - "Website Development"
                   - "Custom Smart CRM"
                   - "Hotel Front Desk Agent"
                   - "Marketing and Lead Gen"
                   - "App Development"
-                  - "Website Development"
                   - "AI Call Agent"
 
               - name: "subtitle"

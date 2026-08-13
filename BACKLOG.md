@@ -9,15 +9,16 @@ design overhaul (see CHANGELOG).
   Identity → enable, set registration to *Invite only*, enable Git Gateway,
   then invite your own email. Until this is done `/admin` will show the
   "not connected yet" message.
-- **Get permission for the testimonials.** The four quotes in the Proof section
-  are real client messages with placeholder attributions
-  (`Exteriors contractor / Chippewa Valley`). Confirm each client is happy to be
-  quoted and replace the placeholders with the real name and company, or keep
-  them anonymous on purpose. Do not deploy attributed quotes without asking.
-  The original screenshots are held in `_source-media/testimonials/` and are
-  deliberately **not** deployed: an unlinked file on Netlify is still publicly
-  fetchable, and those are private client messages. Move them back into
-  `assets/testimonials/` once you have the OK.
+- **Testimonial screenshots are now live** (on your instruction). Cropped to
+  the message bubble only, no phone chrome. Attributions are still generic on
+  purpose (`Exteriors contractor / Chippewa Valley`). Two things to decide:
+  - Confirm each client is fine being quoted, and whether you want real names
+    and companies instead of the generic labels.
+  - `speechless.png` contains the word "shit". Authentic, and arguably on
+    brand for the audience, but it is a public page. Swap the crop or drop
+    that card if you would rather not.
+  - `appreciate-you.png` is a voice-note transcript that cuts off mid-sentence
+    in the original. Reads slightly odd. Worth re-capturing or dropping.
 - **Back up `_source-media/`.** It holds the 97MB of originals and is gitignored,
   so it exists only on this machine.
 
