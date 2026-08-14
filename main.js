@@ -36,41 +36,66 @@ if (heroVideo) {
 }
 
 // Primary CTAs land as a hammer blow.
-// The cursor swap is pure CSS; this only marks where the blow landed so the
-// shock ring can start from the point of contact, and replays the animation
-// on every press rather than only the first.
+// The cursor swap is pure CSS. This injects the nail, marks where the blow
+// landed so the shock ring starts from the point of contact, replays on every
+// press, and fires a haptic tick where the device supports one.
 (function initStrike() {
   const buttons = document.querySelectorAll(".btn-primary");
   if (!buttons.length) return;
 
-  buttons.forEach((btn) => {
-    btn.addEventListener("pointerdown", (e) => {
-      const r = btn.getBoundingClientRect();
-      // Fall back to the centre for keyboard activation, which has no point.
-      const x = e.clientX ? e.clientX - r.left : r.width / 2;
-      const y = e.clientY ? e.clientY - r.top : r.height / 2;
-      btn.style.setProperty("--strike-x", x + "px");
-      btn.style.setProperty("--strike-y", y + "px");
+  const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-      // Restarting a CSS animation needs the class gone and the style
-      // recomputed before it goes back on.
+  // navigator.vibrate is the Vibration API: Android Chrome and Firefox honour
+  // it. iOS Safari does not implement it at all and there is no web API for
+  // the Taptic Engine, so iPhone users get the visual drive only.
+  const canBuzz = typeof navigator.vibrate === "function";
+
+  buttons.forEach((btn) => {
+    // Injected rather than authored into markup so it stays out of every page
+    // template, and so no-JS readers get a plain button instead of a stray dot.
+    if (!btn.querySelector(".nail")) {
+      const nail = document.createElement("span");
+      nail.className = "nail";
+      nail.setAttribute("aria-hidden", "true");
+      btn.appendChild(nail);
+    }
+
+    function strike(x, y) {
+      if (x == null) {
+        btn.style.removeProperty("--strike-x");
+        btn.style.removeProperty("--strike-y");
+      } else {
+        btn.style.setProperty("--strike-x", x + "px");
+        btn.style.setProperty("--strike-y", y + "px");
+      }
+
+      // Restarting a CSS animation needs the class gone and style recomputed
+      // before it goes back on, otherwise a second press does nothing.
       btn.classList.remove("is-struck");
       void btn.offsetWidth;
       btn.classList.add("is-struck");
+
+      // Two quick pulses: the blow, then the nail seating.
+      if (canBuzz && !reduced) {
+        try {
+          navigator.vibrate([14, 26, 8]);
+        } catch (e) {}
+      }
+    }
+
+    btn.addEventListener("pointerdown", (e) => {
+      const r = btn.getBoundingClientRect();
+      strike(e.clientX - r.left, e.clientY - r.top);
+    });
+
+    btn.addEventListener("keydown", (e) => {
+      if (e.key !== "Enter" && e.key !== " ") return;
+      strike(null, null);
     });
 
     btn.addEventListener("animationend", (e) => {
-      if (e.animationName === "strike-hit") btn.classList.remove("is-struck");
-    });
-
-    // Keyboard users get the same feedback.
-    btn.addEventListener("keydown", (e) => {
-      if (e.key !== "Enter" && e.key !== " ") return;
-      btn.style.removeProperty("--strike-x");
-      btn.style.removeProperty("--strike-y");
-      btn.classList.remove("is-struck");
-      void btn.offsetWidth;
-      btn.classList.add("is-struck");
+      // The nail drive is the longest of the three, so clear on that one.
+      if (e.animationName === "nail-drive") btn.classList.remove("is-struck");
     });
   });
 })();

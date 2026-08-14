@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14 30" width="14" height="30">
+  <defs>
+    <linearGradient id="n" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#6c757e"/>
+      <stop offset="0.3" stop-color="#e6ebef"/>
+      <stop offset="0.55" stop-color="#aab3bc"/>
+      <stop offset="1" stop-color="#5a636c"/>
+    </linearGradient>
+  </defs>
+  <!-- shaft, tapering to a point -->
+  <path d="M5.1 4 H8.9 L7.6 25 L7 29.4 L6.4 25 Z" fill="url(#n)" stroke="#2b3138" stroke-width="0.8" stroke-linejoin="round"/>
+  <!-- head, struck flat -->
+  <rect x="1" y="0.6" width="12" height="4" rx="1.6" fill="url(#n)" stroke="#2b3138" stroke-width="0.9"/>
+  <path d="M2.6 2.1 H7.4" stroke="#f4f8fb" stroke-width="1.1" stroke-linecap="round" opacity="0.9"/>
+</svg>

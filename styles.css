@@ -513,16 +513,20 @@ a {
 /* ===================================================================
    THE STRIKE
    Primary CTAs are driven, not clicked. The pointer becomes a cocked
-   hammer, the nail head stands proud on hover, and the click lands as a
-   real impact: the button takes the blow, the nail goes flush, a shock
-   ring runs out from where you hit.
+   claw hammer, and the press drives a nail into the button.
 
-   The cursor is a CSS `cursor: url()` rather than an element chasing the
-   mouse. The compositor draws it, so it cannot lag behind the pointer,
-   which is what makes most custom cursors feel cheap.
+   The cursor is `cursor: url()` rather than an element chasing the
+   pointer: the compositor draws it, so it cannot lag, which is what
+   makes most custom cursors feel cheap. Two poses, both pivoted on the
+   striking face so the head stays put through the swing.
 
-   Scoped to primary CTAs on purpose. Replacing the cursor site-wide
-   would cost every affordance the system cursor carries.
+   The nail is drawn in side profile standing on the button's surface,
+   not as a plan-view dot. A dot read as a stray bezel light; a nail with
+   a head, a tapered shaft and a point reads as a nail, and it means the
+   drive has somewhere legible to travel.
+
+   Scoped to primary CTAs. Replacing the cursor site-wide would cost
+   every affordance the system cursor carries.
    =================================================================== */
 .btn-primary {
   position: relative;
@@ -530,11 +534,11 @@ a {
   background: var(--signal);
   border-color: var(--signal);
   color: var(--on-signal);
-  cursor: url("assets/cursor/hammer-up.png") 6 17, pointer;
+  cursor: url("assets/cursor/hammer-up.png") 8 26, pointer;
 }
 
 .btn-primary:active {
-  cursor: url("assets/cursor/hammer-down.png") 4 13, pointer;
+  cursor: url("assets/cursor/hammer-down.png") 8 26, pointer;
 }
 
 .btn-primary:hover {
@@ -543,91 +547,132 @@ a {
   color: var(--on-signal);
 }
 
-/* The nail. Sits nearly flush at rest, lifts under the raised hammer, and is
-   driven home on the strike.
-
-   A flex item rather than an absolutely positioned dot: .btn is already
-   inline-flex, so this way the button sizes itself around the nail and the
-   label can never run underneath it. Positioned absolutely it overlapped the
-   header CTA's text by 3px, because that button has the tightest padding. */
-.btn-primary::after {
-  content: "";
+/* The nail. The span is the clipping window and its bottom edge is the
+   surface of the board, so travelling down means going into the timber. */
+.btn-primary .nail {
+  position: relative;
   flex: 0 0 auto;
-  width: 8px;
-  height: 8px;
-  margin-left: 0.7rem;
-  border-radius: 50%;
-  background:
-    radial-gradient(circle at 32% 28%, #e9edf1 0%, #9aa3ad 45%, #5d666f 100%);
-  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.45), 0 0 0 1px rgba(0, 0, 0, 0.3);
-  transform: translateY(var(--nail-lift, 0));
-  transition: transform 0.18s cubic-bezier(0.22, 1, 0.36, 1);
+  width: 13px;
+  height: 24px;
+  margin-left: 0.75rem;
+  overflow: hidden;
   pointer-events: none;
 }
 
-.btn-primary:hover::after {
-  --nail-lift: -2.5px;
+.btn-primary .nail::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 13px;
+  height: 28px;
+  background: url("assets/cursor/nail.svg") no-repeat center bottom / contain;
+  transform: translateY(var(--drive, 0));
+  transition: transform 0.2s cubic-bezier(0.22, 1, 0.36, 1);
+  filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.5));
 }
 
-.btn-primary.is-struck::after {
-  --nail-lift: 1px;
-  transition: transform 0.09s cubic-bezier(0.36, 0, 0.66, -0.56);
+/* Stands proud under a raised hammer. */
+.btn-primary:hover .nail::before {
+  --drive: -3px;
 }
 
-/* Shock ring, expanding from the point of impact. */
+/* Struck: down hard, hold, then ease back so the next press has a nail to
+   hit. The hold is what makes it read as driven rather than as a bounce. */
+.btn-primary.is-struck .nail::before {
+  animation: nail-drive 0.66s cubic-bezier(0.2, 0.9, 0.3, 1);
+}
+
+@keyframes nail-drive {
+  0% { transform: translateY(-3px); }
+  9% { transform: translateY(14px); }
+  58% { transform: translateY(14px); }
+  100% { transform: translateY(0); }
+}
+
+/* Flash at the head on contact. */
+.btn-primary .nail::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 2px;
+  width: 26px;
+  height: 26px;
+  margin: -13px 0 0 -13px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 250, 235, 0.95) 0%, rgba(255, 220, 160, 0) 68%);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.btn-primary.is-struck .nail::after {
+  animation: nail-flash 0.34s ease-out;
+}
+
+@keyframes nail-flash {
+  0% { opacity: 0; transform: scale(0.2); }
+  14% { opacity: 1; transform: scale(1); }
+  100% { opacity: 0; transform: scale(1.5); }
+}
+
+/* Shock ring, from the exact point of contact. */
 .btn-primary::before {
   content: "";
   position: absolute;
   left: var(--strike-x, 50%);
   top: var(--strike-y, 50%);
-  width: 12px;
-  height: 12px;
-  margin: -6px 0 0 -6px;
+  width: 14px;
+  height: 14px;
+  margin: -7px 0 0 -7px;
   border-radius: 50%;
-  border: 2px solid rgba(0, 0, 0, 0.55);
+  border: 3px solid rgba(0, 0, 0, 0.6);
   opacity: 0;
   pointer-events: none;
 }
 
 .btn-primary.is-struck::before {
-  animation: strike-ring 0.44s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: strike-ring 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 @keyframes strike-ring {
-  0% { opacity: 0.75; transform: scale(0.3); }
-  100% { opacity: 0; transform: scale(11); }
+  0% { opacity: 0.85; transform: scale(0.25); }
+  100% { opacity: 0; transform: scale(12); }
 }
 
-/* The blow itself. Short and sharp: compress on contact, one small
-   overshoot, done inside 260ms. Anything longer reads as a bounce. */
+/* The blow. Deeper than the first attempt, which was too small to read at
+   all, but still finished quickly: a long bounce reads as a toy. */
 .btn-primary.is-struck {
-  animation: strike-hit 0.26s cubic-bezier(0.2, 0.8, 0.3, 1);
+  animation: strike-hit 0.34s cubic-bezier(0.2, 0.85, 0.28, 1);
 }
 
 @keyframes strike-hit {
   0% { transform: translateY(0) scaleY(1); }
-  16% { transform: translateY(2px) scaleY(0.93); }
-  46% { transform: translateY(-1px) scaleY(1.02); }
+  14% { transform: translateY(3px) scaleY(0.9); }
+  42% { transform: translateY(-1.5px) scaleY(1.03); }
+  70% { transform: translateY(0.5px) scaleY(0.99); }
   100% { transform: translateY(0) scaleY(1); }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .btn-primary.is-struck,
-  .btn-primary.is-struck::before {
+  .btn-primary.is-struck::before,
+  .btn-primary.is-struck .nail::before,
+  .btn-primary.is-struck .nail::after {
     animation: none;
   }
 
-  .btn-primary::after,
-  .btn-primary:hover::after {
-    --nail-lift: 0;
+  .btn-primary .nail::before,
+  .btn-primary:hover .nail::before {
+    --drive: 0;
     transition: none;
   }
 }
 
-/* Touch has no hover and no cursor, so the nail would just be a dot. */
+/* Touch has no hover and no cursor, but the drive still reads on tap, so the
+   nail stays. Only the resting lift goes. */
 @media (hover: none) {
-  .btn-primary::after {
-    display: none;
+  .btn-primary:hover .nail::before {
+    --drive: 0;
   }
 }
 
