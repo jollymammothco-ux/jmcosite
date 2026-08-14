@@ -573,58 +573,56 @@ a {
 }
 
 /* ===================================================================
-   REACTIVE CAUTION TAPE
-   A strung ribbon that sags, twists and settles. Scroll blows it, the
-   pointer brushes it. Used as a section divider.
+   TAPE-MEASURE DIVIDER
+   A steel blade paid out across the page. Replaces the caution tape,
+   which twisted hard enough to read as a cartoon. Precision is what
+   separates premium trades imagery from cute trades imagery, so this is
+   drawn as an instrument: real graduations, sequential numbers, and
+   motion small enough that you might not notice it until you look.
    =================================================================== */
-.tape {
+.rule {
   position: relative;
-  height: 78px;
+  height: 72px;
   margin: 0;
-  overflow: visible;
-  background: transparent;
-  /* Sits above neighbouring bands so the ribbon can hang past its own box. */
   z-index: 4;
+  pointer-events: auto;
   touch-action: pan-y;
 }
 
-.tape__canvas {
+.rule__canvas {
   display: block;
   width: 100%;
   height: 100%;
 }
 
-/* Until the script measures and draws, show nothing rather than a flash of
-   an unpositioned ribbon. */
-.tape:not(.is-live) .tape__canvas {
+.rule:not(.is-live) .rule__canvas {
   visibility: hidden;
 }
 
-/* Read by tape.js so the ribbon can be recoloured per section from CSS.
-   Hazard tape is printed on one face only and the film is slightly
-   translucent, so the reverse reads as a washed, low-contrast version of the
-   front rather than the same graphic in shadow. Keeping the back stripe close
-   to the back face is what sells the flip. */
+/* Read by measure.js. Yellow blade with black graduations is the colourway
+   every contractor already owns, and it sits beside the brand orange without
+   competing with it. */
 :root {
-  --tape-face: #ff6a2b;
-  --tape-stripe: #14161a;
-  --tape-back: #a8461c;
-  --tape-back-stripe: #7a3517;
+  --rule-face: #e8a91d;
+  --rule-face-hi: #ffd670;
+  --rule-face-lo: #b5810f;
+  --rule-edge: #7a5407;
+  --rule-ink: #14161a;
+  --rule-ink-soft: rgba(20, 22, 26, 0.7);
+  --rule-hook: #9aa3ad;
 }
 
-/* The Creative Department gets its own tape colours, same as everything else
-   on that side of the house. */
-.page-creative .tape,
-.tape--creative {
-  --tape-face: #ffc8e0;
-  --tape-stripe: #14161a;
-  --tape-back: #b07f93;
-  --tape-back-stripe: #8d6274;
+/* The Creative Department gets a blade in its own palette. */
+.page-creative .rule {
+  --rule-face: #e9b6c8;
+  --rule-face-hi: #ffd9e6;
+  --rule-face-lo: #c48fa3;
+  --rule-edge: #8d6274;
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .tape {
-    height: 56px;
+@media (max-width: 700px) {
+  .rule {
+    height: 60px;
   }
 }
 

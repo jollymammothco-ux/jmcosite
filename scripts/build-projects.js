@@ -23,7 +23,7 @@ const ROOT = path.join(__dirname, "..");
 const DATA = path.join(ROOT, "content", "projects.json");
 const WORK_DIR = path.join(ROOT, "work");
 
-const CSS_V = "42";
+const CSS_V = "43";
 const JS_V = "11";
 
 /* ------------------------------------------------------------------ utils */

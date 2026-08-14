@@ -52,7 +52,7 @@
       rel="stylesheet"
     />
     <script src="boot.js?v=2"></script>
-    <link rel="stylesheet" href="styles.css?v=42" />
+    <link rel="stylesheet" href="styles.css?v=43" />
     <link rel="icon" href="assets/brand/logo.png" type="image/png" />
     <link rel="apple-touch-icon" href="assets/brand/logo.png" />
 
@@ -139,10 +139,10 @@
         </div>
       </section>
 
-      <!-- Reactive caution tape. Scroll blows it, pointer brushes it.
-           Purely decorative, so it is hidden from assistive tech. -->
-      <div class="tape" data-tape data-nodes="46" data-width="34" data-sag="10" aria-hidden="true">
-        <canvas class="tape__canvas"></canvas>
+      <!-- Tape-measure divider. Pays out once on first view, then flexes very
+           slightly with scroll. Decorative, so hidden from assistive tech. -->
+      <div class="rule" data-rule data-blade="34" data-scale="46" aria-hidden="true">
+        <canvas class="rule__canvas"></canvas>
       </div>
 
       <!-- PAIN — left-anchored over a real job-site frame -->
@@ -754,6 +754,6 @@
 
     <script src="main.js?v=11"></script>
     <script src="mammoth.js?v=2" defer></script>
-    <script src="tape.js?v=4" defer></script>
+    <script src="measure.js?v=1" defer></script>
   </body>
 </html>
