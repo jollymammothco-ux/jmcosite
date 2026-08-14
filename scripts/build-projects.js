@@ -23,7 +23,7 @@ const ROOT = path.join(__dirname, "..");
 const DATA = path.join(ROOT, "content", "projects.json");
 const WORK_DIR = path.join(ROOT, "work");
 
-const CSS_V = "43";
+const CSS_V = "45";
 const JS_V = "11";
 
 /* ------------------------------------------------------------------ utils */
@@ -92,6 +92,10 @@ function header(depth, current) {
     .join("\n");
 
   return `  <body>
+    <div class="rail" data-rail aria-hidden="true">
+      <canvas class="rail__canvas"></canvas>
+    </div>
+
     <header class="site-header" id="top">
       <a href="${u}index.html" class="logo" aria-label="Jolly Mammoth home">
         <img
@@ -150,6 +154,7 @@ function footer(depth) {
     <a class="sticky-cta" href="${u}questionnaire.html">Book a Call</a>
 
     <script src="${u}main.js?v=${JS_V}"></script>
+    <script src="${u}measure.js?v=2" defer></script>
   </body>
 </html>
 `;

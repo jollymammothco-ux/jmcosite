@@ -573,34 +573,38 @@ a {
 }
 
 /* ===================================================================
-   TAPE-MEASURE DIVIDER
-   A steel blade paid out across the page. Replaces the caution tape,
-   which twisted hard enough to read as a cartoon. Precision is what
-   separates premium trades imagery from cute trades imagery, so this is
-   drawn as an instrument: real graduations, sequential numbers, and
-   motion small enough that you might not notice it until you look.
+   TAPE-MEASURE SCROLL RAIL
+   Pinned down the edge of the window, paying out as you read. Replaces a
+   one-shot horizontal divider that, on mobile, sat below the fold at load
+   and finished animating after the reader had already scrolled past it.
+   Making it the progress indicator means it is always visible, always
+   responsive, and earns its space by doing a job.
    =================================================================== */
-.rule {
-  position: relative;
-  height: 72px;
-  margin: 0;
-  z-index: 4;
-  pointer-events: auto;
-  touch-action: pan-y;
+.rail {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 46px;
+  z-index: 60;
+  pointer-events: none;
+  --rail-blade: 30;
+  --rail-scale: 44;
+  --rail-numbers: 1;
 }
 
-.rule__canvas {
+.rail__canvas {
   display: block;
   width: 100%;
   height: 100%;
 }
 
-.rule:not(.is-live) .rule__canvas {
+.rail:not(.is-live) .rail__canvas {
   visibility: hidden;
 }
 
-/* Read by measure.js. Yellow blade with black graduations is the colourway
-   every contractor already owns, and it sits beside the brand orange without
+/* Blade colours. Yellow with black graduations is the colourway every
+   contractor already owns, and it sits beside the brand orange without
    competing with it. */
 :root {
   --rule-face: #e8a91d;
@@ -612,17 +616,130 @@ a {
   --rule-hook: #9aa3ad;
 }
 
-/* The Creative Department gets a blade in its own palette. */
-.page-creative .rule {
+.page-creative .rail {
   --rule-face: #e9b6c8;
   --rule-face-hi: #ffd9e6;
   --rule-face-lo: #c48fa3;
   --rule-edge: #8d6274;
 }
 
-@media (max-width: 700px) {
-  .rule {
-    height: 60px;
+/* Give the page room so the rail never sits on top of content. */
+@media (min-width: 1024px) {
+  body {
+    padding-left: 46px;
+  }
+
+  .site-header {
+    left: 46px;
+  }
+}
+
+/* Narrow screens get a thinner blade with no numbers: it still reads as a
+   graduated steel rule, and it fits inside the existing page gutter. */
+@media (max-width: 1023px) {
+  .rail {
+    width: 18px;
+    --rail-blade: 14;
+    --rail-scale: 30;
+    --rail-numbers: 0;
+  }
+}
+
+/* Still narrower than the 20px page gutter, so it can never sit on copy. */
+@media (max-width: 420px) {
+  .rail {
+    width: 17px;
+    --rail-blade: 13;
+    --rail-scale: 26;
+  }
+}
+
+/* ===================================================================
+   DIMENSION CALLOUT
+   Extension lines, arrowheads and a label, the way a section gets
+   annotated on a construction drawing. Quiet on purpose: it is a
+   caption for the page, not another animation competing for attention.
+   =================================================================== */
+.dim {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: clamp(1.75rem, 4vw, 2.75rem) 1.25rem;
+}
+
+.dim__ext {
+  flex: 0 0 auto;
+  width: 1px;
+  height: 26px;
+  background: var(--theme-border-heavy);
+}
+
+/* The measured span, with an arrowhead at each end. */
+.dim__line {
+  position: relative;
+  flex: 1 1 auto;
+  height: 1px;
+  background: var(--theme-border-heavy);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform-origin: left center;
+  transform: scaleX(var(--dim-draw, 1));
+  transition: transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.js .dim:not(.is-visible) .dim__line {
+  --dim-draw: 0;
+}
+
+.dim__line::before,
+.dim__line::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: 7px;
+  height: 7px;
+  border-top: 1px solid var(--theme-border-heavy);
+  border-right: 1px solid var(--theme-border-heavy);
+}
+
+.dim__line::before {
+  left: 0;
+  transform: translateY(-50%) rotate(-135deg);
+}
+
+.dim__line::after {
+  right: 0;
+  transform: translateY(-50%) rotate(45deg);
+}
+
+.dim__label {
+  position: relative;
+  padding: 0 0.9rem;
+  background: var(--ground);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  white-space: nowrap;
+  opacity: var(--dim-fade, 1);
+  transition: opacity 0.5s ease 0.35s;
+}
+
+.js .dim:not(.is-visible) .dim__label {
+  --dim-fade: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dim__line {
+    transform: none;
+  }
+
+  .dim__label {
+    opacity: 1;
   }
 }
 
