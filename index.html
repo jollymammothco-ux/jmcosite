@@ -52,7 +52,7 @@
       rel="stylesheet"
     />
     <script src="boot.js?v=2"></script>
-    <link rel="stylesheet" href="styles.css?v=40" />
+    <link rel="stylesheet" href="styles.css?v=42" />
     <link rel="icon" href="assets/brand/logo.png" type="image/png" />
     <link rel="apple-touch-icon" href="assets/brand/logo.png" />
 
@@ -142,22 +142,7 @@
       <!-- Reactive caution tape. Scroll blows it, pointer brushes it.
            Purely decorative, so it is hidden from assistive tech. -->
       <div class="tape" data-tape data-nodes="46" data-width="34" data-sag="10" aria-hidden="true">
-        <svg class="tape__svg" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
-          <defs>
-            <pattern
-              id="tape-stripes"
-              width="34"
-              height="34"
-              patternUnits="userSpaceOnUse"
-              patternTransform="rotate(-58)"
-            >
-              <rect width="34" height="34" fill="var(--tape-face)" />
-              <rect width="15" height="34" fill="var(--tape-stripe)" />
-            </pattern>
-          </defs>
-          <path class="tape__front" d="" />
-          <path class="tape__back" d="" />
-        </svg>
+        <canvas class="tape__canvas"></canvas>
       </div>
 
       <!-- PAIN — left-anchored over a real job-site frame -->
@@ -283,40 +268,52 @@
           </p>
           <div class="feature-grid">
             <article class="feature card-lift">
-              <img class="feature-icon" src="assets/icons/lead-capture.png" alt="" width="96" height="96" loading="lazy" aria-hidden="true" />
-              <h3>Lead capture pipeline</h3>
+              <h3>
+                <img class="feature-icon" src="assets/icons/lead-capture.png" alt="" width="96" height="96" loading="lazy" aria-hidden="true" />
+                <span>Lead capture pipeline</span>
+              </h3>
               <p>
                 Web forms, calls, texts, and ads land in one place. Nothing slips through.
               </p>
             </article>
             <article class="feature card-lift">
-              <img class="feature-icon" src="assets/icons/follow-up.png" alt="" width="96" height="96" loading="lazy" aria-hidden="true" />
-              <h3>Automated follow-ups</h3>
+              <h3>
+                <img class="feature-icon" src="assets/icons/follow-up.png" alt="" width="96" height="96" loading="lazy" aria-hidden="true" />
+                <span>Automated follow-ups</span>
+              </h3>
               <p>
                 On the jobsite or fishing? Leads still get nurtured automatically.
               </p>
             </article>
             <article class="feature card-lift">
-              <img class="feature-icon" src="assets/icons/booking.png" alt="" width="96" height="96" loading="lazy" aria-hidden="true" />
-              <h3>Booking &amp; scheduling</h3>
+              <h3>
+                <img class="feature-icon" src="assets/icons/booking.png" alt="" width="96" height="96" loading="lazy" aria-hidden="true" />
+                <span>Booking &amp; scheduling</span>
+              </h3>
               <p>Prospects book straight to your calendar. No phone tag.</p>
             </article>
             <article class="feature card-lift">
-              <img class="feature-icon" src="assets/icons/inbox.png" alt="" width="96" height="96" loading="lazy" aria-hidden="true" />
-              <h3>All comms, one inbox</h3>
+              <h3>
+                <img class="feature-icon" src="assets/icons/inbox.png" alt="" width="96" height="96" loading="lazy" aria-hidden="true" />
+                <span>All comms, one inbox</span>
+              </h3>
               <p>Texts, emails, and DMs in a single organized platform.</p>
             </article>
             <article class="feature card-lift">
-              <img class="feature-icon" src="assets/icons/workflow.png" alt="" width="96" height="96" loading="lazy" aria-hidden="true" />
-              <h3>Custom workflow &amp; AI ops</h3>
+              <h3>
+                <img class="feature-icon" src="assets/icons/workflow.png" alt="" width="96" height="96" loading="lazy" aria-hidden="true" />
+                <span>Custom workflow &amp; AI ops</span>
+              </h3>
               <p>
                 We connect your scheduling and job tools or build custom workflows so the crew stays
                 on track.
               </p>
             </article>
             <article class="feature card-lift">
-              <img class="feature-icon" src="assets/icons/reporting.png" alt="" width="96" height="96" loading="lazy" aria-hidden="true" />
-              <h3>Reporting &amp; dashboards</h3>
+              <h3>
+                <img class="feature-icon" src="assets/icons/reporting.png" alt="" width="96" height="96" loading="lazy" aria-hidden="true" />
+                <span>Reporting &amp; dashboards</span>
+              </h3>
               <p>
                 Pipeline, closed jobs, and analytics on your phone. Pairs with MammothIQ for the full
                 picture.
@@ -757,6 +754,6 @@
 
     <script src="main.js?v=11"></script>
     <script src="mammoth.js?v=2" defer></script>
-    <script src="tape.js?v=2" defer></script>
+    <script src="tape.js?v=4" defer></script>
   </body>
 </html>

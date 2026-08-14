@@ -3,27 +3,33 @@
  * A strung ribbon of hazard tape that sags, twists, and settles. Scrolling
  * blows it; pointing at it pushes it; it goes to sleep when it stops moving.
  *
- * The solver is the same coupled-oscillator chain we used for the papel
- * picado banner on the Speedy build, reimplemented here rather than lifted,
- * because the geometry is different. Papel picado is a row of discrete flags
- * that skew independently. Tape is one continuous ribbon, so the interesting
- * part is the TWIST: as a stretch of tape rotates edge-on it foreshortens to
- * nothing and then shows its back face. That flip is what makes it read as
- * tape rather than as a wavy stripe.
+ * The solver is the coupled-oscillator chain from the Speedy papel picado
+ * banner, reimplemented because the geometry differs: papel picado is a row of
+ * discrete flags that skew independently, tape is one continuous ribbon.
  *
  * Physics, per node:
  *   accel = coupling*(left - 2*self + right)   wave travelling along the tape
  *         - stiffness*self                     pull back toward flat
  *         - damping*velocity                   bleed energy
  *         + wind                               scroll-driven forcing
+ * Damping ramps up near both anchors ("sponge") so waves are absorbed rather
+ * than reflected.
  *
- * Damping ramps up near both ends ("sponge") so waves are absorbed at the
- * anchors instead of reflecting back and ringing forever.
+ * Rendering is canvas, not SVG, because what sells a twisting ribbon is
+ * per-surface shading and stripes that live ON the surface. Three things do
+ * the heavy lifting:
  *
- * Markup it expects:
- *   <div class="tape" data-tape>
- *     <svg class="tape__svg" ...>…</svg>
- *   </div>
+ *   1. Shading from the surface normal. A stretch of tape rotating edge-on
+ *      goes dark and then shows its back face. A flat fill at every angle is
+ *      the single clearest tell that a ribbon is faked.
+ *   2. Stripes in surface space, not screen space. Surface arc length
+ *      accumulates as ds / |cos(twist)|, so where the tape turns edge-on more
+ *      surface compresses into fewer pixels and the stripes bunch up. Pattern
+ *      fills slide over the geometry instead, which reads as a mask.
+ *   3. A smooth centreline. The solver gives ~46 nodes; those are resampled
+ *      to ~220 render points so the silhouette has no visible kinks.
+ *
+ * Markup: <div class="tape" data-tape><canvas class="tape__canvas"></canvas></div>
  */
 (function () {
   "use strict";
@@ -41,7 +47,6 @@
     this.omega = new Float32Array(opts.count);
     this.damp = new Float32Array(opts.count);
 
-    // Sponge: extra damping toward both anchors.
     for (var i = 0; i < opts.count; i++) {
       var edge = Math.min(i, opts.count - 1 - i);
       var t = opts.spongeWidth > 0 ? Math.max(0, 1 - edge / opts.spongeWidth) : 0;
@@ -53,10 +58,9 @@
     var th = this.theta, om = this.omega, dp = this.damp;
     var n = this.count, k = this.coupling, s = this.stiffness, dt = this.dt;
     for (var i = 0; i < n; i++) {
-      var l = i > 0 ? th[i - 1] : 0;          // anchored at both ends
+      var l = i > 0 ? th[i - 1] : 0;
       var r = i < n - 1 ? th[i + 1] : 0;
-      var a = k * (l - 2 * th[i] + r) - s * th[i] - dp[i] * om[i] + wind;
-      om[i] += a * dt;
+      om[i] += (k * (l - 2 * th[i] + r) - s * th[i] - dp[i] * om[i] + wind) * dt;
     }
     for (var j = 0; j < n; j++) th[j] += om[j] * dt;
   };
@@ -82,85 +86,244 @@
 
   function Ribbon(root, cfg) {
     this.root = root;
-    this.svg = root.querySelector(".tape__svg");
-    this.front = root.querySelector(".tape__front");
-    this.back = root.querySelector(".tape__back");
+    this.canvas = root.querySelector(".tape__canvas");
+    this.ctx = this.canvas.getContext("2d");
     this.cfg = cfg;
+    this.M = cfg.samples;
+
+    // Per-render-point buffers, allocated once.
+    this.x = new Float32Array(this.M);
+    this.cy = new Float32Array(this.M);
+    this.hh = new Float32Array(this.M);
+    this.cosT = new Float32Array(this.M);
+    this.surf = new Float32Array(this.M); // arc length along the tape's SURFACE
     this.w = 0;
     this.h = 0;
+    this.dpr = 1;
   }
 
   Ribbon.prototype.measure = function () {
     var r = this.root.getBoundingClientRect();
-    this.w = Math.max(1, r.width);
-    this.h = Math.max(1, r.height);
-    this.svg.setAttribute("viewBox", "0 0 " + Math.round(this.w) + " " + Math.round(this.h));
+    if (!r.width || !r.height) return false;
+    this.dpr = Math.min(window.devicePixelRatio || 1, 2);
+    this.w = r.width;
+    this.h = r.height;
+    this.canvas.width = Math.round(this.w * this.dpr);
+    this.canvas.height = Math.round(this.h * this.dpr);
+    this.canvas.style.width = this.w + "px";
+    this.canvas.style.height = this.h + "px";
+    this.ctx.setTransform(this.dpr, 0, 0, this.dpr, 0, 0);
+    return true;
   };
 
-  /** Where the centre line of the tape sits at node i, before any twist. */
-  Ribbon.prototype.centreY = function (i, n) {
-    var t = i / (n - 1);
-    // Shallow catenary: anchored high at both ends, sagging in the middle.
-    var sag = this.cfg.sag * Math.sin(Math.PI * t);
-    return this.h * 0.5 + sag;
+  /** Catmull-Rom style read of the solver's coarse nodes at fractional index. */
+  function sampleTheta(theta, t) {
+    var n = theta.length;
+    var f = t * (n - 1);
+    var i = Math.floor(f);
+    var frac = f - i;
+    var p0 = theta[Math.max(0, i - 1)];
+    var p1 = theta[i];
+    var p2 = theta[Math.min(n - 1, i + 1)];
+    var p3 = theta[Math.min(n - 1, i + 2)];
+    var a = 2 * p1;
+    var b = p2 - p0;
+    var c = 2 * p0 - 5 * p1 + 4 * p2 - p3;
+    var d = -p0 + 3 * p1 - 3 * p2 + p3;
+    return 0.5 * (a + b * frac + c * frac * frac + d * frac * frac * frac);
+  }
+
+  Ribbon.prototype.build = function (theta) {
+    var M = this.M, cfg = this.cfg;
+    var half = cfg.width * 0.5;
+    var s = 0;
+
+    for (var i = 0; i < M; i++) {
+      var t = i / (M - 1);
+      var th = sampleTheta(theta, t);
+      var c = Math.cos(th * cfg.twist);
+      var ac = Math.abs(c);
+
+      this.x[i] = t * this.w;
+      // Shallow catenary plus the lift the twist imparts.
+      this.cy[i] = this.h * 0.5 + cfg.sag * Math.sin(Math.PI * t) + cfg.lift * th;
+      this.hh[i] = ac * half + cfg.minEdge;
+      this.cosT[i] = c;
+
+      // Surface arc length. Foreshortened stretches pack more printed surface
+      // into fewer screen pixels, so the stripes bunch exactly where the tape
+      // turns edge-on. This is the detail that makes it read as a real
+      // printed ribbon rather than a striped shape.
+      if (i > 0) {
+        var dx = this.x[i] - this.x[i - 1];
+        var dy = this.cy[i] - this.cy[i - 1];
+        var ds = Math.sqrt(dx * dx + dy * dy);
+        s += ds / Math.max(0.18, ac);
+      }
+      this.surf[i] = s;
+    }
+    this.totalSurf = s;
   };
+
+  /** Point on the ribbon at surface coordinate `sv`, across position `v`. */
+  Ribbon.prototype.at = function (sv, v, out) {
+    var M = this.M, surf = this.surf;
+    if (sv <= 0) sv = 0;
+    if (sv >= this.totalSurf) sv = this.totalSurf;
+    // surf is monotonic increasing, so binary search.
+    var lo = 0, hi = M - 1;
+    while (lo < hi - 1) {
+      var mid = (lo + hi) >> 1;
+      if (surf[mid] <= sv) lo = mid; else hi = mid;
+    }
+    var span = surf[hi] - surf[lo];
+    var f = span > 1e-6 ? (sv - surf[lo]) / span : 0;
+    var x = this.x[lo] + (this.x[hi] - this.x[lo]) * f;
+    var cy = this.cy[lo] + (this.cy[hi] - this.cy[lo]) * f;
+    var hh = this.hh[lo] + (this.hh[hi] - this.hh[lo]) * f;
+    out[0] = x;
+    out[1] = cy + v * hh;
+    return out;
+  };
+
+  /**
+   * Lambert-ish shading from the twist. A ribbon turning edge-on catches less
+   * light; past 90 degrees you see the unprinted back, which on real tape is
+   * duller and slightly translucent.
+   */
+  function shade(c, cfg) {
+    var ac = Math.abs(c);
+    var lit = cfg.ambient + (1 - cfg.ambient) * Math.pow(ac, 0.65);
+    // Grazing angles catch a rim of specular off the plastic.
+    var rim = (1 - ac) * (1 - ac) * cfg.sheen;
+    return { lit: lit, rim: rim, back: c < 0 };
+  }
+
+  function mix(a, b, t) {
+    return [
+      Math.round(a[0] + (b[0] - a[0]) * t),
+      Math.round(a[1] + (b[1] - a[1]) * t),
+      Math.round(a[2] + (b[2] - a[2]) * t),
+    ];
+  }
+
+  function css(rgb, alpha) {
+    return "rgba(" + rgb[0] + "," + rgb[1] + "," + rgb[2] + "," + (alpha == null ? 1 : alpha) + ")";
+  }
 
   Ribbon.prototype.render = function (theta) {
-    var n = theta.length;
-    var half = this.cfg.width * 0.5;
-    var top = [], bot = [], xs = [], facing = [];
+    var ctx = this.ctx, cfg = this.cfg, M = this.M;
+    this.build(theta);
+    ctx.clearRect(0, 0, this.w, this.h);
 
-    for (var i = 0; i < n; i++) {
-      var x = (i / (n - 1)) * this.w;
-      var th = theta[i];
-      // Twist foreshortens the ribbon: edge-on is zero height, and past 90deg
-      // you are looking at the back of the tape.
-      var c = Math.cos(th * this.cfg.twist);
-      var hh = Math.abs(c) * half + this.cfg.minEdge;
-      var cy = this.centreY(i, n) + this.cfg.lift * th;
-      xs.push(x);
-      top.push(cy - hh);
-      bot.push(cy + hh);
-      facing.push(c >= 0);
+    var p = [0, 0];
+    var i;
+
+    /* 1. Cast shadow, so the tape sits in front of the page rather than on it. */
+    ctx.save();
+    ctx.translate(0, cfg.shadowDrop);
+    ctx.filter = "blur(" + cfg.shadowBlur + "px)";
+    ctx.fillStyle = "rgba(0,0,0,0.32)";
+    ctx.beginPath();
+    ctx.moveTo(this.x[0], this.cy[0] - this.hh[0]);
+    for (i = 1; i < M; i++) ctx.lineTo(this.x[i], this.cy[i] - this.hh[i]);
+    for (i = M - 1; i >= 0; i--) ctx.lineTo(this.x[i], this.cy[i] + this.hh[i]);
+    ctx.closePath();
+    ctx.fill();
+    ctx.restore();
+
+    /* 2. Body, one quad per render segment, shaded by its own normal. */
+    for (i = 0; i < M - 1; i++) {
+      var c = (this.cosT[i] + this.cosT[i + 1]) * 0.5;
+      var sh = shade(c, cfg);
+      var base = sh.back ? cfg.backRGB : cfg.faceRGB;
+      var col = mix(cfg.shadowRGB, base, sh.lit);
+      ctx.fillStyle = css(col);
+      ctx.beginPath();
+      ctx.moveTo(this.x[i], this.cy[i] - this.hh[i]);
+      ctx.lineTo(this.x[i + 1], this.cy[i + 1] - this.hh[i + 1]);
+      ctx.lineTo(this.x[i + 1], this.cy[i + 1] + this.hh[i + 1]);
+      ctx.lineTo(this.x[i], this.cy[i] + this.hh[i]);
+      ctx.closePath();
+      ctx.fill();
     }
 
-    this.front.setAttribute("d", ribbonPath(xs, top, bot, 0, n - 1));
-    // Back-facing runs get their own darker path drawn over the front fill.
-    this.back.setAttribute("d", backPath(xs, top, bot, facing));
+    /* 3. Hazard stripes, positioned in surface space so they compress with
+          the twist, and slanted so they read as printed diagonals. */
+    var period = cfg.stripePeriod;
+    var skew = cfg.stripeSkew;
+    var a = [0, 0], b = [0, 0], cpt = [0, 0], d = [0, 0];
+    for (var s0 = -skew; s0 < this.totalSurf + skew; s0 += period) {
+      var s1 = s0 + period * cfg.stripeDuty;
+      this.at(s0, -1, a);
+      this.at(s1, -1, b);
+      this.at(s1 + skew, 1, cpt);
+      this.at(s0 + skew, 1, d);
+
+      // Shade the stripe by the surface it is printed on.
+      var mid = (s0 + s1) * 0.5;
+      var idx = this.indexAtSurface(mid);
+      var sc = shade(this.cosT[idx], cfg);
+      var stripeCol = mix(cfg.shadowRGB, sc.back ? cfg.backStripeRGB : cfg.stripeRGB, sc.lit);
+
+      ctx.fillStyle = css(stripeCol);
+      ctx.beginPath();
+      ctx.moveTo(a[0], a[1]);
+      ctx.lineTo(b[0], b[1]);
+      ctx.lineTo(cpt[0], cpt[1]);
+      ctx.lineTo(d[0], d[1]);
+      ctx.closePath();
+      ctx.fill();
+    }
+
+    /* 4. Specular rim along the upper edge, strongest where the tape turns
+          through the light. Drawn as one polyline per alpha bucket so the
+          highlight reads as a continuous sheen instead of a stack of
+          individually stroked segments with visible joins. */
+    ctx.lineWidth = 1.3;
+    ctx.lineJoin = "round";
+    var BUCKETS = 5;
+    for (var bkt = 0; bkt < BUCKETS; bkt++) {
+      var lo = bkt / BUCKETS, hi = (bkt + 1) / BUCKETS;
+      var alpha = cfg.rimBase + (lo + hi) * 0.5 * cfg.sheen;
+      if (alpha < 0.05) continue;
+      ctx.strokeStyle = "rgba(255,244,232," + alpha.toFixed(3) + ")";
+      ctx.beginPath();
+      var drawing = false;
+      for (i = 0; i < M; i++) {
+        var rimAmt = (1 - Math.abs(this.cosT[i]));
+        rimAmt = rimAmt * rimAmt;
+        if (rimAmt >= lo && rimAmt < hi) {
+          if (!drawing) { ctx.moveTo(this.x[i], this.cy[i] - this.hh[i]); drawing = true; }
+          else ctx.lineTo(this.x[i], this.cy[i] - this.hh[i]);
+        } else {
+          drawing = false;
+        }
+      }
+      ctx.stroke();
+    }
+
+    /* 5. Contact shading on the lower edge, which grounds the ribbon. */
+    ctx.strokeStyle = "rgba(0,0,0,0.35)";
+    ctx.lineWidth = 1.2;
+    ctx.beginPath();
+    ctx.moveTo(this.x[0], this.cy[0] + this.hh[0]);
+    for (i = 1; i < M; i++) ctx.lineTo(this.x[i], this.cy[i] + this.hh[i]);
+    ctx.stroke();
+  };
+
+  Ribbon.prototype.indexAtSurface = function (sv) {
+    var lo = 0, hi = this.M - 1, surf = this.surf;
+    while (lo < hi - 1) {
+      var mid = (lo + hi) >> 1;
+      if (surf[mid] <= sv) lo = mid; else hi = mid;
+    }
+    return lo;
   };
 
   Ribbon.prototype.reset = function () {
-    var n = this.cfg.count;
-    var flat = new Float32Array(n);
-    this.render(flat);
+    this.render(new Float32Array(this.cfg.count));
   };
-
-  /** Closed polygon: along the top edge, back along the bottom. */
-  function ribbonPath(xs, top, bot, a, b) {
-    if (b <= a) return "";
-    var d = "M" + r1(xs[a]) + " " + r1(top[a]);
-    for (var i = a + 1; i <= b; i++) d += "L" + r1(xs[i]) + " " + r1(top[i]);
-    for (var j = b; j >= a; j--) d += "L" + r1(xs[j]) + " " + r1(bot[j]);
-    return d + "Z";
-  }
-
-  /** One sub-path per contiguous run of back-facing nodes. */
-  function backPath(xs, top, bot, facing) {
-    var d = "", start = -1;
-    for (var i = 0; i < facing.length; i++) {
-      if (!facing[i] && start < 0) start = i;
-      if ((facing[i] || i === facing.length - 1) && start >= 0) {
-        var end = facing[i] ? i - 1 : i;
-        if (end > start) d += ribbonPath(xs, top, bot, start, end);
-        start = -1;
-      }
-    }
-    return d;
-  }
-
-  function r1(v) {
-    return Math.round(v * 10) / 10;
-  }
 
   /* ---------------------------------------------------------------- driver */
 
@@ -178,9 +341,15 @@
 
     var self = this;
     window.addEventListener("scroll", function () { self.wake(); }, { passive: true });
+    var rt;
     window.addEventListener("resize", function () {
-      for (var i = 0; i < self.items.length; i++) self.items[i].ribbon.measure();
-      self.wake();
+      clearTimeout(rt);
+      rt = setTimeout(function () {
+        for (var i = 0; i < self.items.length; i++) {
+          if (self.items[i].ribbon.measure()) self.items[i].ribbon.reset();
+        }
+        self.wake();
+      }, 150);
     }, { passive: true });
     document.addEventListener("visibilitychange", function () {
       if (document.hidden) self.running = false; else self.wake();
@@ -202,11 +371,14 @@
       }, { rootMargin: "20% 0px" }).observe(root);
     }
 
-    // Brushing the tape with the pointer pushes it locally.
+    function nodeAt(e) {
+      var r = root.getBoundingClientRect();
+      return Math.round(((e.clientX - r.left) / r.width) * (chain.count - 1));
+    }
+
     root.addEventListener("pointermove", function (e) {
       if (reduced.matches) return;
-      var r = root.getBoundingClientRect();
-      var i = Math.round(((e.clientX - r.left) / r.width) * (chain.count - 1));
+      var i = nodeAt(e);
       chain.impulse(i, self.cfg.brushImpulse);
       chain.impulse(i - 1, self.cfg.brushImpulse * 0.5);
       chain.impulse(i + 1, self.cfg.brushImpulse * 0.5);
@@ -215,8 +387,7 @@
 
     root.addEventListener("pointerdown", function (e) {
       if (reduced.matches) return;
-      var r = root.getBoundingClientRect();
-      var i = Math.round(((e.clientX - r.left) / r.width) * (chain.count - 1));
+      var i = nodeAt(e);
       chain.impulse(i, self.cfg.clickImpulse);
       chain.impulse(i - 1, self.cfg.clickImpulse * 0.6);
       chain.impulse(i + 1, self.cfg.clickImpulse * 0.6);
@@ -295,10 +466,10 @@
   var DRIVER = {
     dt: DT,
     maxSubsteps: 4,
-    // Tuned against the solver: at twist 3.4 a click peaks around 0.9 rad,
-    // which carries roughly seven segments past 90deg so a run of tape
-    // visibly flips onto its back face. Scroll wind peaks near 0.37 rad and
-    // never flips, so ambient scrolling undulates without strobing.
+    // Tuned against the solver: at twist 3.4 a click peaks near 0.9 rad, which
+    // carries a run of tape past 90 degrees so it visibly flips onto its back.
+    // Scroll wind peaks near 0.37 rad and never flips, so scrolling undulates
+    // the tape without strobing it.
     brushImpulse: 4,
     clickImpulse: 20,
     velClamp: 3000,
@@ -309,6 +480,28 @@
     sleepFrames: 30,
   };
 
+  function readColors(root) {
+    var cs = getComputedStyle(root);
+    function rgb(name, fallback) {
+      var v = cs.getPropertyValue(name).trim();
+      var m = v.match(/^#?([0-9a-f]{6})$/i);
+      if (m) {
+        var n = parseInt(m[1], 16);
+        return [(n >> 16) & 255, (n >> 8) & 255, n & 255];
+      }
+      var p = v.match(/[\d.]+/g);
+      if (p && p.length >= 3) return [+p[0], +p[1], +p[2]];
+      return fallback;
+    }
+    return {
+      faceRGB: rgb("--tape-face", [255, 106, 43]),
+      stripeRGB: rgb("--tape-stripe", [20, 22, 26]),
+      backRGB: rgb("--tape-back", [184, 69, 26]),
+      backStripeRGB: rgb("--tape-back-stripe", [38, 34, 32]),
+      shadowRGB: [8, 9, 12],
+    };
+  }
+
   function init() {
     var roots = document.querySelectorAll("[data-tape]");
     if (!roots.length) return;
@@ -317,17 +510,35 @@
 
     for (var i = 0; i < roots.length; i++) {
       var root = roots[i];
+      if (!root.querySelector(".tape__canvas")) continue;
+
       var count = Number(root.getAttribute("data-nodes")) || 46;
+      var colors = readColors(root);
       var geom = {
         count: count,
+        samples: 220,
         width: Number(root.getAttribute("data-width")) || 34,
         sag: Number(root.getAttribute("data-sag")) || 10,
         twist: 3.4,
         lift: 10,
-        minEdge: 0.6,
+        minEdge: 0.5,
+        stripePeriod: 46,
+        stripeDuty: 0.5,
+        stripeSkew: 30,
+        ambient: 0.34,
+        sheen: 0.42,
+        rimBase: 0.06,
+        shadowDrop: 7,
+        shadowBlur: 7,
+        faceRGB: colors.faceRGB,
+        stripeRGB: colors.stripeRGB,
+        backRGB: colors.backRGB,
+        backStripeRGB: colors.backStripeRGB,
+        shadowRGB: colors.shadowRGB,
       };
+
       var ribbon = new Ribbon(root, geom);
-      ribbon.measure();
+      if (!ribbon.measure()) continue;
       ribbon.reset();
       root.classList.add("is-live");
 

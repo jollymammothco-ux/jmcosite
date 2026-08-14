@@ -588,37 +588,28 @@ a {
   touch-action: pan-y;
 }
 
-.tape__svg {
+.tape__canvas {
   display: block;
   width: 100%;
   height: 100%;
-  overflow: visible;
 }
 
 /* Until the script measures and draws, show nothing rather than a flash of
    an unpositioned ribbon. */
-.tape:not(.is-live) .tape__svg {
+.tape:not(.is-live) .tape__canvas {
   visibility: hidden;
 }
 
-.tape__front {
-  fill: url(#tape-stripes);
-}
-
-.tape__back {
-  fill: var(--tape-back);
-}
-
-.tape__edge {
-  fill: none;
-  stroke: rgba(0, 0, 0, 0.45);
-  stroke-width: 1;
-}
-
+/* Read by tape.js so the ribbon can be recoloured per section from CSS.
+   Hazard tape is printed on one face only and the film is slightly
+   translucent, so the reverse reads as a washed, low-contrast version of the
+   front rather than the same graphic in shadow. Keeping the back stripe close
+   to the back face is what sells the flip. */
 :root {
   --tape-face: #ff6a2b;
   --tape-stripe: #14161a;
-  --tape-back: #b8451a;
+  --tape-back: #a8461c;
+  --tape-back-stripe: #7a3517;
 }
 
 /* The Creative Department gets its own tape colours, same as everything else
@@ -627,7 +618,8 @@ a {
 .tape--creative {
   --tape-face: #ffc8e0;
   --tape-stripe: #14161a;
-  --tape-back: #c98aa6;
+  --tape-back: #b07f93;
+  --tape-back-stripe: #8d6274;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -1612,42 +1604,49 @@ a {
   margin: 2rem auto 0;
 }
 
+/* Tighter than before. With the icon on the title line these cards were
+   carrying a lot of empty room. */
 .feature {
-  padding: 1.25rem;
+  padding: 1rem 1.1rem 1.05rem;
   background: rgba(0, 0, 0, 0.15);
   border-radius: var(--radius);
 }
 
-/* Neon line-art icons. They already run on cyan/yellow/orange/green, which
-   happens to sit right next to the Jolly palette, so they read as part of the
-   brand rather than as stock clip art. Kept small and dimmed until hover so
-   six of them in a grid do not out-shout the copy. */
+/* Neon line-art icons sit on the title line rather than stacked above it,
+   which removes a row of dead space from every card. They already run on
+   cyan/yellow/orange, right next to the Jolly palette, so they read as brand
+   rather than clip art. Dimmed at rest so six in a grid do not out-shout
+   the copy. */
+.feature h3 {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  line-height: 1.05;
+  text-transform: uppercase;
+  margin: 0 0 0.4rem;
+  color: var(--text);
+}
+
 .feature-icon {
-  width: 40px;
-  height: 40px;
-  margin-bottom: 0.85rem;
-  opacity: 0.82;
+  flex-shrink: 0;
+  width: 30px;
+  height: 30px;
+  opacity: 0.85;
   transition: opacity 0.25s ease, transform 0.25s ease;
-  filter: drop-shadow(0 0 10px rgba(255, 106, 43, 0.28));
+  filter: drop-shadow(0 0 8px rgba(255, 106, 43, 0.3));
 }
 
 .feature:hover .feature-icon {
   opacity: 1;
-  transform: translateY(-2px) scale(1.06);
+  transform: scale(1.08);
 }
 
 @media (prefers-reduced-motion: reduce) {
   .feature:hover .feature-icon {
     transform: none;
   }
-}
-
-.feature h3 {
-  font-family: var(--font-display);
-  font-size: 1.35rem;
-  text-transform: uppercase;
-  margin: 0 0 0.5rem;
-  color: var(--text);
 }
 
 .section-blue .feature h3,
