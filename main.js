@@ -35,6 +35,46 @@ if (heroVideo) {
   }
 }
 
+// Primary CTAs land as a hammer blow.
+// The cursor swap is pure CSS; this only marks where the blow landed so the
+// shock ring can start from the point of contact, and replays the animation
+// on every press rather than only the first.
+(function initStrike() {
+  const buttons = document.querySelectorAll(".btn-primary");
+  if (!buttons.length) return;
+
+  buttons.forEach((btn) => {
+    btn.addEventListener("pointerdown", (e) => {
+      const r = btn.getBoundingClientRect();
+      // Fall back to the centre for keyboard activation, which has no point.
+      const x = e.clientX ? e.clientX - r.left : r.width / 2;
+      const y = e.clientY ? e.clientY - r.top : r.height / 2;
+      btn.style.setProperty("--strike-x", x + "px");
+      btn.style.setProperty("--strike-y", y + "px");
+
+      // Restarting a CSS animation needs the class gone and the style
+      // recomputed before it goes back on.
+      btn.classList.remove("is-struck");
+      void btn.offsetWidth;
+      btn.classList.add("is-struck");
+    });
+
+    btn.addEventListener("animationend", (e) => {
+      if (e.animationName === "strike-hit") btn.classList.remove("is-struck");
+    });
+
+    // Keyboard users get the same feedback.
+    btn.addEventListener("keydown", (e) => {
+      if (e.key !== "Enter" && e.key !== " ") return;
+      btn.style.removeProperty("--strike-x");
+      btn.style.removeProperty("--strike-y");
+      btn.classList.remove("is-struck");
+      void btn.offsetWidth;
+      btn.classList.add("is-struck");
+    });
+  });
+})();
+
 // Work cards: play a silent clip on hover.
 // The <video> is created on first hover rather than shipped in the markup, so
 // a grid of twelve cards costs nothing until someone actually points at one.

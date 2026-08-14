@@ -510,16 +510,125 @@ a {
   }
 }
 
+/* ===================================================================
+   THE STRIKE
+   Primary CTAs are driven, not clicked. The pointer becomes a cocked
+   hammer, the nail head stands proud on hover, and the click lands as a
+   real impact: the button takes the blow, the nail goes flush, a shock
+   ring runs out from where you hit.
+
+   The cursor is a CSS `cursor: url()` rather than an element chasing the
+   mouse. The compositor draws it, so it cannot lag behind the pointer,
+   which is what makes most custom cursors feel cheap.
+
+   Scoped to primary CTAs on purpose. Replacing the cursor site-wide
+   would cost every affordance the system cursor carries.
+   =================================================================== */
 .btn-primary {
+  position: relative;
+  overflow: hidden;
   background: var(--signal);
   border-color: var(--signal);
   color: var(--on-signal);
+  cursor: url("assets/cursor/hammer-up.png") 6 17, pointer;
+}
+
+.btn-primary:active {
+  cursor: url("assets/cursor/hammer-down.png") 4 13, pointer;
 }
 
 .btn-primary:hover {
   background: var(--signal-hot);
   border-color: var(--signal-hot);
   color: var(--on-signal);
+}
+
+/* The nail. Sits nearly flush at rest, lifts under the raised hammer, and is
+   driven home on the strike.
+
+   A flex item rather than an absolutely positioned dot: .btn is already
+   inline-flex, so this way the button sizes itself around the nail and the
+   label can never run underneath it. Positioned absolutely it overlapped the
+   header CTA's text by 3px, because that button has the tightest padding. */
+.btn-primary::after {
+  content: "";
+  flex: 0 0 auto;
+  width: 8px;
+  height: 8px;
+  margin-left: 0.7rem;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 32% 28%, #e9edf1 0%, #9aa3ad 45%, #5d666f 100%);
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.45), 0 0 0 1px rgba(0, 0, 0, 0.3);
+  transform: translateY(var(--nail-lift, 0));
+  transition: transform 0.18s cubic-bezier(0.22, 1, 0.36, 1);
+  pointer-events: none;
+}
+
+.btn-primary:hover::after {
+  --nail-lift: -2.5px;
+}
+
+.btn-primary.is-struck::after {
+  --nail-lift: 1px;
+  transition: transform 0.09s cubic-bezier(0.36, 0, 0.66, -0.56);
+}
+
+/* Shock ring, expanding from the point of impact. */
+.btn-primary::before {
+  content: "";
+  position: absolute;
+  left: var(--strike-x, 50%);
+  top: var(--strike-y, 50%);
+  width: 12px;
+  height: 12px;
+  margin: -6px 0 0 -6px;
+  border-radius: 50%;
+  border: 2px solid rgba(0, 0, 0, 0.55);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.btn-primary.is-struck::before {
+  animation: strike-ring 0.44s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes strike-ring {
+  0% { opacity: 0.75; transform: scale(0.3); }
+  100% { opacity: 0; transform: scale(11); }
+}
+
+/* The blow itself. Short and sharp: compress on contact, one small
+   overshoot, done inside 260ms. Anything longer reads as a bounce. */
+.btn-primary.is-struck {
+  animation: strike-hit 0.26s cubic-bezier(0.2, 0.8, 0.3, 1);
+}
+
+@keyframes strike-hit {
+  0% { transform: translateY(0) scaleY(1); }
+  16% { transform: translateY(2px) scaleY(0.93); }
+  46% { transform: translateY(-1px) scaleY(1.02); }
+  100% { transform: translateY(0) scaleY(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn-primary.is-struck,
+  .btn-primary.is-struck::before {
+    animation: none;
+  }
+
+  .btn-primary::after,
+  .btn-primary:hover::after {
+    --nail-lift: 0;
+    transition: none;
+  }
+}
+
+/* Touch has no hover and no cursor, so the nail would just be a dot. */
+@media (hover: none) {
+  .btn-primary::after {
+    display: none;
+  }
 }
 
 .btn-ghost {
@@ -651,95 +760,6 @@ a {
     width: 17px;
     --rail-blade: 13;
     --rail-scale: 26;
-  }
-}
-
-/* ===================================================================
-   DIMENSION CALLOUT
-   Extension lines, arrowheads and a label, the way a section gets
-   annotated on a construction drawing. Quiet on purpose: it is a
-   caption for the page, not another animation competing for attention.
-   =================================================================== */
-.dim {
-  display: flex;
-  align-items: center;
-  gap: 0;
-  max-width: 1120px;
-  margin: 0 auto;
-  padding: clamp(1.75rem, 4vw, 2.75rem) 1.25rem;
-}
-
-.dim__ext {
-  flex: 0 0 auto;
-  width: 1px;
-  height: 26px;
-  background: var(--theme-border-heavy);
-}
-
-/* The measured span, with an arrowhead at each end. */
-.dim__line {
-  position: relative;
-  flex: 1 1 auto;
-  height: 1px;
-  background: var(--theme-border-heavy);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transform-origin: left center;
-  transform: scaleX(var(--dim-draw, 1));
-  transition: transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.js .dim:not(.is-visible) .dim__line {
-  --dim-draw: 0;
-}
-
-.dim__line::before,
-.dim__line::after {
-  content: "";
-  position: absolute;
-  top: 50%;
-  width: 7px;
-  height: 7px;
-  border-top: 1px solid var(--theme-border-heavy);
-  border-right: 1px solid var(--theme-border-heavy);
-}
-
-.dim__line::before {
-  left: 0;
-  transform: translateY(-50%) rotate(-135deg);
-}
-
-.dim__line::after {
-  right: 0;
-  transform: translateY(-50%) rotate(45deg);
-}
-
-.dim__label {
-  position: relative;
-  padding: 0 0.9rem;
-  background: var(--ground);
-  font-size: 0.7rem;
-  font-weight: 600;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--text-muted);
-  white-space: nowrap;
-  opacity: var(--dim-fade, 1);
-  transition: opacity 0.5s ease 0.35s;
-}
-
-.js .dim:not(.is-visible) .dim__label {
-  --dim-fade: 0;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .dim__line {
-    transform: none;
-  }
-
-  .dim__label {
-    opacity: 1;
   }
 }
 
