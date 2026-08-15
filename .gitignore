@@ -5,6 +5,9 @@ node_modules/
 .netlify/
 .claude/
 
+# Byte-cache from the cursor art generator.
+__pycache__/
+
 # Original camera/phone uploads. Kept locally, not deployed.
 _source-media/
 .DS_Store

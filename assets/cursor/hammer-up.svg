@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48">
+  <defs>
+    <linearGradient id="steel" x1="0" y1="0" x2="0.85" y2="1">
+      <stop offset="0" stop-color="#f2f6fa"/>
+      <stop offset="0.40" stop-color="#c2cbd5"/>
+      <stop offset="0.74" stop-color="#8b95a1"/>
+      <stop offset="1" stop-color="#626b77"/>
+    </linearGradient>
+    <linearGradient id="wood" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#c08a44"/>
+      <stop offset="0.5" stop-color="#8f5c22"/>
+      <stop offset="1" stop-color="#5a3611"/>
+    </linearGradient>
+  </defs>
+  <g transform="translate(2.05,10.25) scale(1.0000)">
+    <g transform="rotate(17.0,37.55,17.83)">
+      <g transform="translate(12.00,8.60) rotate(-8.0,0,21.4)">
+        <!-- Handle first: the head then covers where it enters the eye, so it
+             reads as passing through rather than butting against. -->
+        <path d="M 2.20,9.40 L 9.50,9.70 L 21.00,10.40 L 25.50,10.30 L 29.50,10.70 L 29.50,14.90 L 25.50,15.40 L 21.00,14.80 L 9.50,14.90 L 2.20,15.00 Z" fill="url(#wood)" stroke="#14171c"
+              stroke-width="1.15" stroke-linejoin="round"/>
+        <!-- Claw and head are two shapes that overlap. Stroking both would
+             draw an outline along the seam between them, so they are stroked
+             first and then re-filled without stroke: the exterior outline
+             survives (half of it sits outside the fill) and the seam is
+             painted out. -->
+        <g stroke="#14171c" stroke-width="1.15" stroke-linejoin="round">
+          <path d="M -5.5,9.4
+  C -5.6,3.6 -4.0,-1.0 -0.4,-4.2
+  L 3.0,-1.6
+  C 1.4,0.2 0.6,3.4 0.9,9.4 Z" fill="url(#steel)"/>
+          <path d="M 6.10,21.40 L 6.40,19.00 L 4.00,17.80 L 4.40,15.80 L 5.50,14.40 L 5.80,12.00 L 5.50,7.60 L -5.50,7.60 L -5.80,12.00 L -5.50,14.40 L -4.40,15.80 L -4.00,17.80 L -6.40,19.00 L -6.10,21.40 Z" fill="url(#steel)"/>
+        </g>
+        <g stroke="none">
+          <path d="M -5.5,9.4
+  C -5.6,3.6 -4.0,-1.0 -0.4,-4.2
+  L 3.0,-1.6
+  C 1.4,0.2 0.6,3.4 0.9,9.4 Z" fill="url(#steel)"/>
+          <path d="M 6.10,21.40 L 6.40,19.00 L 4.00,17.80 L 4.40,15.80 L 5.50,14.40 L 5.80,12.00 L 5.50,7.60 L -5.50,7.60 L -5.80,12.00 L -5.50,14.40 L -4.40,15.80 L -4.00,17.80 L -6.40,19.00 L -6.10,21.40 Z" fill="url(#steel)"/>
+        </g>
+        <path d="M -1.8,-2.6 C -1.0,0.8 -1.4,4.4 -1.2,8.0" fill="none" stroke="#5c6672" stroke-width="0.7"
+              stroke-linecap="round" opacity="0.5"/>
+        <!-- polished striking face: the brightest edge is the business end -->
+        <path d="M -5.7,18.70 L 5.7,18.70 L 5.5,21.05 L -5.5,21.05 Z"
+              fill="#f6fafd" opacity="0.95"/>
+      </g>
+    </g>
+  </g>
+</svg>

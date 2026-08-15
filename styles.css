@@ -186,7 +186,8 @@ body {
   font-size: 1.05rem;
   line-height: 1.55;
   color: var(--text);
-  background: var(--charcoal-deep);
+  /* The page ground every band fades into at its edges. See THE BANDS. */
+  background: var(--ground-deep);
   -webkit-font-smoothing: antialiased;
 }
 
@@ -513,12 +514,22 @@ a {
 /* ===================================================================
    THE STRIKE
    Primary CTAs are driven, not clicked. The pointer becomes a cocked
-   claw hammer, and the press drives a nail into the button.
+   hammer, and the press drives a nail into the button.
+
+   A plain hammer: steel head, flat striking face, wood handle. No claw.
+   Two earlier passes drew one, and at 48px its curl read as a hook
+   rather than a claw while eating the pixels that should have gone into
+   the head's mass. What makes a hammer legible this small is weight, not
+   detail: a chunky eye block, a waisted neck, and a bright flat face.
+   Geometry lives in assets/cursor/hammer-src.py; both poses are fitted
+   to the canvas together so the hotspot is the same pixel in each and
+   the pointer does not jump on press.
 
    The cursor is `cursor: url()` rather than an element chasing the
    pointer: the compositor draws it, so it cannot lag, which is what
-   makes most custom cursors feel cheap. Two poses, both pivoted on the
-   striking face so the head stays put through the swing.
+   makes most custom cursors feel cheap. PNG first, SVG second: where
+   SVG cursors are supported the later rule wins and the art stays sharp
+   on retina, and where they are not the PNG already holds.
 
    The nail is drawn in side profile standing on the button's surface,
    not as a plan-view dot. A dot read as a stray bezel light; a nail with
@@ -534,11 +545,13 @@ a {
   background: var(--signal);
   border-color: var(--signal);
   color: var(--on-signal);
-  cursor: url("assets/cursor/hammer-up.png") 8 26, pointer;
+  cursor: url("assets/cursor/hammer-up.png?v=3") 14 40, pointer;
+  cursor: url("assets/cursor/hammer-up.svg?v=3") 14 40, pointer;
 }
 
 .btn-primary:active {
-  cursor: url("assets/cursor/hammer-down.png") 8 26, pointer;
+  cursor: url("assets/cursor/hammer-down.png?v=3") 14 40, pointer;
+  cursor: url("assets/cursor/hammer-down.svg?v=3") 14 40, pointer;
 }
 
 .btn-primary:hover {
@@ -577,16 +590,43 @@ a {
   --drive: -3px;
 }
 
-/* Struck: down hard, hold, then ease back so the next press has a nail to
-   hit. The hold is what makes it read as driven rather than as a bounce. */
+/* Struck. Weight is not slowness, it is contrast: a wind-up you can feel, a
+   hit faster than anything else on the page, then a long beat where nothing
+   moves at all. The old pass ran the whole thing in 0.66s at one easing, so
+   the drive and the return read as a single bounce and the blow carried no
+   mass. Per-keyframe easing is what buys the contrast, so the animation is
+   declared linear and each step sets its own curve. */
 .btn-primary.is-struck .nail::before {
-  animation: nail-drive 0.66s cubic-bezier(0.2, 0.9, 0.3, 1);
+  animation: nail-drive 1.15s linear;
 }
 
 @keyframes nail-drive {
-  0% { transform: translateY(-3px); }
-  9% { transform: translateY(14px); }
-  58% { transform: translateY(14px); }
+  /* wind: the nail rides up under the raised hammer */
+  0% {
+    transform: translateY(-3px);
+    animation-timing-function: cubic-bezier(0.4, 0, 0.9, 0.35);
+  }
+  4% {
+    transform: translateY(-4.5px);
+    animation-timing-function: cubic-bezier(0.55, 0, 0.75, 0.1);
+  }
+  /* the blow: ~60ms of travel, the fastest move on the page */
+  9% {
+    transform: translateY(14px);
+    animation-timing-function: ease-out;
+  }
+  /* the timber pushes back a hair, then the nail seats */
+  13% {
+    transform: translateY(12.4px);
+    animation-timing-function: ease-in-out;
+  }
+  18% { transform: translateY(14px); }
+  /* the beat. Nothing moves for 0.64s. This is where the weight lives. */
+  74% {
+    transform: translateY(14px);
+    animation-timing-function: cubic-bezier(0.32, 0, 0.24, 1);
+  }
+  /* drawn back out slowly, so the next press has a nail to hit */
   100% { transform: translateY(0); }
 }
 
@@ -605,14 +645,16 @@ a {
   pointer-events: none;
 }
 
+/* Delayed to land on the impact keyframe rather than on the press, so the
+   flash marks contact instead of announcing it. */
 .btn-primary.is-struck .nail::after {
-  animation: nail-flash 0.34s ease-out;
+  animation: nail-flash 0.3s ease-out 0.075s;
 }
 
 @keyframes nail-flash {
   0% { opacity: 0; transform: scale(0.2); }
-  14% { opacity: 1; transform: scale(1); }
-  100% { opacity: 0; transform: scale(1.5); }
+  12% { opacity: 1; transform: scale(1); }
+  100% { opacity: 0; transform: scale(1.6); }
 }
 
 /* Shock ring, from the exact point of contact. */
@@ -630,26 +672,51 @@ a {
   pointer-events: none;
 }
 
+/* Same delay as the flash: the ring leaves the point of contact at the moment
+   of contact. It also runs wider and longer now, so the shock outlives the
+   hit instead of finishing with it. */
 .btn-primary.is-struck::before {
-  animation: strike-ring 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: strike-ring 0.78s cubic-bezier(0.12, 0.8, 0.25, 1) 0.075s forwards;
 }
 
 @keyframes strike-ring {
-  0% { opacity: 0.85; transform: scale(0.25); }
-  100% { opacity: 0; transform: scale(12); }
+  0% { opacity: 0.9; transform: scale(0.2); }
+  100% { opacity: 0; transform: scale(15); }
 }
 
-/* The blow. Deeper than the first attempt, which was too small to read at
-   all, but still finished quickly: a long bounce reads as a toy. */
+/* The button takes the blow: a small rise as the hammer winds, a hard dip on
+   contact, then a settle that damps out over three decreasing bounces. The
+   old version dipped and recovered in 0.34s flat, which reads as a UI blip
+   rather than as something heavy landing on it. */
 .btn-primary.is-struck {
-  animation: strike-hit 0.34s cubic-bezier(0.2, 0.85, 0.28, 1);
+  animation: strike-hit 0.72s linear;
 }
 
 @keyframes strike-hit {
-  0% { transform: translateY(0) scaleY(1); }
-  14% { transform: translateY(3px) scaleY(0.9); }
-  42% { transform: translateY(-1.5px) scaleY(1.03); }
-  70% { transform: translateY(0.5px) scaleY(0.99); }
+  0% {
+    transform: translateY(0) scaleY(1);
+    animation-timing-function: cubic-bezier(0.4, 0, 0.85, 0.4);
+  }
+  6% {
+    transform: translateY(-1.5px) scaleY(1.02);
+    animation-timing-function: cubic-bezier(0.55, 0, 0.7, 0.1);
+  }
+  14% {
+    transform: translateY(4px) scaleY(0.88);
+    animation-timing-function: ease-out;
+  }
+  30% {
+    transform: translateY(-1.6px) scaleY(1.035);
+    animation-timing-function: ease-in-out;
+  }
+  48% {
+    transform: translateY(1.1px) scaleY(0.985);
+    animation-timing-function: ease-in-out;
+  }
+  68% {
+    transform: translateY(-0.4px) scaleY(1.008);
+    animation-timing-function: ease-in-out;
+  }
   100% { transform: translateY(0) scaleY(1); }
 }
 
@@ -674,6 +741,31 @@ a {
   .btn-primary:hover .nail::before {
     --drive: 0;
   }
+}
+
+/* Jump links wear the primary colour but they are not a commitment — they
+   just move you down the page. There is nothing to drive home, so the whole
+   strike comes off: no nail, no blow, no hammer. Two of these sat beside real
+   CTAs and the metaphor read as redundant. The strike stays reserved for the
+   buttons that actually ask the reader for something.
+
+   Stated in CSS rather than left to the JS that skips these, so a button
+   marked .btn-jump is inert even if a stale main.js injects a nail into it. */
+.btn-primary.btn-jump,
+.btn-primary.btn-jump:active {
+  cursor: pointer;
+}
+
+.btn-primary.btn-jump::before {
+  content: none;
+}
+
+.btn-primary.btn-jump .nail {
+  display: none;
+}
+
+.btn-primary.btn-jump.is-struck {
+  animation: none;
 }
 
 .btn-ghost {
@@ -815,7 +907,9 @@ a {
   position: relative;
   isolation: isolate;
   overflow: hidden;
-  background-color: var(--slate-deep);
+  /* Matches the page ground so the photographic bands join the same way the
+     colour bands now do. Only ever seen before the image decodes. */
+  background-color: var(--ground-deep);
 }
 
 .band-photo > .band-photo-bg {
@@ -828,6 +922,25 @@ a {
      contrast everywhere stops reading as a photograph at all, so instead the
      copy is kept off it and the image gets to stay bright. */
   filter: grayscale(0.35) contrast(1.06) brightness(0.92) saturate(0.9);
+}
+
+/* Video layers over the poster frame inside the same element, so it inherits
+   the grading filter above and needs no separate treatment. It only ever
+   starts playing if initBackgroundVideo decides the connection can afford it;
+   until then the poster underneath is what shows. */
+.band-photo-bg > video {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 0.6s ease;
+}
+
+.band-photo-bg > video.is-playing {
+  opacity: 1;
 }
 
 .band-photo::before {
@@ -876,6 +989,32 @@ a {
 
   .band-photo .pain-buckets {
     max-width: 620px;
+  }
+}
+
+/* Once the buckets stack, the left anchor has nothing left to anchor against:
+   the scrim has already gone uniform and the photograph is texture rather
+   than a picture, so there is no clear zone on the right for the copy to hold
+   its edge away from. Left-aligned in that state reads as off-centre rather
+   than deliberate, so the whole column centres. The eyebrow's signal rule
+   comes with it, which is why it needs the auto margins too. */
+@media (max-width: 767px) {
+  .band-photo > .band-anchor,
+  .band-photo > .band-anchor > .headline,
+  .band-photo > .band-anchor > .eyebrow,
+  .band-photo > .band-anchor > .lead,
+  .band-photo .band-anchor .pain-bucket-label,
+  .band-photo .band-anchor .pain-grid li,
+  .band-photo .band-anchor .pain-footer {
+    text-align: center;
+  }
+
+  .band-photo > .band-anchor > .headline,
+  .band-photo > .band-anchor > .eyebrow,
+  .band-photo > .band-anchor > .lead,
+  .band-photo .band-anchor .pain-buckets,
+  .band-photo .band-anchor .pain-footer {
+    margin-inline: auto;
   }
 }
 
@@ -999,8 +1138,30 @@ a {
   margin-inline: max(0px, calc((100% - 1120px) / 2)) auto;
 }
 
+/* ===================================================================
+   THE BANDS
+   Every band starts and ends at the page ground and reaches its own
+   colour in the middle. The hues and the running order are unchanged;
+   only the joins are. Hard-edged blocks made scrolling read as a stack
+   of separate pages rather than one argument, and the edges were doing
+   that work, not the colours.
+
+   Near-black bands have no edge to dissolve into a near-black ground,
+   so those get a low radial lift instead. Fading black into black just
+   flattens them.
+
+   Contrast is unaffected by construction: each ramp runs between two
+   grounds that already carried this text, so every point on it is a
+   blend of two passing values.
+   =================================================================== */
 .section-charcoal {
-  background: var(--charcoal);
+  background:
+    radial-gradient(
+      ellipse 120% 80% at 50% 0%,
+      rgba(255, 106, 43, 0.05),
+      transparent 62%
+    ),
+    linear-gradient(180deg, var(--ground-deep) 0%, var(--charcoal) 45%, var(--ground-deep) 100%);
 }
 
 /* The Jolly band is the vision beat, sitting between the problem and the
@@ -1105,16 +1266,34 @@ a {
 }
 
 .section-dark {
-  background: var(--charcoal-deep);
+  background:
+    radial-gradient(
+      ellipse 120% 80% at 50% 0%,
+      rgba(255, 106, 43, 0.05),
+      transparent 62%
+    ),
+    linear-gradient(180deg, var(--ground-deep) 0%, var(--charcoal-deep) 45%, var(--ground-deep) 100%);
 }
 
 .section-blue {
-  background: var(--blue);
+  background: linear-gradient(
+    180deg,
+    var(--ground-deep) 0%,
+    var(--blue) 20%,
+    var(--blue) 80%,
+    var(--ground-deep) 100%
+  );
   color: var(--white);
 }
 
 .section-blue-dark {
-  background: var(--blue-dark);
+  background: linear-gradient(
+    180deg,
+    var(--ground-deep) 0%,
+    var(--blue-dark) 20%,
+    var(--blue-dark) 80%,
+    var(--ground-deep) 100%
+  );
   color: var(--white);
 }
 
@@ -1760,20 +1939,213 @@ a {
   font-size: 1.5rem;
 }
 
-.mock-bars {
-  display: flex;
-  align-items: flex-end;
-  gap: 8px;
-  height: 100px;
-  padding-top: 0.5rem;
+/* ===================================================================
+   RAPIDDASHBOARD DEMO
+   Shows the mechanic instead of asserting it. The old panel said "live
+   dashboard" over five bars with no numbers on them, which is a claim
+   rather than a demonstration.
+
+   One measure (dollars over budget) across five jobs, so the bars are a
+   single hue stepped by magnitude. Five different colours would say the
+   jobs are five categories that need telling apart; they are not, they
+   are one thing ranked. Steps run bright-to-dim rather than the usual
+   light-to-dark, because the surface here is dark and a dark step would
+   sink into it. Every bar carries its own value, so ranking survives
+   greyscale, colour blindness and a printer.
+   =================================================================== */
+.rd-demo {
+  width: 100%;
+  border-radius: 10px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--theme-border-strong);
 }
 
-.mock-bars span {
-  flex: 1;
-  height: var(--h);
-  background: linear-gradient(180deg, var(--mint), var(--blue));
-  border-radius: 4px 4px 0 0;
-  min-height: 12px;
+.rd-chrome {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0.6rem 0.85rem;
+  background: rgba(255, 255, 255, 0.05);
+  border-bottom: 1px solid var(--theme-border-strong);
+}
+
+.rd-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.18);
+}
+
+.rd-chrome-label {
+  margin-left: auto;
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  /* Faint ink cleared 4.5:1 on the old flat band but not on the lifted one
+     the gradient grounds introduced. Muted, not faint. */
+  color: var(--text-muted);
+}
+
+.rd-ask {
+  padding: 0.9rem 1.1rem;
+  border-bottom: 1px solid var(--theme-border-strong);
+}
+
+.rd-question {
+  margin: 0;
+  color: var(--text);
+  font-style: italic;
+  min-height: 1.5em;
+}
+
+/* Only visible while the line is being typed. */
+.rd-caret {
+  display: none;
+  width: 2px;
+  height: 1.05em;
+  margin-left: 1px;
+  vertical-align: text-bottom;
+  background: var(--signal);
+}
+
+.rd-demo.is-typing .rd-caret {
+  display: inline-block;
+  animation: rd-blink 1s steps(1, end) infinite;
+}
+
+@keyframes rd-blink {
+  50% { opacity: 0; }
+}
+
+.rd-answer {
+  padding: 1rem 1.1rem 1.1rem;
+}
+
+/* Headline numbers. The answer to the question is a figure, not a chart,
+   so it gets to be a figure. */
+.rd-kpis {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.75rem;
+  margin-bottom: 1.1rem;
+}
+
+.rd-kpi b {
+  display: block;
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 3.4vw, 2rem);
+  line-height: 1;
+  letter-spacing: 0.02em;
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+}
+
+.rd-kpi span {
+  display: block;
+  margin-top: 0.3rem;
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.rd-bars {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.rd-bars li {
+  display: grid;
+  grid-template-columns: minmax(0, 7.5rem) 1fr auto;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.rd-bar-name {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.rd-bar-track {
+  position: relative;
+  height: 10px;
+  border-radius: 5px;
+  background: rgba(255, 255, 255, 0.07);
+  overflow: hidden;
+}
+
+/* The single-hue ramp, brightest at the top of the ranking. */
+.rd-bar-track i {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: var(--w);
+  border-radius: 5px;
+  background: var(--signal);
+  transform-origin: left center;
+}
+
+.rd-bars li:nth-child(2) .rd-bar-track i { background: #e2571f; }
+.rd-bars li:nth-child(3) .rd-bar-track i { background: #c04619; }
+.rd-bars li:nth-child(4) .rd-bar-track i { background: #9c3714; }
+.rd-bars li:nth-child(5) .rd-bar-track i { background: #7b2b11; }
+
+.rd-bar-val {
+  font-size: 0.78rem;
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.rd-foot {
+  margin: 1rem 0 0;
+  font-size: 0.72rem;
+  color: var(--text-faint);
+}
+
+/* Build-in. Held at zero only while the panel is armed and waiting for the
+   reader to reach it; if the script never runs, everything stays at its
+   authored value and the panel is simply static. */
+.rd-demo.is-armed .rd-bar-track i {
+  transform: scaleX(0);
+}
+
+.rd-demo.is-running .rd-bar-track i {
+  transform: scaleX(1);
+  transition: transform 0.62s cubic-bezier(0.22, 1, 0.36, 1);
+  transition-delay: calc(var(--step) * 90ms);
+}
+
+@media (max-width: 560px) {
+  .rd-bars li {
+    grid-template-columns: minmax(0, 5.5rem) 1fr auto;
+  }
+
+  .rd-bar-name,
+  .rd-bar-val {
+    font-size: 0.72rem;
+  }
+}
+
+/* Reduced motion keeps the panel, drops the build: no typing, no caret, no
+   growing bars. The information is identical, it just arrives at once. */
+@media (prefers-reduced-motion: reduce) {
+  .rd-demo.is-armed .rd-bar-track i,
+  .rd-demo.is-running .rd-bar-track i {
+    transform: scaleX(1);
+    transition: none;
+  }
+
+  .rd-demo.is-typing .rd-caret {
+    display: none;
+  }
 }
 
 /* Features */
