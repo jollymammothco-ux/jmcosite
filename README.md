@@ -17,26 +17,46 @@ add an entry. Saving commits to git, Netlify rebuilds, and the new page appears 
 Setup, one time: in Netlify, enable **Identity** (set registration to *Invite only*)
 and **Git Gateway** under Site settings → Identity, then invite your own email.
 
-**By hand:** edit `content/projects.json` and run:
+The home page is editable the same way, under **Home page**. Every word on it
+lives in `content/landing.json`; the sections, layout and animations do not, and
+are not editable from the CMS on purpose.
+
+**By hand:** edit `content/landing.json` or `content/projects.json` and run:
 
 ```bash
-node scripts/build-projects.js
+node scripts/build.js
 ```
 
-That regenerates every page under `work/`, `projects.html`, and `sitemap.xml`.
-Never edit those files directly — they are build output and will be overwritten.
+That regenerates `index.html`, `projects.html`, `creative.html`, every page under
+`work/`, and `sitemap.xml`.
+
+**Never edit those files directly.** They are build output and are overwritten on
+every build and every deploy, so hand edits disappear without warning. Copy goes
+in `content/*.json`; structure goes in `scripts/build-*.js`. `index.html` carries
+a comment at the top saying so.
+
+Two authoring marks work in any headline field in `landing.json`:
+`[[like this]]` paints the yellow accent run, and `{{jolly}}` drops in the
+rainbow wordmark.
 
 ## Architecture
 
 | Path | What it is |
 |---|---|
+| `content/landing.json` | Every word on the home page |
 | `content/projects.json` | The single source of truth for case studies |
-| `scripts/build-projects.js` | Generates `work/*.html`, `projects.html`, `sitemap.xml` |
+| `scripts/build.js` | The build. Runs both builders below |
+| `scripts/build-landing.js` | Generates `index.html` |
+| `scripts/build-projects.js` | Generates `work/*.html`, `projects.html`, `creative.html`, `sitemap.xml` |
+| `scripts/partials.js` | Shared by both: asset versions, escaping, nav, card helpers |
 | `admin/` | Decap CMS. Noindexed and disallowed in robots.txt |
 | `boot.js` | Runs in `<head>`. Flags JS so scroll reveals can never blank the page |
 | `mammoth.js` | The hero particle herd, sampled from the brand mark's alpha channel |
 | `main.js` | Nav, scroll reveals, staggered lists, work-card hover clips |
 | `_source-media/` | Original camera and phone uploads. Gitignored, not deployed |
+
+Cache-busting lives in one place: bump `CSS_V` / `JS_V` in `scripts/partials.js`
+and rebuild. Every page picks it up; no hand-editing `?v=` strings.
 
 Every page is dark-only. There is no theme toggle; it was removed deliberately.
 

@@ -1,4 +1,10 @@
 <!DOCTYPE html>
+<!--
+  GENERATED FILE. Do not edit index.html by hand: it is overwritten by
+  scripts/build-landing.js on every build and on every deploy, so edits here
+  are lost silently. Copy lives in content/landing.json (or /admin). Structure
+  lives in scripts/build-landing.js.
+-->
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -14,7 +20,7 @@
     <meta property="og:title" content="Jolly Mammoth Co: AI Growth Systems" />
     <meta
       property="og:description"
-      content="Jolly Mammoth: AI consultancy that advises and builds. Go Mammoth for lead & revenue generation. MammothIQ for data & ops intelligence."
+      content="Jolly Mammoth: AI consultancy that advises and builds. Go Mammoth for lead &amp; revenue generation. MammothIQ for data &amp; ops intelligence."
     />
     <meta property="og:image" content="https://jollymammoth.co/assets/brand/og-share.jpg" />
     <meta property="og:image:width" content="1200" />
@@ -25,7 +31,7 @@
     <meta name="twitter:title" content="Jolly Mammoth Co: AI Growth Systems" />
     <meta
       name="twitter:description"
-      content="Jolly Mammoth: AI consultancy that advises and builds. Go Mammoth for lead & revenue generation. MammothIQ for data & ops intelligence."
+      content="Jolly Mammoth: AI consultancy that advises and builds. Go Mammoth for lead &amp; revenue generation. MammothIQ for data &amp; ops intelligence."
     />
     <meta name="twitter:image" content="https://jollymammoth.co/assets/brand/og-share.jpg" />
     <script type="application/ld+json">
@@ -52,10 +58,11 @@
       rel="stylesheet"
     />
     <script src="boot.js?v=2"></script>
-    <link rel="stylesheet" href="styles.css?v=48" />
-    <link rel="icon" href="assets/brand/logo.png" type="image/png" />
-    <link rel="apple-touch-icon" href="assets/brand/logo.png" />
-
+    <link rel="stylesheet" href="styles.css?v=55" />
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="icon" href="assets/brand/favicon-32.png" type="image/png" sizes="32x32" />
+    <link rel="icon" href="assets/brand/favicon-192.png" type="image/png" sizes="192x192" />
+    <link rel="apple-touch-icon" href="assets/brand/apple-touch-icon.png" />
   </head>
   <body>
     <!-- Tape-measure scroll rail. Pays out as you read; section boundaries are
@@ -123,14 +130,12 @@
         </div>
         <div class="hero-inner">
           <div class="hero-copy">
-            <p class="hero-eyebrow">Eau Claire, Wisconsin</p>
             <h1 class="headline headline-lavender">
               <span class="hero-line">You started your business to build things.</span>
               <span class="hero-line">Not to patch <span class="accent-yellow">revenue leaks</span>.</span>
             </h1>
             <p class="hero-subhead">
-              AI can expand what your business handles without adding headcount. We look at how you
-              actually run, find where it is leaking, and build the fix around you.
+              AI can expand what your business handles without adding headcount. We look at how you actually run, find where it is leaking, and build the fix around you.
             </p>
             <div class="cta-row">
               <a class="btn btn-primary btn-lg" href="questionnaire.html">Book a Strategy Call</a>
@@ -140,38 +145,54 @@
         </div>
         <div class="hero-proof">
           <div><b>2024</b><span>Established</span></div>
-          <div><b>Eau Claire</b><span>Headquarters</span></div>
+          <div><b>Eau Claire, WI</b><span>Headquarters</span></div>
           <div><b>Small, but mighty</b><span>The team</span></div>
         </div>
       </section>
-      <!-- PAIN — left-anchored over a real job-site frame -->
+      <!-- PAIN — left-anchored over real job-site footage. The background-image
+           is the poster frame, so no-JS and no-autoplay readers still get a
+           picture; the video layers over it and is skipped outright on phones
+           and metered connections (see initBackgroundVideo). -->
       <section class="section band-photo reveal" id="problems">
         <div
           class="band-photo-bg"
-          style="background-image: url('assets/trades/roof-house.jpg')"
+          style="background-image: url('assets/trades/jobsite-loop-poster.jpg')"
           aria-hidden="true"
-        ></div>
+        >
+          <video
+            class="band-photo-video"
+            muted
+            loop
+            playsinline
+            preload="none"
+            poster="assets/trades/jobsite-loop-poster.jpg"
+          >
+            <source src="assets/trades/jobsite-loop.webm" type="video/webm" />
+            <source src="assets/trades/jobsite-loop.mp4" type="video/mp4" />
+          </video>
+        </div>
         <div class="band-anchor">
           <p class="eyebrow">The problem</p>
           <h2 class="headline">
-            Good businesses lose <span class="accent-yellow">good money</span> to
-            solvable problems.
+            Good businesses lose <span class="accent-yellow">good money</span> to solvable problems.
           </h2>
+          <!-- Bucket order is content, not layout: whichever pain the reader is
+               meant to recognise first is listed first in landing.json. -->
           <div class="pain-buckets">
-            <div class="pain-bucket">
-              <p class="pain-bucket-label">Where growth leaks</p>
-              <ul class="pain-grid">
-                <li>Leads go cold fast</li>
-                <li>Follow-ups get messy</li>
-                <li>The sales process is clunky</li>
-              </ul>
-            </div>
             <div class="pain-bucket">
               <p class="pain-bucket-label">Where operations leak</p>
               <ul class="pain-grid">
                 <li>Jobs cost more than they bid</li>
                 <li>Workflow lives in five tools</li>
                 <li>Scattered data means slow decisions</li>
+              </ul>
+            </div>
+            <div class="pain-bucket">
+              <p class="pain-bucket-label">Where growth leaks</p>
+              <ul class="pain-grid">
+                <li>Leads go cold fast</li>
+                <li>Follow-ups get messy</li>
+                <li>The sales process is clunky</li>
               </ul>
             </div>
           </div>
@@ -184,8 +205,7 @@
           </ul>
 
           <p class="pain-footer pain-payoff reveal">
-            None of this is a failure of effort. It's a failure of infrastructure.
-            <span class="accent-yellow">That's what we install.</span>
+            None of this is a failure of effort. It's a failure of infrastructure. <span class="accent-yellow">That's what we install.</span>
           </p>
         </div>
       </section>
@@ -203,8 +223,7 @@
             </span>
           </h2>
           <p class="lead centered">
-            We take the heavy lifting off your plate. Growth feels intentional. Operations feel
-            lighter. Running your company feels predictable, clear, and actually fun again.
+            We take the heavy lifting off your plate. Growth feels intentional. Operations feel lighter. Running your company feels predictable, clear, and actually fun again.
           </p>
         </div>
       </section>
@@ -219,9 +238,7 @@
           We are not here to sell you software.
         </h2>
         <p class="lead centered">
-          We look at the whole business. Not just marketing. Not just your logistics or your
-          scheduling. All of it, as one system. Then we build the fix custom to you, and we stick
-          around to keep it earning its keep. Most builds run in one of two lanes.
+          We look at the whole business. Not just marketing. Not just your logistics or your scheduling. All of it, as one system. Then we build the fix custom to you, and we stick around to keep it earning its keep. Most builds run in one of two lanes.
         </p>
         <div class="suite-grid">
           <article class="suite-card card-lift">
@@ -234,7 +251,7 @@
               <li>Automated follow-up &amp; booking</li>
               <li>Unified inbox &amp; smart CRM</li>
             </ul>
-            <a class="btn btn-primary" href="#go-mammoth">See Go Mammoth</a>
+            <a class="btn btn-primary btn-jump" href="#go-mammoth">See Go Mammoth</a>
           </article>
           <article class="suite-card card-lift">
             <p class="suite-question">Flying blind on job costs and crew hours?</p>
@@ -246,7 +263,7 @@
               <li>Live shareable dashboards</li>
               <li>One source of truth across tools</li>
             </ul>
-            <a class="btn btn-primary" href="#mammothiq">See MammothIQ</a>
+            <a class="btn btn-primary btn-jump" href="#mammothiq">See MammothIQ</a>
           </article>
         </div>
         <p class="suite-footer">
@@ -262,8 +279,7 @@
             The <span class="accent-yellow">Go Mammoth</span> System
           </h2>
           <p class="lead">
-            Growth infrastructure built for your business, installed and running. We white-label and
-            configure the platform so you don't touch a thing.
+            Growth infrastructure built for your business, installed and running. We white-label and configure the platform so you don't touch a thing.
           </p>
           <div class="feature-grid">
             <article class="feature card-lift">
@@ -289,14 +305,18 @@
                 <img class="feature-icon" src="assets/icons/booking.png" alt="" width="96" height="96" loading="lazy" aria-hidden="true" />
                 <span>Booking &amp; scheduling</span>
               </h3>
-              <p>Prospects book straight to your calendar. No phone tag.</p>
+              <p>
+                Prospects book straight to your calendar. No phone tag.
+              </p>
             </article>
             <article class="feature card-lift">
               <h3>
                 <img class="feature-icon" src="assets/icons/inbox.png" alt="" width="96" height="96" loading="lazy" aria-hidden="true" />
                 <span>All comms, one inbox</span>
               </h3>
-              <p>Texts, emails, and DMs in a single organized platform.</p>
+              <p>
+                Texts, emails, and DMs in a single organized platform.
+              </p>
             </article>
             <article class="feature card-lift">
               <h3>
@@ -304,8 +324,7 @@
                 <span>Custom workflow &amp; AI ops</span>
               </h3>
               <p>
-                We connect your scheduling and job tools or build custom workflows so the crew stays
-                on track.
+                We connect your scheduling and job tools or build custom workflows so the crew stays on track.
               </p>
             </article>
             <article class="feature card-lift">
@@ -314,8 +333,7 @@
                 <span>Reporting &amp; dashboards</span>
               </h3>
               <p>
-                Pipeline, closed jobs, and analytics on your phone. Pairs with MammothIQ for the full
-                picture.
+                Pipeline, closed jobs, and analytics on your phone. Pairs with MammothIQ for the full picture.
               </p>
             </article>
           </div>
@@ -333,22 +351,19 @@
             Know what the job made you. Before the invoice clears.
           </h2>
           <p class="lead">
-            MammothIQ connects your job costing, crew hours, material spend, and pipeline into one
-            place. Ask a question, get an answer your whole team can trust.
+            MammothIQ connects your job costing, crew hours, material spend, and pipeline into one place. Ask a question, get an answer your whole team can trust.
           </p>
           <div class="feature-grid feature-grid--iq">
             <article class="feature card-lift">
               <h3>Every job, one view</h3>
               <p>
-                Bids, change orders, labor hours, and material costs reconciled. No more copy-paste
-                between five tabs.
+                Bids, change orders, labor hours, and material costs reconciled. No more copy-paste between five tabs.
               </p>
             </article>
             <article class="feature card-lift">
               <h3>Plain-English questions</h3>
               <p>
-                "Which crews ran over on hours last month?" Ask it like you'd ask a foreman.
-                MammothIQ handles the query.
+                &quot;Which crews ran over on hours last month?&quot; Ask it like you'd ask a foreman. MammothIQ handles the query.
               </p>
             </article>
             <article class="feature card-lift">
@@ -360,26 +375,23 @@
             <article class="feature card-lift">
               <h3>Always current</h3>
               <p>
-                Automated syncs run hourly, nightly, or on change. Numbers reflect this morning, not
-                last Tuesday.
+                Automated syncs run hourly, nightly, or on change. Numbers reflect this morning, not last Tuesday.
               </p>
             </article>
           </div>
 
-          <!-- RapidDashboard — signature feature -->
+          <!-- RapidDashboard — featured solution -->
           <div class="signature-feature" id="rapiddashboard">
-            <p class="eyebrow">Signature feature · RapidDashboard</p>
+            <p class="eyebrow">Featured solution · RapidDashboard</p>
             <h3 class="signature-headline">Ask in plain English. Get a live dashboard.</h3>
             <p class="lead">
-              RapidDashboard is MammothIQ's core mechanic: type what you need, hit share, and your
-              team gets a live URL with the same numbers you see.
+              RapidDashboard is MammothIQ's core mechanic: type what you need, hit share, and your team gets a live URL with the same numbers you see.
             </p>
             <div class="product-card card-lift">
               <div class="product-card-copy">
                 <h3>Prompt → Dashboard</h3>
                 <p>
-                  Type what you need. Hit share. Your crew leads get a live URL with the same numbers
-                  you see. Reconciled from a single source of truth.
+                  Type what you need. Hit share. Your crew leads get a live URL with the same numbers you see. Reconciled from a single source of truth.
                 </p>
                 <ul class="check-list">
                   <li>Private, encrypted AI in a Box</li>
@@ -398,20 +410,72 @@
                   >
                 </div>
               </div>
+              <!-- An illustration of the mechanic, not a screenshot: the
+                   question types itself, then the answer builds. Figures are
+                   representative, and every bar is labelled so the ranking
+                   never rides on colour alone. One measure across jobs, so the
+                   ramp is a single hue stepped by magnitude, not a set of
+                   different colours. -->
               <div class="product-card-visual" aria-hidden="true">
-                <div class="mock-prompt">
-                  <span class="mock-label">You</span>
-                  <p>Which jobs ran over budget last quarter?</p>
-                </div>
-                <div class="mock-arrow">↓</div>
-                <div class="mock-dashboard">
-                  <span class="mock-label">Live dashboard</span>
-                  <div class="mock-bars">
-                    <span style="--h: 85%"></span>
-                    <span style="--h: 62%"></span>
-                    <span style="--h: 48%"></span>
-                    <span style="--h: 35%"></span>
-                    <span style="--h: 22%"></span>
+                <div class="rd-demo" data-rd-demo>
+                  <div class="rd-chrome">
+                    <span class="rd-dot"></span><span class="rd-dot"></span><span class="rd-dot"></span>
+                    <span class="rd-chrome-label">RapidDashboard</span>
+                  </div>
+
+                  <div class="rd-ask">
+                    <span class="mock-label">You</span>
+                    <p class="rd-question">
+                      <span data-rd-type>Which jobs ran over budget last quarter?</span
+                      ><i class="rd-caret"></i>
+                    </p>
+                  </div>
+
+                  <div class="rd-answer">
+                    <div class="rd-kpis">
+                      <div class="rd-kpi">
+                        <b data-rd-count="5">5</b>
+                        <span>jobs over</span>
+                      </div>
+                      <div class="rd-kpi">
+                        <b data-rd-count="46" data-rd-prefix="$" data-rd-suffix="K">$46K</b>
+                        <span>margin at risk</span>
+                      </div>
+                      <div class="rd-kpi">
+                        <b data-rd-count="12" data-rd-suffix="%">12%</b>
+                        <span>avg overrun</span>
+                      </div>
+                    </div>
+
+                    <ul class="rd-bars">
+                      <li style="--w: 100%; --step: 1">
+                        <span class="rd-bar-name">Weston reroof</span>
+                        <span class="rd-bar-track"><i></i></span>
+                        <span class="rd-bar-val">$18.2K</span>
+                      </li>
+                      <li style="--w: 63%; --step: 2">
+                        <span class="rd-bar-name">Altoona siding</span>
+                        <span class="rd-bar-track"><i></i></span>
+                        <span class="rd-bar-val">$11.4K</span>
+                      </li>
+                      <li style="--w: 45%; --step: 3">
+                        <span class="rd-bar-name">Chippewa deck</span>
+                        <span class="rd-bar-track"><i></i></span>
+                        <span class="rd-bar-val">$8.1K</span>
+                      </li>
+                      <li style="--w: 29%; --step: 4">
+                        <span class="rd-bar-name">Menomonie gutters</span>
+                        <span class="rd-bar-track"><i></i></span>
+                        <span class="rd-bar-val">$5.3K</span>
+                      </li>
+                      <li style="--w: 16%; --step: 5">
+                        <span class="rd-bar-name">Hallie soffit</span>
+                        <span class="rd-bar-track"><i></i></span>
+                        <span class="rd-bar-val">$3.0K</span>
+                      </li>
+                    </ul>
+
+                    <p class="rd-foot">Shared as a live URL. Updates when the data does.</p>
                   </div>
                 </div>
               </div>
@@ -420,27 +484,16 @@
         </div>
       </section>
 
-
-      <!-- WORK — systems and brand work in one band -->
+      <!-- WORK — systems and brand work in one band. Cards come from
+           content/projects.json, the same source as the work index. -->
       <section class="section section-charcoal reveal" id="work">
         <div class="band-anchor">
           <p class="eyebrow">Selected work</p>
           <h2 class="headline">What we've built.</h2>
           <div class="work-grid">
-            <a class="work-card card-lift" href="work/the-oxbow-hotel.html">
-              <span class="work-card-media">
-                <img class="work-card-thumb" src="assets/projects/oxbow-hotel.png" alt="The Oxbow Hotel" width="800" height="600" loading="lazy" />
-              </span>
-              <span class="work-card-meta">
-                <span class="work-card-year">2025</span>
-                <span class="work-card-cat">Hotel Front Desk Agent</span>
-              </span>
-              <span class="work-card-title">The Oxbow Hotel</span>
-              <span class="work-card-sub">The Oxbow is a locally loved boutique hotel with genuine heart.</span>
-            </a>
             <a class="work-card card-lift" href="work/high-cliff-consulting.html">
               <span class="work-card-media">
-                <img class="work-card-thumb work-card-thumb--contain" src="assets/projects/high-cliff-consulting.png" alt="High Cliff Consulting" width="800" height="600" loading="lazy" />
+                <img class="work-card-thumb work-card-thumb--contain" src="assets/projects/high-cliff-consulting-stacked.png" alt="High Cliff Consulting brand identity" width="800" height="600" loading="lazy" />
               </span>
               <span class="work-card-meta">
                 <span class="work-card-year">2026</span>
@@ -449,20 +502,31 @@
               <span class="work-card-title">High Cliff Consulting</span>
               <span class="work-card-sub">High Cliff Consulting is a soil testing and sewage design firm serving contractors and property owners across the region.</span>
             </a>
-            <a class="work-card card-lift" href="work/mas.html">
+            <a class="work-card card-lift" href="work/the-oxbow-hotel.html">
               <span class="work-card-media">
-                <img class="work-card-thumb" src="assets/projects/mas-exteriors-drone.png" alt="M.A.S Exteriors" width="800" height="600" loading="lazy" />
+                <img class="work-card-thumb work-card-thumb--contain" src="assets/projects/oxbow-hotel.png" alt="The Oxbow Hotel logo" width="800" height="600" loading="lazy" />
               </span>
               <span class="work-card-meta">
                 <span class="work-card-year">2025</span>
-                <span class="work-card-cat">Marketing &amp; Lead Gen</span>
+                <span class="work-card-cat">Hotel Front Desk Agent</span>
+              </span>
+              <span class="work-card-title">The Oxbow Hotel</span>
+              <span class="work-card-sub">The Oxbow is a locally loved boutique hotel with genuine heart.</span>
+            </a>
+            <a class="work-card card-lift" href="work/mas.html">
+              <span class="work-card-media">
+                <img class="work-card-thumb" src="assets/projects/mas-exteriors-drone.png" alt="M.A.S Exteriors project photography" width="800" height="600" loading="lazy" />
+              </span>
+              <span class="work-card-meta">
+                <span class="work-card-year">2025</span>
+                <span class="work-card-cat">Marketing and Lead Gen</span>
               </span>
               <span class="work-card-title">M.A.S Exteriors</span>
               <span class="work-card-sub">A Western Wisconsin–based contractor delivering residential and commercial exterior solutions.</span>
             </a>
             <a class="work-card card-lift" href="work/brainthoven.html">
               <span class="work-card-media">
-                <img class="work-card-thumb" src="assets/projects/brainthoven-books.png" alt="Brainthoven brand books" width="800" height="600" loading="lazy" />
+                <img class="work-card-thumb" src="assets/projects/brainthoven-pattern.png" alt="Brainthoven brand pattern" width="800" height="600" loading="lazy" />
               </span>
               <span class="work-card-meta">
                 <span class="work-card-year">2025</span>
@@ -475,7 +539,7 @@
 
           <div class="creative-teaser" id="creative">
             <div>
-              <p class="creative-kicker">A department of Jolly Mammoth</p>
+              <p class="creative-kicker">A Division of Jolly Mammoth</p>
               <h3 class="creative-teaser-name">
                 <span class="jolly-word" aria-label="Jolly"
                   ><span>J</span><span>o</span><span>l</span><span>l</span><span>y</span></span
@@ -486,8 +550,7 @@
                 <span>Brand identity</span><span>Video</span><span>Photography</span><span>Social</span><span>Websites</span>
               </div>
               <p>
-                Systems are our strength. Brand building is our sauce. The creative side runs
-                its own room, for when the business needs to look as good as the work.
+                Systems are our strength. Brand building is our sauce. The creative side runs its own room, for when the business needs to look as good as the work.
               </p>
               <a class="btn btn-ghost" href="creative.html">See the Creative Department</a>
             </div>
@@ -503,16 +566,13 @@
             <h2 class="headline">3 steps to a system that runs itself.</h2>
             <ol class="steps">
               <li>
-                <strong>Discover:</strong> We learn your business and map the right
-                stack (Go Mammoth, MammothIQ, add-ons).
+                <strong>Discover:</strong> We learn your business and map the right stack (Go Mammoth, MammothIQ, add-ons).
               </li>
               <li>
-                <strong>Build:</strong> Your system is configured, tested, and fully
-                set up. You don't touch a thing.
+                <strong>Build:</strong> Your system is configured, tested, and fully set up. You don't touch a thing.
               </li>
               <li>
-                <strong>Launch:</strong> We hand you the keys and stick around. The
-                system compounds. You get back to building.
+                <strong>Launch:</strong> We hand you the keys and stick around. The system compounds. You get back to building.
               </li>
             </ol>
           </div>
@@ -535,8 +595,7 @@
             <div class="local-copy">
               <h3>Eau Claire, the Chippewa Valley, and beyond.</h3>
               <p>
-                We're local. We show up in person, build in front of you, and pick up the phone when
-                you call. That's not how most AI companies work. It's how we do.
+                We're local. We show up in person, build in front of you, and pick up the phone when you call. That's not how most AI companies work. It's how we do.
               </p>
             </div>
           </aside>
@@ -566,33 +625,16 @@
             </p>
             <div class="founder-prose">
               <p>
-                I started out as a freelance marketer and copywriter. Brand guides,
-                landing pages, lead magnets, campaigns, etc. Mostly for sustainability
-                and ESG companies, back in 2021. Then one day I opened ChatGPT for the
-                first time, typed a prompt, and watched it do a version of my job in
-                about four seconds. I'm not going to lie to you: that was a weird
-                afternoon.
+                I started out as a freelance marketer and copywriter. Brand guides, landing pages, lead magnets, campaigns, etc. Mostly for sustainability and ESG companies, back in 2021. Then one day I opened ChatGPT for the first time, typed a prompt, and watched it do a version of my job in about four seconds. I'm not going to lie to you: that was a weird afternoon.
               </p>
               <p>
-                I could've dug in, fought it, and resisted the AI movement. Instead I
-                got curious. And the deeper I went, the more familiar it felt.
-                Reverse-engineering, workflows, big-picture vision, and efficiency
-                applications. All skills I had already developed. The difference? Better
-                tools. Same thinking.
+                I could've dug in, fought it, and resisted the AI movement. Instead I got curious. And the deeper I went, the more familiar it felt. Reverse-engineering, workflows, big-picture vision, and efficiency applications. All skills I had already developed. The difference? Better tools. Same thinking.
               </p>
               <p>
-                So while everyone was bracing for AI to end the world, I started learning
-                to drive it. And I found the gap: businesses need someone who gets how
-                their operations actually run, then builds the systems that help their
-                growth compound.
+                So while everyone was bracing for AI to end the world, I started learning to drive it. And I found the gap: businesses need someone who gets how their operations actually run, then builds the systems that help their growth compound.
               </p>
               <p>
-                That's Jolly Mammoth. We advise and build, starting with your business,
-                not the tech. HQ'd in Eau Claire, working with contractors and service
-                businesses across Wisconsin. If you're nervous about what AI means for
-                your company, I get it. I was on the wrong end of it years ago. Today, my
-                goal is to help business owners feel confident to take on the shifting
-                business landscape.
+                That's Jolly Mammoth. We advise and build, starting with your business, not the tech. HQ'd in Eau Claire, working with contractors and service businesses across Wisconsin. If you're nervous about what AI means for your company, I get it. I was on the wrong end of it years ago. Today, my goal is to help business owners feel confident to take on the shifting business landscape.
               </p>
             </div>
             <a class="btn btn-primary" href="questionnaire.html">Let's talk</a>
@@ -611,8 +653,7 @@
             One went from two jobs a week to <span class="accent-yellow">one a day</span>.
           </h2>
           <p class="proof-note">
-            No pull quotes, no stock headshots. These are the actual messages, uncropped
-            past the edge of the bubble.
+            No pull quotes, no stock headshots. These are the actual messages, uncropped past the edge of the bubble.
           </p>
 
           <div class="shot-rail" role="group" aria-label="Client messages">
@@ -640,8 +681,8 @@
         </div>
       </section>
 
-      <!-- FAQ — moved off the retired Go Mammoth page. Sits immediately before
-           the CTA so it answers the last objections at the decision point. -->
+      <!-- FAQ — sits immediately before the CTA so it answers the last
+           objections at the decision point. -->
       <section class="section section-blue reveal" id="faq">
         <div class="band-anchor">
           <p class="eyebrow">Before you ask</p>
@@ -651,9 +692,7 @@
               <summary>How long until I see results?</summary>
               <div class="faq-body">
                 <p>
-                  Most businesses see the first wins quickly. Faster follow-up, cleaner handoffs,
-                  fewer dropped leads, and clearer visibility in the first few weeks. The compounding
-                  part shows up over the next 60 to 90 days as the system starts running without you.
+                  Most businesses see the first wins quickly. Faster follow-up, cleaner handoffs, fewer dropped leads, and clearer visibility in the first few weeks. The compounding part shows up over the next 60 to 90 days as the system starts running without you.
                 </p>
               </div>
             </details>
@@ -661,8 +700,7 @@
               <summary>Do I have to learn the system?</summary>
               <div class="faq-body">
                 <p>
-                  No. We build and install it, then show you the few views that matter. Your job is to
-                  run the business. The system handles the busywork.
+                  No. We build and install it, then show you the few views that matter. Your job is to run the business. The system handles the busywork.
                 </p>
               </div>
             </details>
@@ -670,8 +708,7 @@
               <summary>Is there a contract?</summary>
               <div class="faq-body">
                 <p>
-                  No long term commitment. You stay month to month because the system is working, not
-                  because you're locked in. If you ever step away, you keep the infrastructure we built.
+                  No long term commitment. You stay month to month because the system is working, not because you're locked in. If you ever step away, you keep the infrastructure we built.
                 </p>
               </div>
             </details>
@@ -679,8 +716,7 @@
               <summary>What if I already use some marketing tools?</summary>
               <div class="faq-body">
                 <p>
-                  That is normal. We do not rip everything out on day one. We connect what is worth
-                  keeping and replace the parts causing dropped leads, slow response, or messy operations.
+                  That is normal. We do not rip everything out on day one. We connect what is worth keeping and replace the parts causing dropped leads, slow response, or messy operations.
                 </p>
               </div>
             </details>
@@ -688,8 +724,7 @@
               <summary>Do you work with my industry?</summary>
               <div class="faq-body">
                 <p>
-                  We work best with contractors and service businesses. If you sell work that requires
-                  calls, estimates, scheduling, and follow-through, the system fits.
+                  We work best with contractors and service businesses. If you sell work that requires calls, estimates, scheduling, and follow-through, the system fits.
                 </p>
               </div>
             </details>
@@ -697,9 +732,7 @@
               <summary>What if it doesn't work for me?</summary>
               <div class="faq-body">
                 <p>
-                  That is why we start with a short strategy call. We back every install with a
-                  satisfaction guarantee and our Jolly in 90 promise. If you are not seeing the system
-                  working in the first 90 days, we make it right.
+                  That is why we start with a short strategy call. We back every install with a satisfaction guarantee and our Jolly in 90 promise. If you are not seeing the system working in the first 90 days, we make it right.
                 </p>
               </div>
             </details>
@@ -714,7 +747,10 @@
           style="background-image: url('assets/trades/shingle-carry.jpg')"
           aria-hidden="true"
         ></div>
-        <p class="cta-prompt">want to work together?</p>
+        <!-- The one place the hammer metaphor is said out loud. It is the
+             language the CTAs already speak through the cursor and the nail,
+             so it lands here and is not repeated at every other button. -->
+        <p class="cta-prompt">ready to hit the nail on the head?</p>
         <h2 class="headline">Let's build something that compounds.</h2>
         <div class="cta-row">
           <a class="btn btn-primary btn-lg" href="questionnaire.html">Book a Strategy Call</a>
@@ -751,7 +787,7 @@
 
     <a class="sticky-cta" href="questionnaire.html">Book a Call</a>
 
-    <script src="main.js?v=13"></script>
+    <script src="main.js?v=18"></script>
     <script src="mammoth.js?v=2" defer></script>
     <script src="measure.js?v=2" defer></script>
   </body>

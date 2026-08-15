@@ -23,21 +23,10 @@ const ROOT = path.join(__dirname, "..");
 const DATA = path.join(ROOT, "content", "projects.json");
 const WORK_DIR = path.join(ROOT, "work");
 
-const CSS_V = "48";
-const JS_V = "13";
-
-/* ------------------------------------------------------------------ utils */
-
-function esc(s) {
-  return String(s == null ? "" : s)
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;");
-}
-
-/** Asset and page links differ by directory depth: work/*.html needs "../". */
-const up = (depth) => "../".repeat(depth);
+/* Versions, escaping, nav and the case-study helpers are shared with the
+   landing page builder so the two can never drift apart. */
+const P = require("./partials");
+const { CSS_V, JS_V, esc, up, thumbFor, hoverClipFor } = P;
 
 /* --------------------------------------------------------------- partials */
 
@@ -69,8 +58,10 @@ ${opts.jsonLd ? `    <script type="application/ld+json">\n${opts.jsonLd}\n    </
     />
     <script src="${u}boot.js?v=2"></script>
     <link rel="stylesheet" href="${u}styles.css?v=${CSS_V}" />
-    <link rel="icon" href="${u}assets/brand/logo.png" type="image/png" />
-    <link rel="apple-touch-icon" href="${u}assets/brand/logo.png" />
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="icon" href="${u}assets/brand/favicon-32.png" type="image/png" sizes="32x32" />
+    <link rel="icon" href="${u}assets/brand/favicon-192.png" type="image/png" sizes="192x192" />
+    <link rel="apple-touch-icon" href="${u}assets/brand/apple-touch-icon.png" />
   </head>`;
 }
 
@@ -183,21 +174,6 @@ function mediaFigure(m, depth, opts) {
   return `      <figure class="${cls.join(" ")}">
         <img src="${u}${esc(m.src)}" alt="${esc(m.alt || "")}" loading="lazy" />${cap}
       </figure>`;
-}
-
-/** Poster/thumbnail used on the index card. */
-function thumbFor(c) {
-  const img = c.media.find((m) => m.type === "image");
-  if (img) return { src: img.src, alt: img.alt || c.title, contain: img.variant === "logo" };
-  const vid = c.media.find((m) => m.type === "video" && m.poster);
-  if (vid) return { src: vid.poster, alt: c.title, contain: false };
-  return { src: "assets/brand/logo.png", alt: c.title, contain: true };
-}
-
-/** A short clip to play on hover, if the case has one. */
-function hoverClipFor(c) {
-  const vid = c.media.find((m) => m.type === "video" && m.src);
-  return vid ? vid.src : null;
 }
 
 /* --------------------------------------------------------- case study page */
@@ -452,7 +428,7 @@ ${header(depth, "creative")}
     <main class="page-creative">
       <section class="creative-hero">
         <div class="creative-hero-inner">
-          <p class="creative-kicker">A department of Jolly Mammoth</p>
+          <p class="creative-kicker">A Division of Jolly Mammoth</p>
           <h1 class="creative-wordmark">
             <span class="jolly-word" aria-label="Jolly"
               ><span>J</span><span>o</span><span>l</span><span>l</span><span>y</span></span
@@ -566,4 +542,6 @@ ${urls.map((u) => `  <url>\n    <loc>${esc(u)}</loc>\n  </url>`).join("\n")}
   fs.writeFileSync(path.join(ROOT, "sitemap.xml"), xml, "utf8");
 }
 
-build();
+if (require.main === module) build();
+
+module.exports = { build };

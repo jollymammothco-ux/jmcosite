@@ -1,8 +1,9 @@
 [build]
   publish = "."
-  # Regenerates /work/*.html and projects.html from content/projects.json.
-  # Runs on every deploy, so anything saved in the CMS ships as static HTML.
-  command = "node scripts/build-projects.js"
+  # Regenerates index.html, projects.html, creative.html and /work/*.html from
+  # content/landing.json and content/projects.json. Runs on every deploy, so
+  # anything saved in the CMS ships as static HTML.
+  command = "node scripts/build.js"
 
 [functions]
   directory = "netlify/functions"

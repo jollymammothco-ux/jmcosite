@@ -141,3 +141,296 @@ collections:
                   - { name: "timeframe", label: "Timeframe", widget: "string", required: false, hint: "e.g. 16 days" }
                   - { name: "tools", label: "Tools", widget: "string", required: false, hint: "e.g. Framer, Go High Level" }
                   - { name: "category", label: "Category", widget: "string", required: false }
+
+  # ---------------------------------------------------------------- landing
+  # Every word on the home page. Structure (sections, layout, the particle
+  # hero, the dashboard animation) lives in scripts/build-landing.js and is
+  # deliberately not editable here: this is for copy, not for markup.
+  #
+  # Two authoring marks work in any headline or payoff field:
+  #   [[like this]]  paints the run in the yellow accent
+  #   {{jolly}}      drops in the rainbow JOLLY wordmark
+  #
+  # The work grid is NOT here. It builds itself from the case studies above,
+  # newest first, so a new case study appears on the home page on its own.
+  - name: "landing"
+    label: "Home page"
+    files:
+      - name: "landing"
+        label: "Home page copy"
+        file: "content/landing.json"
+        description: "The words on jollymammoth.co. Saving republishes the site."
+        fields:
+          - name: "seo"
+            label: "Search & sharing"
+            widget: "object"
+            collapsed: true
+            fields:
+              - { name: "title", label: "Page title", widget: "string" }
+              - { name: "description", label: "Search description", widget: "text" }
+              - { name: "shareDescription", label: "Link preview description", widget: "text", hint: "Shown when the link is pasted into a text or a post." }
+              - { name: "shareImageAlt", label: "Link preview image alt", widget: "string" }
+
+          - name: "hero"
+            label: "Hero"
+            widget: "object"
+            fields:
+              - name: "headlineLines"
+                label: "Headline lines"
+                widget: "list"
+                hint: "One line per row. Use [[brackets]] for the yellow accent."
+                field: { name: "line", label: "Line", widget: "string" }
+              - { name: "subhead", label: "Subhead", widget: "text" }
+              - name: "ctaSecondary"
+                label: "Secondary button"
+                widget: "object"
+                fields:
+                  - { name: "label", label: "Label", widget: "string" }
+                  - { name: "href", label: "Link", widget: "string" }
+              - name: "proof"
+                label: "Stat strip"
+                widget: "list"
+                summary: "{{fields.value}} — {{fields.label}}"
+                fields:
+                  - { name: "value", label: "Big text", widget: "string" }
+                  - { name: "label", label: "Caption", widget: "string" }
+
+          - name: "problem"
+            label: "The problem"
+            widget: "object"
+            fields:
+              - { name: "eyebrow", label: "Eyebrow", widget: "string" }
+              - { name: "headline", label: "Headline", widget: "text" }
+              - name: "buckets"
+                label: "Leak columns"
+                widget: "list"
+                summary: "{{fields.label}}"
+                hint: "Order matters. The first one is the pain you want recognised first."
+                fields:
+                  - { name: "label", label: "Column heading", widget: "string" }
+                  - name: "items"
+                    label: "Lines"
+                    widget: "list"
+                    field: { name: "item", label: "Line", widget: "string" }
+              - name: "lines"
+                label: "Pain lines"
+                widget: "list"
+                field: { name: "line", label: "Line", widget: "text" }
+              - { name: "payoff", label: "Closing line", widget: "text" }
+
+          - name: "jolly"
+            label: "Jolly band"
+            widget: "object"
+            collapsed: true
+            fields:
+              - { name: "headline", label: "Headline", widget: "string", hint: "The rainbow JOLLY? is added automatically at the end." }
+              - { name: "lead", label: "Body", widget: "text" }
+
+          - name: "products"
+            label: "Two lanes"
+            widget: "object"
+            fields:
+              - { name: "eyebrow", label: "Eyebrow", widget: "string" }
+              - { name: "headline", label: "Headline", widget: "text" }
+              - { name: "lead", label: "Intro", widget: "text" }
+              - name: "cards"
+                label: "Lane cards"
+                widget: "list"
+                summary: "{{fields.name}}"
+                fields:
+                  - { name: "question", label: "Question", widget: "string" }
+                  - { name: "tag", label: "Tag", widget: "string" }
+                  - { name: "name", label: "Product name", widget: "string" }
+                  - { name: "promise", label: "Promise", widget: "text" }
+                  - name: "benefits"
+                    label: "Benefits"
+                    widget: "list"
+                    field: { name: "benefit", label: "Benefit", widget: "string" }
+                  - { name: "ctaLabel", label: "Button label", widget: "string" }
+                  - { name: "ctaHref", label: "Button link", widget: "string" }
+              - { name: "footer", label: "Closing line", widget: "text" }
+
+          - name: "goMammoth"
+            label: "Go Mammoth"
+            widget: "object"
+            collapsed: true
+            fields:
+              - { name: "eyebrow", label: "Eyebrow", widget: "string" }
+              - { name: "headline", label: "Headline", widget: "string" }
+              - { name: "lead", label: "Intro", widget: "text" }
+              - name: "features"
+                label: "Feature cards"
+                widget: "list"
+                summary: "{{fields.title}}"
+                fields:
+                  - { name: "icon", label: "Icon", widget: "file" }
+                  - { name: "title", label: "Title", widget: "string" }
+                  - { name: "body", label: "Body", widget: "text" }
+              - { name: "ctaLabel", label: "Button label", widget: "string" }
+
+          - name: "mammothIQ"
+            label: "MammothIQ"
+            widget: "object"
+            collapsed: true
+            fields:
+              - { name: "eyebrow", label: "Eyebrow", widget: "string" }
+              - { name: "headline", label: "Headline", widget: "text" }
+              - { name: "lead", label: "Intro", widget: "text" }
+              - name: "features"
+                label: "Feature cards"
+                widget: "list"
+                summary: "{{fields.title}}"
+                fields:
+                  - { name: "title", label: "Title", widget: "string" }
+                  - { name: "body", label: "Body", widget: "text" }
+
+          - name: "rapidDashboard"
+            label: "RapidDashboard"
+            widget: "object"
+            collapsed: true
+            fields:
+              - { name: "eyebrow", label: "Eyebrow", widget: "string" }
+              - { name: "headline", label: "Headline", widget: "string" }
+              - { name: "lead", label: "Intro", widget: "text" }
+              - { name: "cardTitle", label: "Card title", widget: "string" }
+              - { name: "cardBody", label: "Card body", widget: "text" }
+              - name: "checks"
+                label: "Checklist"
+                widget: "list"
+                field: { name: "check", label: "Item", widget: "string" }
+              - { name: "ctaLabel", label: "Primary button", widget: "string" }
+              - { name: "secondaryLabel", label: "Secondary button", widget: "string" }
+              - { name: "secondaryHref", label: "Secondary link", widget: "string" }
+              - name: "demo"
+                label: "Demo panel"
+                widget: "object"
+                collapsed: true
+                hint: "Illustrative figures for the animated dashboard. Keep them plausible; they are not real client data."
+                fields:
+                  - { name: "question", label: "Typed question", widget: "string" }
+                  - name: "kpis"
+                    label: "Headline numbers"
+                    widget: "list"
+                    summary: "{{fields.prefix}}{{fields.value}}{{fields.suffix}} {{fields.label}}"
+                    fields:
+                      - { name: "value", label: "Number", widget: "number", value_type: "int" }
+                      - { name: "prefix", label: "Prefix", widget: "string", required: false }
+                      - { name: "suffix", label: "Suffix", widget: "string", required: false }
+                      - { name: "label", label: "Caption", widget: "string" }
+                  - name: "bars"
+                    label: "Bars"
+                    widget: "list"
+                    summary: "{{fields.name}} — {{fields.value}}"
+                    hint: "Longest bar first. Width is a percentage of the widest."
+                    fields:
+                      - { name: "name", label: "Job name", widget: "string" }
+                      - { name: "value", label: "Value label", widget: "string" }
+                      - { name: "width", label: "Bar width %", widget: "number", value_type: "int", min: 1, max: 100 }
+                  - { name: "footnote", label: "Footnote", widget: "string" }
+
+          - name: "work"
+            label: "Selected work"
+            widget: "object"
+            collapsed: true
+            hint: "The cards themselves come from Case studies. Only the framing is here."
+            fields:
+              - { name: "eyebrow", label: "Eyebrow", widget: "string" }
+              - { name: "headline", label: "Headline", widget: "string" }
+              - { name: "count", label: "How many cards", widget: "number", value_type: "int", min: 1, max: 8 }
+              - name: "creativeTeaser"
+                label: "Creative Department teaser"
+                widget: "object"
+                fields:
+                  - { name: "kicker", label: "Kicker", widget: "string" }
+                  - name: "tags"
+                    label: "Tags"
+                    widget: "list"
+                    field: { name: "tag", label: "Tag", widget: "string" }
+                  - { name: "body", label: "Body", widget: "text" }
+                  - { name: "ctaLabel", label: "Button label", widget: "string" }
+
+          - name: "process"
+            label: "Process & local"
+            widget: "object"
+            collapsed: true
+            fields:
+              - { name: "eyebrow", label: "Eyebrow", widget: "string" }
+              - { name: "headline", label: "Headline", widget: "string" }
+              - name: "steps"
+                label: "Steps"
+                widget: "list"
+                summary: "{{fields.name}}"
+                fields:
+                  - { name: "name", label: "Step name", widget: "string", hint: "Include the colon, e.g. Discover:" }
+                  - { name: "body", label: "Body", widget: "text" }
+              - name: "local"
+                label: "Local note"
+                widget: "object"
+                fields:
+                  - { name: "videoSrc", label: "Video", widget: "file" }
+                  - { name: "videoPoster", label: "Video poster", widget: "image" }
+                  - { name: "videoLabel", label: "Video description", widget: "string" }
+                  - { name: "headline", label: "Headline", widget: "string" }
+                  - { name: "body", label: "Body", widget: "text" }
+
+          - name: "founder"
+            label: "Founder"
+            widget: "object"
+            collapsed: true
+            fields:
+              - { name: "eyebrow", label: "Eyebrow", widget: "string" }
+              - { name: "photo", label: "Photo", widget: "image" }
+              - { name: "photoAlt", label: "Photo alt text", widget: "string" }
+              - { name: "headline", label: "Headline", widget: "text" }
+              - { name: "name", label: "Name", widget: "string" }
+              - { name: "credential", label: "Credential", widget: "string" }
+              - name: "prose"
+                label: "Story"
+                widget: "list"
+                field: { name: "paragraph", label: "Paragraph", widget: "text" }
+              - { name: "ctaLabel", label: "Button label", widget: "string" }
+
+          - name: "proof"
+            label: "Social proof"
+            widget: "object"
+            collapsed: true
+            fields:
+              - { name: "eyebrow", label: "Eyebrow", widget: "string" }
+              - { name: "headline", label: "Headline", widget: "text" }
+              - { name: "note", label: "Note", widget: "text" }
+              - name: "shots"
+                label: "Screenshots"
+                widget: "list"
+                summary: "{{fields.who}} — {{fields.what}}"
+                fields:
+                  - { name: "src", label: "Image", widget: "image" }
+                  - { name: "alt", label: "Alt text", widget: "text", hint: "Transcribe the message. Screen reader users get nothing otherwise." }
+                  - { name: "width", label: "Width", widget: "number", value_type: "int" }
+                  - { name: "height", label: "Height", widget: "number", value_type: "int" }
+                  - { name: "who", label: "Attribution", widget: "string" }
+                  - { name: "what", label: "Work type", widget: "string" }
+
+          - name: "faq"
+            label: "FAQ"
+            widget: "object"
+            collapsed: true
+            fields:
+              - { name: "eyebrow", label: "Eyebrow", widget: "string" }
+              - { name: "headline", label: "Headline", widget: "string" }
+              - name: "items"
+                label: "Questions"
+                widget: "list"
+                summary: "{{fields.q}}"
+                fields:
+                  - { name: "q", label: "Question", widget: "string" }
+                  - { name: "a", label: "Answer", widget: "text" }
+
+          - name: "contact"
+            label: "Closing CTA"
+            widget: "object"
+            fields:
+              - { name: "background", label: "Background photo", widget: "image" }
+              - { name: "prompt", label: "Prompt line", widget: "string" }
+              - { name: "headline", label: "Headline", widget: "string" }
+              - { name: "secondaryLabel", label: "Secondary button", widget: "string" }
+              - { name: "secondaryHref", label: "Secondary link", widget: "string" }

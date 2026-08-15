@@ -1,0 +1,316 @@
+{
+  "seo": {
+    "title": "Jolly Mammoth Co: AI Growth Systems",
+    "description": "AI systems for Wisconsin contractors and service businesses. Built and run in person, out of Eau Claire.",
+    "shareDescription": "Jolly Mammoth: AI consultancy that advises and builds. Go Mammoth for lead & revenue generation. MammothIQ for data & ops intelligence.",
+    "shareImageAlt": "Jolly Mammoth: AI systems for Wisconsin contractors."
+  },
+  "hero": {
+    "headlineLines": [
+      "You started your business to build things.",
+      "Not to patch [[revenue leaks]]."
+    ],
+    "subhead": "AI can expand what your business handles without adding headcount. We look at how you actually run, find where it is leaking, and build the fix around you.",
+    "ctaSecondary": { "label": "See where it fits", "href": "#products" },
+    "proof": [
+      { "value": "2024", "label": "Established" },
+      { "value": "Eau Claire, WI", "label": "Headquarters" },
+      { "value": "Small, but mighty", "label": "The team" }
+    ]
+  },
+  "problem": {
+    "eyebrow": "The problem",
+    "headline": "Good businesses lose [[good money]] to solvable problems.",
+    "buckets": [
+      {
+        "label": "Where operations leak",
+        "items": [
+          "Jobs cost more than they bid",
+          "Workflow lives in five tools",
+          "Scattered data means slow decisions"
+        ]
+      },
+      {
+        "label": "Where growth leaks",
+        "items": [
+          "Leads go cold fast",
+          "Follow-ups get messy",
+          "The sales process is clunky"
+        ]
+      }
+    ],
+    "lines": [
+      "Leads come in. Some get a call back, some don't. You've stopped tracking which.",
+      "You pay for ads or referrals. Half never get a callback, because you were on a job.",
+      "Your CRM is your inbox, your phone, and a notebook in the truck.",
+      "You've hired marketers before. You got pretty pictures and no pipeline."
+    ],
+    "payoff": "None of this is a failure of effort. It's a failure of infrastructure. [[That's what we install.]]"
+  },
+  "jolly": {
+    "headline": "How do we make businesses more",
+    "lead": "We take the heavy lifting off your plate. Growth feels intentional. Operations feel lighter. Running your company feels predictable, clear, and actually fun again."
+  },
+  "products": {
+    "eyebrow": "How we work",
+    "headline": "We are not here to sell you software.",
+    "lead": "We look at the whole business. Not just marketing. Not just your logistics or your scheduling. All of it, as one system. Then we build the fix custom to you, and we stick around to keep it earning its keep. Most builds run in one of two lanes.",
+    "cards": [
+      {
+        "question": "Losing leads and stalling on growth?",
+        "tag": "The brawn",
+        "name": "Go Mammoth",
+        "promise": "Lead & revenue generation that never lets a lead go cold.",
+        "benefits": [
+          "Capture leads from every channel",
+          "Automated follow-up & booking",
+          "Unified inbox & smart CRM"
+        ],
+        "ctaLabel": "See Go Mammoth",
+        "ctaHref": "#go-mammoth"
+      },
+      {
+        "question": "Flying blind on job costs and crew hours?",
+        "tag": "The brains",
+        "name": "MammothIQ",
+        "promise": "Know what every job actually made you, while it is still running.",
+        "benefits": [
+          "Ask questions in plain English",
+          "Live shareable dashboards",
+          "One source of truth across tools"
+        ],
+        "ctaLabel": "See MammothIQ",
+        "ctaHref": "#mammothiq"
+      }
+    ],
+    "footer": "Same relationship either way. We start where it hurts most and grow from there."
+  },
+  "goMammoth": {
+    "eyebrow": "Product · Go Mammoth",
+    "headline": "The [[Go Mammoth]] System",
+    "lead": "Growth infrastructure built for your business, installed and running. We white-label and configure the platform so you don't touch a thing.",
+    "features": [
+      {
+        "icon": "assets/icons/lead-capture.png",
+        "title": "Lead capture pipeline",
+        "body": "Web forms, calls, texts, and ads land in one place. Nothing slips through."
+      },
+      {
+        "icon": "assets/icons/follow-up.png",
+        "title": "Automated follow-ups",
+        "body": "On the jobsite or fishing? Leads still get nurtured automatically."
+      },
+      {
+        "icon": "assets/icons/booking.png",
+        "title": "Booking & scheduling",
+        "body": "Prospects book straight to your calendar. No phone tag."
+      },
+      {
+        "icon": "assets/icons/inbox.png",
+        "title": "All comms, one inbox",
+        "body": "Texts, emails, and DMs in a single organized platform."
+      },
+      {
+        "icon": "assets/icons/workflow.png",
+        "title": "Custom workflow & AI ops",
+        "body": "We connect your scheduling and job tools or build custom workflows so the crew stays on track."
+      },
+      {
+        "icon": "assets/icons/reporting.png",
+        "title": "Reporting & dashboards",
+        "body": "Pipeline, closed jobs, and analytics on your phone. Pairs with MammothIQ for the full picture."
+      }
+    ],
+    "ctaLabel": "Get the Go Mammoth System"
+  },
+  "mammothIQ": {
+    "eyebrow": "Product · MammothIQ",
+    "headline": "Know what the job made you. Before the invoice clears.",
+    "lead": "MammothIQ connects your job costing, crew hours, material spend, and pipeline into one place. Ask a question, get an answer your whole team can trust.",
+    "features": [
+      {
+        "title": "Every job, one view",
+        "body": "Bids, change orders, labor hours, and material costs reconciled. No more copy-paste between five tabs."
+      },
+      {
+        "title": "Plain-English questions",
+        "body": "\"Which crews ran over on hours last month?\" Ask it like you'd ask a foreman. MammothIQ handles the query."
+      },
+      {
+        "title": "Role-based access",
+        "body": "Foremen see their jobs. You see the full picture. Everyone stays on the same page."
+      },
+      {
+        "title": "Always current",
+        "body": "Automated syncs run hourly, nightly, or on change. Numbers reflect this morning, not last Tuesday."
+      }
+    ]
+  },
+  "rapidDashboard": {
+    "eyebrow": "Featured solution · RapidDashboard",
+    "headline": "Ask in plain English. Get a live dashboard.",
+    "lead": "RapidDashboard is MammothIQ's core mechanic: type what you need, hit share, and your team gets a live URL with the same numbers you see.",
+    "cardTitle": "Prompt → Dashboard",
+    "cardBody": "Type what you need. Hit share. Your crew leads get a live URL with the same numbers you see. Reconciled from a single source of truth.",
+    "checks": [
+      "Private, encrypted AI in a Box",
+      "Automated syncs: hourly, nightly, or on change",
+      "Role-based access for foremen and owners",
+      "Follow-up questions without re-exporting files"
+    ],
+    "ctaLabel": "Schedule a Demo",
+    "secondaryLabel": "How It Works",
+    "secondaryHref": "https://rapiddashboard.ai/about",
+    "demo": {
+      "question": "Which jobs ran over budget last quarter?",
+      "kpis": [
+        { "value": 5, "prefix": "", "suffix": "", "label": "jobs over" },
+        { "value": 46, "prefix": "$", "suffix": "K", "label": "margin at risk" },
+        { "value": 12, "prefix": "", "suffix": "%", "label": "avg overrun" }
+      ],
+      "bars": [
+        { "name": "Weston reroof", "value": "$18.2K", "width": 100 },
+        { "name": "Altoona siding", "value": "$11.4K", "width": 63 },
+        { "name": "Chippewa deck", "value": "$8.1K", "width": 45 },
+        { "name": "Menomonie gutters", "value": "$5.3K", "width": 29 },
+        { "name": "Hallie soffit", "value": "$3.0K", "width": 16 }
+      ],
+      "footnote": "Shared as a live URL. Updates when the data does."
+    }
+  },
+  "work": {
+    "eyebrow": "Selected work",
+    "headline": "What we've built.",
+    "count": 4,
+    "creativeTeaser": {
+      "kicker": "A Division of Jolly Mammoth",
+      "tags": ["Brand identity", "Video", "Photography", "Social", "Websites"],
+      "body": "Systems are our strength. Brand building is our sauce. The creative side runs its own room, for when the business needs to look as good as the work.",
+      "ctaLabel": "See the Creative Department"
+    }
+  },
+  "process": {
+    "eyebrow": "How it goes",
+    "headline": "3 steps to a system that runs itself.",
+    "steps": [
+      {
+        "name": "Discover:",
+        "body": "We learn your business and map the right stack (Go Mammoth, MammothIQ, add-ons)."
+      },
+      {
+        "name": "Build:",
+        "body": "Your system is configured, tested, and fully set up. You don't touch a thing."
+      },
+      {
+        "name": "Launch:",
+        "body": "We hand you the keys and stick around. The system compounds. You get back to building."
+      }
+    ],
+    "local": {
+      "videoSrc": "assets/founder/jack-roof.mp4",
+      "videoPoster": "assets/founder/jack-roof-poster.jpg",
+      "videoLabel": "Jack on site with a roofing crew in Eau Claire",
+      "headline": "Eau Claire, the Chippewa Valley, and beyond.",
+      "body": "We're local. We show up in person, build in front of you, and pick up the phone when you call. That's not how most AI companies work. It's how we do."
+    }
+  },
+  "founder": {
+    "eyebrow": "About · the human behind the mammoth",
+    "photo": "assets/founder/jack-ipad.jpg",
+    "photoAlt": "Jack Fentress, founder of Jolly Mammoth, working from a chair with an iPad",
+    "headline": "I watched AI take the gigs I used to win. So I learned to build with it.",
+    "name": "Jack Fentress",
+    "credential": "Founder & AIBMM Executive Coach",
+    "prose": [
+      "I started out as a freelance marketer and copywriter. Brand guides, landing pages, lead magnets, campaigns, etc. Mostly for sustainability and ESG companies, back in 2021. Then one day I opened ChatGPT for the first time, typed a prompt, and watched it do a version of my job in about four seconds. I'm not going to lie to you: that was a weird afternoon.",
+      "I could've dug in, fought it, and resisted the AI movement. Instead I got curious. And the deeper I went, the more familiar it felt. Reverse-engineering, workflows, big-picture vision, and efficiency applications. All skills I had already developed. The difference? Better tools. Same thinking.",
+      "So while everyone was bracing for AI to end the world, I started learning to drive it. And I found the gap: businesses need someone who gets how their operations actually run, then builds the systems that help their growth compound.",
+      "That's Jolly Mammoth. We advise and build, starting with your business, not the tech. HQ'd in Eau Claire, working with contractors and service businesses across Wisconsin. If you're nervous about what AI means for your company, I get it. I was on the wrong end of it years ago. Today, my goal is to help business owners feel confident to take on the shifting business landscape."
+    ],
+    "ctaLabel": "Let's talk"
+  },
+  "proof": {
+    "eyebrow": "What clients actually say",
+    "headline": "One went from two jobs a week to [[one a day]].",
+    "note": "No pull quotes, no stock headshots. These are the actual messages, uncropped past the edge of the bubble.",
+    "shots": [
+      {
+        "src": "assets/testimonials/jobs-per-day.png",
+        "alt": "Client text message: phone calls galore, went from about two jobs a week to at least one a day",
+        "width": 760,
+        "height": 464,
+        "who": "Exteriors contractor",
+        "what": "lead gen"
+      },
+      {
+        "src": "assets/testimonials/presentation.png",
+        "alt": "Client text message: presentation went very well, could not have been a success without y'all",
+        "width": 760,
+        "height": 625,
+        "who": "Consulting client",
+        "what": "presentation build"
+      },
+      {
+        "src": "assets/testimonials/speechless.png",
+        "alt": "Client text message: speechless, this came out so well, you really blew my expectations",
+        "width": 760,
+        "height": 414,
+        "who": "Brand client",
+        "what": "video & editing"
+      },
+      {
+        "src": "assets/testimonials/eight-pages.png",
+        "alt": "Client text message: my sister absolutely loved the eight pages",
+        "width": 760,
+        "height": 299,
+        "who": "Copy client",
+        "what": "long-form"
+      },
+      {
+        "src": "assets/testimonials/appreciate-you.png",
+        "alt": "Client voice message transcript: I really appreciate you and I value your work",
+        "width": 760,
+        "height": 297,
+        "who": "Long-term client",
+        "what": "voice note"
+      }
+    ]
+  },
+  "faq": {
+    "eyebrow": "Before you ask",
+    "headline": "Questions we get every week.",
+    "items": [
+      {
+        "q": "How long until I see results?",
+        "a": "Most businesses see the first wins quickly. Faster follow-up, cleaner handoffs, fewer dropped leads, and clearer visibility in the first few weeks. The compounding part shows up over the next 60 to 90 days as the system starts running without you."
+      },
+      {
+        "q": "Do I have to learn the system?",
+        "a": "No. We build and install it, then show you the few views that matter. Your job is to run the business. The system handles the busywork."
+      },
+      {
+        "q": "Is there a contract?",
+        "a": "No long term commitment. You stay month to month because the system is working, not because you're locked in. If you ever step away, you keep the infrastructure we built."
+      },
+      {
+        "q": "What if I already use some marketing tools?",
+        "a": "That is normal. We do not rip everything out on day one. We connect what is worth keeping and replace the parts causing dropped leads, slow response, or messy operations."
+      },
+      {
+        "q": "Do you work with my industry?",
+        "a": "We work best with contractors and service businesses. If you sell work that requires calls, estimates, scheduling, and follow-through, the system fits."
+      },
+      {
+        "q": "What if it doesn't work for me?",
+        "a": "That is why we start with a short strategy call. We back every install with a satisfaction guarantee and our Jolly in 90 promise. If you are not seeing the system working in the first 90 days, we make it right."
+      }
+    ]
+  },
+  "contact": {
+    "background": "assets/trades/shingle-carry.jpg",
+    "prompt": "ready to hit the nail on the head?",
+    "headline": "Let's build something that compounds.",
+    "secondaryLabel": "Demo RapidDashboard",
+    "secondaryHref": "https://rapiddashboard.ai/demo"
+  }
+}
